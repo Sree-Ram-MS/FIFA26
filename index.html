@@ -429,21 +429,39 @@ footer span { color:var(--gold); }
 <div class="panel active" id="panel-fixtures">
   <h2 class="section-title">Match <span>Schedule</span></h2>
   <div class="notice">📌 All times shown in IST (Indian Standard Time). Click any match card for details.</div>
+
+  <!-- Country Search -->
+  <div style="position:relative;max-width:340px;margin-bottom:16px;">
+    <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:1rem;pointer-events:none;">🔍</span>
+    <input id="country-search" type="text" placeholder="Search country (e.g. Brazil, Spain…)"
+      oninput="onCountrySearch()" autocomplete="off"
+      style="width:100%;padding:10px 36px 10px 38px;background:var(--card-bg);border:1px solid var(--card-border);
+             border-radius:5px;color:var(--text);font-family:'Barlow',sans-serif;font-size:0.9rem;
+             outline:none;transition:border-color 0.2s;"
+      onfocus="this.style.borderColor='var(--gold)'"
+      onblur="this.style.borderColor='var(--card-border)'">
+    <button id="search-clear" onclick="clearSearch()"
+      style="display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);
+             background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;line-height:1;">✕</button>
+    <div id="suggestions"
+      style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:100;
+             background:var(--card-bg);border:1px solid var(--gold);border-radius:5px;overflow:hidden;
+             box-shadow:0 8px 24px rgba(0,0,0,0.4);"></div>
+  </div>
+
   <div class="group-filter" id="group-filter">
-    <button class="gf-btn active" onclick="filterGroup('ALL')">All</button>
-    <button class="gf-btn" onclick="filterGroup('A')">A</button>
-    <button class="gf-btn" onclick="filterGroup('B')">B</button>
-    <button class="gf-btn" onclick="filterGroup('C')">C</button>
-    <button class="gf-btn" onclick="filterGroup('D')">D</button>
-    <button class="gf-btn" onclick="filterGroup('E')">E</button>
-    <button class="gf-btn" onclick="filterGroup('F')">F</button>
-    <button class="gf-btn" onclick="filterGroup('G')">G</button>
-    <button class="gf-btn" onclick="filterGroup('H')">H</button>
-    <button class="gf-btn" onclick="filterGroup('I')">I</button>
-    <button class="gf-btn" onclick="filterGroup('J')">J</button>
-    <button class="gf-btn" onclick="filterGroup('K')">K</button>
-    <button class="gf-btn" onclick="filterGroup('L')">L</button>
-    <button class="gf-btn" onclick="filterGroup('KO')">Knockouts</button>
+    <button class="gf-btn active" onclick="filterGroup('A')">Group A</button>
+    <button class="gf-btn" onclick="filterGroup('B')">Group B</button>
+    <button class="gf-btn" onclick="filterGroup('C')">Group C</button>
+    <button class="gf-btn" onclick="filterGroup('D')">Group D</button>
+    <button class="gf-btn" onclick="filterGroup('E')">Group E</button>
+    <button class="gf-btn" onclick="filterGroup('F')">Group F</button>
+    <button class="gf-btn" onclick="filterGroup('G')">Group G</button>
+    <button class="gf-btn" onclick="filterGroup('H')">Group H</button>
+    <button class="gf-btn" onclick="filterGroup('I')">Group I</button>
+    <button class="gf-btn" onclick="filterGroup('J')">Group J</button>
+    <button class="gf-btn" onclick="filterGroup('K')">Group K</button>
+    <button class="gf-btn" onclick="filterGroup('L')">Group L</button>
   </div>
   <div class="fixtures-grid" id="fixtures-grid"></div>
 </div>
@@ -532,15 +550,27 @@ footer span { color:var(--gold); }
 // ────────────────────────────────────────────────
 
 // ET to IST = +9h30m
+// Returns { time: "HH:MM", date: "12 Jun" or same as input }
 function etToIST(dateStr, etTime) {
-  // etTime like "15:00" (24h)
   const [h, m] = etTime.split(':').map(Number);
   let ih = h + 9, im = m + 30;
-  let dayAdd = 0;
   if (im >= 60) { ih++; im -= 60; }
-  if (ih >= 24) { ih -= 24; dayAdd = 1; }
   const pad = n => String(n).padStart(2,'0');
-  return `${pad(ih)}:${pad(im)}${dayAdd ? ' (+1 day)' : ''}`;
+
+  if (ih < 24) {
+    return { time: `${pad(ih)}:${pad(im)}`, date: dateStr };
+  }
+
+  // Crossed midnight — compute next calendar date
+  ih -= 24;
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
+  const parts = dateStr.split(' '); // e.g. ["11","Jun"]
+  let day = parseInt(parts[0]);
+  let monIdx = months.indexOf(parts[1]);
+  day++;
+  if (day > daysInMonth[monIdx]) { day = 1; monIdx++; }
+  return { time: `${pad(ih)}:${pad(im)}`, date: `${day} ${months[monIdx]}` };
 }
 
 // Country flags (emoji)
@@ -754,18 +784,91 @@ const DEFAULT_LINKS = [
 let extraLinks = [];
 
 // ────────────────────────────────────────────────
+// COUNTRY SEARCH
+// ────────────────────────────────────────────────
+let activeCountry = null; // code like 'BRA' or null
+
+function onCountrySearch() {
+  const q = document.getElementById('country-search').value.trim().toLowerCase();
+  const sugBox = document.getElementById('suggestions');
+  const clearBtn = document.getElementById('search-clear');
+
+  clearBtn.style.display = q ? 'block' : 'none';
+
+  if (!q) {
+    sugBox.style.display = 'none';
+    activeCountry = null;
+    renderFixtures('A');
+    // re-activate Group A button
+    document.querySelectorAll('.gf-btn').forEach((b,i) => b.classList.toggle('active', i===0));
+    return;
+  }
+
+  // Build suggestions from NAMES
+  const matches = Object.entries(NAMES)
+    .filter(([code, name]) => name.toLowerCase().includes(q))
+    .slice(0, 6);
+
+  if (matches.length === 0) {
+    sugBox.innerHTML = `<div style="padding:10px 14px;color:var(--muted);font-size:0.85rem;">No country found</div>`;
+    sugBox.style.display = 'block';
+    return;
+  }
+
+  sugBox.innerHTML = matches.map(([code, name]) => `
+    <div onclick="selectCountry('${code}')"
+      style="display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;
+             transition:background 0.15s;font-family:'Barlow Condensed',sans-serif;font-size:0.95rem;
+             letter-spacing:1px;border-bottom:1px solid rgba(255,255,255,0.05);"
+      onmouseover="this.style.background='rgba(201,168,76,0.12)'"
+      onmouseout="this.style.background='transparent'">
+      <span style="font-size:1.3rem">${FLAGS[code]||'🏳️'}</span> ${name}
+    </div>`).join('');
+  sugBox.style.display = 'block';
+}
+
+function selectCountry(code) {
+  activeCountry = code;
+  document.getElementById('country-search').value = NAMES[code];
+  document.getElementById('suggestions').style.display = 'none';
+  document.getElementById('search-clear').style.display = 'block';
+  // deactivate group buttons
+  document.querySelectorAll('.gf-btn').forEach(b => b.classList.remove('active'));
+  renderFixtures(null, code);
+}
+
+function clearSearch() {
+  document.getElementById('country-search').value = '';
+  document.getElementById('search-clear').style.display = 'none';
+  document.getElementById('suggestions').style.display = 'none';
+  activeCountry = null;
+  // re-activate Group A
+  document.querySelectorAll('.gf-btn').forEach((b,i) => b.classList.toggle('active', i===0));
+  renderFixtures('A');
+}
+
+// Close suggestions on outside click
+document.addEventListener('click', e => {
+  if (!e.target.closest('#country-search') && !e.target.closest('#suggestions')) {
+    document.getElementById('suggestions').style.display = 'none';
+  }
+});
+
+// ────────────────────────────────────────────────
 // RENDER FIXTURES
 // ────────────────────────────────────────────────
-function renderFixtures(group='ALL') {
+function renderFixtures(group='A', country=null) {
   const grid = document.getElementById('fixtures-grid');
-  const list = group === 'ALL' ? ALL_MATCHES
-    : group === 'KO' ? [] // knockouts placeholder
-    : ALL_MATCHES.filter(m => m.group === group);
+  let list;
+
+  if (country) {
+    list = ALL_MATCHES.filter(m => m.home === country || m.away === country);
+  } else {
+    list = ALL_MATCHES.filter(m => m.group === group);
+  }
 
   if (list.length === 0) {
-    grid.innerHTML = `<div style="color:var(--muted);font-size:0.9rem;grid-column:1/-1;padding:40px 0;text-align:center;">
-      ${group === 'KO' ? '🏟️ Knockout fixtures will be confirmed after the Group Stage.' : 'No matches found.'}
-    </div>`;
+    grid.innerHTML = `<div style="color:var(--muted);font-size:0.9rem;grid-column:1/-1;padding:40px 0;text-align:center;">No matches found.</div>`;
     return;
   }
 
@@ -788,7 +891,7 @@ function renderFixtures(group='ALL') {
         </div>
       </div>
       <div class="card-footer">
-        <div class="match-time">🕐 ${ist} IST<br><span style="font-size:0.7rem;color:var(--muted)">${m.date}</span></div>
+        <div class="match-time">🕐 ${ist.time} IST<br><span style="font-size:0.7rem;color:var(--muted)">${ist.date} 2026</span></div>
         <div class="match-venue">${VENUES[m.venue]||m.venue}</div>
       </div>
     </div>`;
@@ -796,6 +899,12 @@ function renderFixtures(group='ALL') {
 }
 
 function filterGroup(g) {
+  // Clear any country search
+  activeCountry = null;
+  document.getElementById('country-search').value = '';
+  document.getElementById('search-clear').style.display = 'none';
+  document.getElementById('suggestions').style.display = 'none';
+  // Activate button
   document.querySelectorAll('.gf-btn').forEach(b => b.classList.remove('active'));
   event.target.classList.add('active');
   renderFixtures(g);
@@ -814,8 +923,8 @@ function openModal(no) {
   document.getElementById('m-team1').textContent = NAMES[m.home]||m.home;
   document.getElementById('m-flag2').textContent = FLAGS[m.away]||'🏳️';
   document.getElementById('m-team2').textContent = NAMES[m.away]||m.away;
-  document.getElementById('m-date').textContent = m.date + ' 2026';
-  document.getElementById('m-time').textContent = ist + ' IST';
+  document.getElementById('m-date').textContent = ist.date + ' 2026';
+  document.getElementById('m-time').textContent = ist.time + ' IST';
   document.getElementById('m-venue').textContent = VENUES[m.venue]||m.venue;
   document.getElementById('modal').classList.add('open');
 }
@@ -916,7 +1025,7 @@ function showPanel(id) {
 // ────────────────────────────────────────────────
 // INIT
 // ────────────────────────────────────────────────
-renderFixtures();
+renderFixtures('A');
 renderGroups();
 renderPlayers('goals');
 renderLinks();
