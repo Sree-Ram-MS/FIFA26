@@ -462,6 +462,281 @@ footer span { color:var(--gold); }
   font-size:0.7rem; color:var(--muted); line-height:1.5;
 }
 .ko-footer span:first-child { color:var(--gold); font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; }
+
+/* ── LIST VIEW STYLES ── */
+.fixtures-grid.list-mode {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.match-row-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.match-row-card::before {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 3px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+  opacity: 0; transition: opacity 0.2s;
+}
+.match-row-card:hover {
+  transform: translateX(4px);
+  border-color: var(--gold);
+  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.12);
+}
+.match-row-card:hover::before { opacity: 1; }
+
+.mr-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 90px;
+}
+.mr-no {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold); opacity: 0.8;
+}
+.mr-group {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase;
+  padding: 2px 6px; border-radius: 2px;
+  background: rgba(26,58,143,0.3); color: #7EB0FF;
+  border: 1px solid rgba(26,58,143,0.5);
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.mr-teams {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  justify-content: center;
+}
+.mr-team {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 40%;
+}
+.mr-team.home {
+  justify-content: flex-end;
+  text-align: right;
+}
+.mr-team.away {
+  justify-content: flex-start;
+  text-align: left;
+}
+.mr-team-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--text);
+  font-weight: 600;
+}
+.mr-flag {
+  display: flex;
+  align-items: center;
+}
+.mr-vs {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+.mr-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 4px;
+  min-width: 200px;
+}
+.mr-time {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  color: var(--gold);
+  font-weight: 600;
+}
+.mr-date {
+  color: var(--text);
+  font-weight: 500;
+}
+.mr-venue {
+  font-size: 0.72rem;
+  color: var(--muted);
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Responsive styles for match list row */
+@media (max-width: 768px) {
+  .match-row-card {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+    gap: 12px;
+  }
+  .match-row-card:hover {
+    transform: translateY(-2px);
+  }
+  .match-row-card::before {
+    top: 0; left: 0; right: 0; height: 3px; width: auto;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .mr-left {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 8px;
+  }
+  .mr-teams {
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .mr-team {
+    width: auto;
+    flex: 1;
+  }
+  .mr-right {
+    align-items: flex-start;
+    text-align: left;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 8px;
+  }
+}
+
+/* ── TOURNAMENT BRACKET STYLES ── */
+.bracket-wrapper {
+  display: flex;
+  gap: 40px;
+  overflow-x: auto;
+  padding: 40px 20px;
+  background: rgba(10, 14, 26, 0.4);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+.bracket-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 260px;
+  flex-shrink: 0;
+  position: relative;
+}
+.ko-round-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem; letter-spacing: 2px;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 24px;
+  border-bottom: 2px solid rgba(201, 168, 76, 0.25);
+  padding-bottom: 8px;
+  text-transform: uppercase;
+}
+
+/* Premium Match Card */
+.ko-match-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.25s ease;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.ko-match-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(201, 168, 76, 0.15);
+}
+.ko-match-card.ko-final {
+  border-color: var(--gold);
+  background: linear-gradient(145deg, #0F1628 0%, #1c1400 100%);
+  box-shadow: 0 0 25px rgba(201,168,76,0.25);
+}
+
+.ko-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 1px;
+}
+.ko-match-id {
+  color: var(--gold);
+  font-weight: 700;
+}
+.ko-card-teams {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(0,0,0,0.2);
+  padding: 8px;
+  border-radius: 6px;
+}
+.ko-card-team {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ko-flag-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px dashed var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ko-tbd-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.55rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+.ko-team-name-ko {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+  font-weight: 600;
+}
+.ko-card-vs-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+}
+.ko-card-venue {
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-align: right;
+  font-family: 'Barlow', sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 </style>
 </head>
 <body>
@@ -517,23 +792,42 @@ footer span { color:var(--gold); }
     });
   </script>
 
-  <!-- Country Search -->
-  <div style="position:relative;max-width:340px;margin-bottom:16px;">
-    <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:1rem;pointer-events:none;">🔍</span>
-    <input id="country-search" type="text" placeholder="Search country (e.g. Brazil, Spain…)"
-      oninput="onCountrySearch()" autocomplete="off"
-      style="width:100%;padding:10px 36px 10px 38px;background:var(--card-bg);border:1px solid var(--card-border);
-             border-radius:5px;color:var(--text);font-family:'Barlow',sans-serif;font-size:0.9rem;
-             outline:none;transition:border-color 0.2s;"
-      onfocus="this.style.borderColor='var(--gold)'"
-      onblur="this.style.borderColor='var(--card-border)'">
-    <button id="search-clear" onclick="clearSearch()"
-      style="display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);
-             background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;line-height:1;">✕</button>
-    <div id="suggestions"
-      style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:100;
-             background:var(--card-bg);border:1px solid var(--gold);border-radius:5px;overflow:hidden;
-             box-shadow:0 8px 24px rgba(0,0,0,0.4);"></div>
+  <!-- Controls Bar -->
+  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:20px;">
+    <!-- Country Search -->
+    <div style="position:relative; width:100%; max-width:340px;">
+      <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:1rem;pointer-events:none;">🔍</span>
+      <input id="country-search" type="text" placeholder="Search country (e.g. Brazil, Spain…)"
+        oninput="onCountrySearch()" autocomplete="off"
+        style="width:100%;padding:10px 36px 10px 38px;background:var(--card-bg);border:1px solid var(--card-border);
+               border-radius:5px;color:var(--text);font-family:'Barlow',sans-serif;font-size:0.9rem;
+               outline:none;transition:border-color 0.2s;"
+        onfocus="this.style.borderColor='var(--gold)'"
+        onblur="this.style.borderColor='var(--card-border)'">
+      <button id="search-clear" onclick="clearSearch()"
+        style="display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);
+               background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;line-height:1;">✕</button>
+      <div id="suggestions"
+        style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:100;
+               background:var(--card-bg);border:1px solid var(--gold);border-radius:5px;overflow:hidden;
+               box-shadow:0 8px 24px rgba(0,0,0,0.4);"></div>
+    </div>
+
+    <!-- View Switcher Toggle -->
+    <div class="view-switcher" style="display:flex; background:var(--card-bg); border:1px solid var(--card-border); border-radius:6px; padding:4px; gap:4px;">
+      <button id="btn-view-grid" class="view-btn active" onclick="switchView('grid')" title="Grid View" style="
+        padding: 8px; border-radius:4px; border:none; cursor:pointer; transition:all 0.2s;
+        background: var(--gold); color: var(--darker); display: flex; align-items: center; justify-content: center;
+      ">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+      </button>
+      <button id="btn-view-list" class="view-btn" onclick="switchView('list')" title="List View" style="
+        padding: 8px; border-radius:4px; border:none; cursor:pointer; transition:all 0.2s;
+        background: transparent; color: var(--muted); display: flex; align-items: center; justify-content: center;
+      ">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+      </button>
+    </div>
   </div>
 
   <div class="group-filter" id="group-filter">
@@ -647,7 +941,13 @@ footer span { color:var(--gold); }
 // ET to IST = +9h30m
 // Returns { time: "HH:MM", date: "12 Jun" or same as input }
 function etToIST(dateStr, etTime) {
+  if (!etTime || etTime === 'TBD') {
+    return { time: 'TBD', date: dateStr };
+  }
   const [h, m] = etTime.split(':').map(Number);
+  if (isNaN(h) || isNaN(m)) {
+    return { time: etTime, date: dateStr };
+  }
   let ih = h + 9, im = m + 30;
   if (im >= 60) { ih++; im -= 60; }
   const pad = n => String(n).padStart(2,'0');
@@ -729,100 +1029,100 @@ const VENUES = {
 
 const MATCHES = [
   // GROUP A
-  { no: 1, group: 'A', date: '11 Jun', et: 'TBD', home: 'MEX', away: 'RSA', venue: 'Mexico City', stage: 'Group Stage' },
-  { no: 2, group: 'A', date: '12 Jun', et: 'TBD', home: 'KOR', away: 'CZE', venue: 'Guadalajara', stage: 'Group Stage' },
-  { no: 25, group: 'A', date: '18 Jun', et: 'TBD', home: 'CZE', away: 'RSA', venue: 'Atlanta', stage: 'Group Stage' },
-  { no: 28, group: 'A', date: '18 Jun', et: 'TBD', home: 'MEX', away: 'KOR', venue: 'Guadalajara', stage: 'Group Stage' },
-  { no: 53, group: 'A', date: '24 Jun', et: 'TBD', home: 'CZE', away: 'MEX', venue: 'Mexico City', stage: 'Group Stage' },
-  { no: 54, group: 'A', date: '24 Jun', et: 'TBD', home: 'RSA', away: 'KOR', venue: 'Monterrey', stage: 'Group Stage' },
+  { no: 1, group: 'A', date: '11 Jun', et: '15:00', home: 'MEX', away: 'RSA', venue: 'Mexico City', stage: 'Group Stage' },
+  { no: 2, group: 'A', date: '12 Jun', et: '22:00', home: 'KOR', away: 'CZE', venue: 'Guadalajara', stage: 'Group Stage' },
+  { no: 25, group: 'A', date: '18 Jun', et: '12:00', home: 'CZE', away: 'RSA', venue: 'Atlanta', stage: 'Group Stage' },
+  { no: 28, group: 'A', date: '18 Jun', et: '21:00', home: 'MEX', away: 'KOR', venue: 'Guadalajara', stage: 'Group Stage' },
+  { no: 53, group: 'A', date: '24 Jun', et: '21:00', home: 'CZE', away: 'MEX', venue: 'Mexico City', stage: 'Group Stage' },
+  { no: 54, group: 'A', date: '24 Jun', et: '21:00', home: 'RSA', away: 'KOR', venue: 'Monterrey', stage: 'Group Stage' },
 
   // GROUP B
-  { no: 3, group: 'B', date: '12 Jun', et: 'TBD', home: 'CAN', away: 'BIH', venue: 'Toronto', stage: 'Group Stage' },
-  { no: 8, group: 'B', date: '13 Jun', et: 'TBD', home: 'QAT', away: 'SUI', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
-  { no: 26, group: 'B', date: '18 Jun', et: 'TBD', home: 'SUI', away: 'BIH', venue: 'Los Angeles', stage: 'Group Stage' },
-  { no: 27, group: 'B', date: '18 Jun', et: 'TBD', home: 'CAN', away: 'QAT', venue: 'Vancouver', stage: 'Group Stage' },
-  { no: 51, group: 'B', date: '24 Jun', et: 'TBD', home: 'SUI', away: 'CAN', venue: 'Vancouver', stage: 'Group Stage' },
-  { no: 52, group: 'B', date: '24 Jun', et: 'TBD', home: 'BIH', away: 'QAT', venue: 'Seattle', stage: 'Group Stage' },
+  { no: 3, group: 'B', date: '12 Jun', et: '15:00', home: 'CAN', away: 'BIH', venue: 'Toronto', stage: 'Group Stage' },
+  { no: 8, group: 'B', date: '13 Jun', et: '15:00', home: 'QAT', away: 'SUI', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
+  { no: 26, group: 'B', date: '18 Jun', et: '15:00', home: 'SUI', away: 'BIH', venue: 'Los Angeles', stage: 'Group Stage' },
+  { no: 27, group: 'B', date: '18 Jun', et: '18:00', home: 'CAN', away: 'QAT', venue: 'Vancouver', stage: 'Group Stage' },
+  { no: 51, group: 'B', date: '24 Jun', et: '15:00', home: 'SUI', away: 'CAN', venue: 'Vancouver', stage: 'Group Stage' },
+  { no: 52, group: 'B', date: '24 Jun', et: '15:00', home: 'BIH', away: 'QAT', venue: 'Seattle', stage: 'Group Stage' },
 
   // GROUP C
-  { no: 5, group: 'C', date: '13 Jun', et: 'TBD', home: 'HAI', away: 'SCO', venue: 'Boston', stage: 'Group Stage' },
-  { no: 7, group: 'C', date: '13 Jun', et: 'TBD', home: 'BRA', away: 'MAR', venue: 'New York/New Jersey', stage: 'Group Stage' },
-  { no: 29, group: 'C', date: '19 Jun', et: 'TBD', home: 'BRA', away: 'HAI', venue: 'Philadelphia', stage: 'Group Stage' },
-  { no: 30, group: 'C', date: '19 Jun', et: 'TBD', home: 'SCO', away: 'MAR', venue: 'Boston', stage: 'Group Stage' },
-  { no: 49, group: 'C', date: '24 Jun', et: 'TBD', home: 'SCO', away: 'BRA', venue: 'Miami', stage: 'Group Stage' },
-  { no: 50, group: 'C', date: '24 Jun', et: 'TBD', home: 'MAR', away: 'HAI', venue: 'Atlanta', stage: 'Group Stage' },
+  { no: 5, group: 'C', date: '13 Jun', et: '21:00', home: 'HAI', away: 'SCO', venue: 'Boston', stage: 'Group Stage' },
+  { no: 7, group: 'C', date: '13 Jun', et: '21:00', home: 'BRA', away: 'MAR', venue: 'New York/New Jersey', stage: 'Group Stage' },
+  { no: 29, group: 'C', date: '19 Jun', et: '20:30', home: 'BRA', away: 'HAI', venue: 'Philadelphia', stage: 'Group Stage' },
+  { no: 30, group: 'C', date: '19 Jun', et: '18:00', home: 'SCO', away: 'MAR', venue: 'Boston', stage: 'Group Stage' },
+  { no: 49, group: 'C', date: '24 Jun', et: '18:00', home: 'SCO', away: 'BRA', venue: 'Miami', stage: 'Group Stage' },
+  { no: 50, group: 'C', date: '24 Jun', et: '18:00', home: 'MAR', away: 'HAI', venue: 'Atlanta', stage: 'Group Stage' },
 
   // GROUP D
-  { no: 4, group: 'D', date: '12 Jun', et: 'TBD', home: 'USA', away: 'PAR', venue: 'Los Angeles', stage: 'Group Stage' },
-  { no: 6, group: 'D', date: '13 Jun', et: 'TBD', home: 'AUS', away: 'TUR', venue: 'Vancouver', stage: 'Group Stage' },
-  { no: 31, group: 'D', date: '19 Jun', et: 'TBD', home: 'TUR', away: 'PAR', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
-  { no: 32, group: 'D', date: '19 Jun', et: 'TBD', home: 'USA', away: 'AUS', venue: 'Seattle', stage: 'Group Stage' },
-  { no: 59, group: 'D', date: '25 Jun', et: 'TBD', home: 'TUR', away: 'USA', venue: 'Los Angeles', stage: 'Group Stage' },
-  { no: 60, group: 'D', date: '25 Jun', et: 'TBD', home: 'PAR', away: 'AUS', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
+  { no: 4, group: 'D', date: '12 Jun', et: '21:00', home: 'USA', away: 'PAR', venue: 'Los Angeles', stage: 'Group Stage' },
+  { no: 6, group: 'D', date: '13 Jun', et: '00:00', home: 'AUS', away: 'TUR', venue: 'Vancouver', stage: 'Group Stage' },
+  { no: 31, group: 'D', date: '19 Jun', et: '23:00', home: 'TUR', away: 'PAR', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
+  { no: 32, group: 'D', date: '19 Jun', et: '15:00', home: 'USA', away: 'AUS', venue: 'Seattle', stage: 'Group Stage' },
+  { no: 59, group: 'D', date: '25 Jun', et: '22:00', home: 'TUR', away: 'USA', venue: 'Los Angeles', stage: 'Group Stage' },
+  { no: 60, group: 'D', date: '25 Jun', et: '22:00', home: 'PAR', away: 'AUS', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
 
   // GROUP E
-  { no: 9, group: 'E', date: '14 Jun', et: 'TBD', home: 'CIV', away: 'ECU', venue: 'Philadelphia', stage: 'Group Stage' },
-  { no: 10, group: 'E', date: '14 Jun', et: 'TBD', home: 'GER', away: 'CUW', venue: 'Houston', stage: 'Group Stage' },
-  { no: 33, group: 'E', date: '20 Jun', et: 'TBD', home: 'GER', away: 'CIV', venue: 'Toronto', stage: 'Group Stage' },
-  { no: 34, group: 'E', date: '20 Jun', et: 'TBD', home: 'ECU', away: 'CUW', venue: 'Kansas City', stage: 'Group Stage' },
-  { no: 55, group: 'E', date: '25 Jun', et: 'TBD', home: 'CUW', away: 'CIV', venue: 'Philadelphia', stage: 'Group Stage' },
-  { no: 56, group: 'E', date: '25 Jun', et: 'TBD', home: 'ECU', away: 'GER', venue: 'New York/New Jersey', stage: 'Group Stage' },
+  { no: 9, group: 'E', date: '14 Jun', et: '19:00', home: 'CIV', away: 'ECU', venue: 'Philadelphia', stage: 'Group Stage' },
+  { no: 10, group: 'E', date: '14 Jun', et: '13:00', home: 'GER', away: 'CUW', venue: 'Houston', stage: 'Group Stage' },
+  { no: 33, group: 'E', date: '20 Jun', et: '16:00', home: 'GER', away: 'CIV', venue: 'Toronto', stage: 'Group Stage' },
+  { no: 34, group: 'E', date: '20 Jun', et: '20:00', home: 'ECU', away: 'CUW', venue: 'Kansas City', stage: 'Group Stage' },
+  { no: 55, group: 'E', date: '25 Jun', et: '16:00', home: 'CUW', away: 'CIV', venue: 'Philadelphia', stage: 'Group Stage' },
+  { no: 56, group: 'E', date: '25 Jun', et: '16:00', home: 'ECU', away: 'GER', venue: 'New York/New Jersey', stage: 'Group Stage' },
 
   // GROUP F
-  { no: 11, group: 'F', date: '14 Jun', et: 'TBD', home: 'NED', away: 'JPN', venue: 'Dallas', stage: 'Group Stage' },
-  { no: 12, group: 'F', date: '14 Jun', et: 'TBD', home: 'SWE', away: 'TUN', venue: 'Monterrey', stage: 'Group Stage' },
-  { no: 35, group: 'F', date: '20 Jun', et: 'TBD', home: 'NED', away: 'SWE', venue: 'Houston', stage: 'Group Stage' },
-  { no: 36, group: 'F', date: '20 Jun', et: 'TBD', home: 'TUN', away: 'JPN', venue: 'Monterrey', stage: 'Group Stage' },
-  { no: 57, group: 'F', date: '25 Jun', et: 'TBD', home: 'JPN', away: 'SWE', venue: 'Dallas', stage: 'Group Stage' },
-  { no: 58, group: 'F', date: '25 Jun', et: 'TBD', home: 'TUN', away: 'NED', venue: 'Kansas City', stage: 'Group Stage' },
+  { no: 11, group: 'F', date: '14 Jun', et: '16:00', home: 'NED', away: 'JPN', venue: 'Dallas', stage: 'Group Stage' },
+  { no: 12, group: 'F', date: '14 Jun', et: '22:00', home: 'SWE', away: 'TUN', venue: 'Monterrey', stage: 'Group Stage' },
+  { no: 35, group: 'F', date: '20 Jun', et: '13:00', home: 'NED', away: 'SWE', venue: 'Houston', stage: 'Group Stage' },
+  { no: 36, group: 'F', date: '20 Jun', et: '00:00', home: 'TUN', away: 'JPN', venue: 'Monterrey', stage: 'Group Stage' },
+  { no: 57, group: 'F', date: '25 Jun', et: '15:00', home: 'JPN', away: 'SWE', venue: 'Dallas', stage: 'Group Stage' },
+  { no: 58, group: 'F', date: '25 Jun', et: '19:00', home: 'TUN', away: 'NED', venue: 'Kansas City', stage: 'Group Stage' },
 
   // GROUP G
-  { no: 15, group: 'G', date: '15 Jun', et: 'TBD', home: 'IRN', away: 'NZL', venue: 'Los Angeles', stage: 'Group Stage' },
-  { no: 16, group: 'G', date: '15 Jun', et: 'TBD', home: 'BEL', away: 'EGY', venue: 'Seattle', stage: 'Group Stage' },
-  { no: 39, group: 'G', date: '21 Jun', et: 'TBD', home: 'BEL', away: 'IRN', venue: 'Los Angeles', stage: 'Group Stage' },
-  { no: 40, group: 'G', date: '21 Jun', et: 'TBD', home: 'NZL', away: 'EGY', venue: 'Vancouver', stage: 'Group Stage' },
-  { no: 63, group: 'G', date: '26 Jun', et: 'TBD', home: 'EGY', away: 'IRN', venue: 'Seattle', stage: 'Group Stage' },
-  { no: 64, group: 'G', date: '26 Jun', et: 'TBD', home: 'NZL', away: 'BEL', venue: 'Vancouver', stage: 'Group Stage' },
+  { no: 15, group: 'G', date: '15 Jun', et: '21:00', home: 'IRN', away: 'NZL', venue: 'Los Angeles', stage: 'Group Stage' },
+  { no: 16, group: 'G', date: '15 Jun', et: '15:00', home: 'BEL', away: 'EGY', venue: 'Seattle', stage: 'Group Stage' },
+  { no: 39, group: 'G', date: '21 Jun', et: '15:00', home: 'BEL', away: 'IRN', venue: 'Los Angeles', stage: 'Group Stage' },
+  { no: 40, group: 'G', date: '21 Jun', et: '21:00', home: 'NZL', away: 'EGY', venue: 'Vancouver', stage: 'Group Stage' },
+  { no: 63, group: 'G', date: '26 Jun', et: '22:00', home: 'EGY', away: 'IRN', venue: 'Seattle', stage: 'Group Stage' },
+  { no: 64, group: 'G', date: '26 Jun', et: '23:00', home: 'NZL', away: 'BEL', venue: 'Vancouver', stage: 'Group Stage' },
 
   // GROUP H
-  { no: 13, group: 'H', date: '15 Jun', et: 'TBD', home: 'KSA', away: 'URU', venue: 'Miami', stage: 'Group Stage' },
-  { no: 14, group: 'H', date: '15 Jun', et: 'TBD', home: 'ESP', away: 'CPV', venue: 'Atlanta', stage: 'Group Stage' },
-  { no: 37, group: 'H', date: '21 Jun', et: 'TBD', home: 'URU', away: 'CPV', venue: 'Miami', stage: 'Group Stage' },
-  { no: 38, group: 'H', date: '21 Jun', et: 'TBD', home: 'ESP', away: 'KSA', venue: 'Atlanta', stage: 'Group Stage' },
-  { no: 65, group: 'H', date: '26 Jun', et: 'TBD', home: 'CPV', away: 'KSA', venue: 'Houston', stage: 'Group Stage' },
-  { no: 66, group: 'H', date: '26 Jun', et: 'TBD', home: 'URU', away: 'ESP', venue: 'Guadalajara', stage: 'Group Stage' },
+  { no: 13, group: 'H', date: '15 Jun', et: '18:00', home: 'KSA', away: 'URU', venue: 'Miami', stage: 'Group Stage' },
+  { no: 14, group: 'H', date: '15 Jun', et: '12:00', home: 'ESP', away: 'CPV', venue: 'Atlanta', stage: 'Group Stage' },
+  { no: 37, group: 'H', date: '21 Jun', et: '18:00', home: 'URU', away: 'CPV', venue: 'Miami', stage: 'Group Stage' },
+  { no: 38, group: 'H', date: '21 Jun', et: '12:00', home: 'ESP', away: 'KSA', venue: 'Atlanta', stage: 'Group Stage' },
+  { no: 65, group: 'H', date: '26 Jun', et: '20:00', home: 'CPV', away: 'KSA', venue: 'Houston', stage: 'Group Stage' },
+  { no: 66, group: 'H', date: '26 Jun', et: '20:00', home: 'URU', away: 'ESP', venue: 'Guadalajara', stage: 'Group Stage' },
 
   // GROUP I
-  { no: 17, group: 'I', date: '16 Jun', et: 'TBD', home: 'FRA', away: 'SEN', venue: 'New York/New Jersey', stage: 'Group Stage' },
-  { no: 18, group: 'I', date: '16 Jun', et: 'TBD', home: 'IRQ', away: 'NOR', venue: 'Boston', stage: 'Group Stage' },
-  { no: 41, group: 'I', date: '22 Jun', et: 'TBD', home: 'NOR', away: 'SEN', venue: 'New York/New Jersey', stage: 'Group Stage' },
-  { no: 42, group: 'I', date: '22 Jun', et: 'TBD', home: 'FRA', away: 'IRQ', venue: 'Philadelphia', stage: 'Group Stage' },
-  { no: 61, group: 'I', date: '26 Jun', et: 'TBD', home: 'NOR', away: 'FRA', venue: 'Boston', stage: 'Group Stage' },
-  { no: 62, group: 'I', date: '26 Jun', et: 'TBD', home: 'SEN', away: 'IRQ', venue: 'Toronto', stage: 'Group Stage' },
+  { no: 17, group: 'I', date: '16 Jun', et: '15:00', home: 'FRA', away: 'SEN', venue: 'New York/New Jersey', stage: 'Group Stage' },
+  { no: 18, group: 'I', date: '16 Jun', et: '18:00', home: 'IRQ', away: 'NOR', venue: 'Boston', stage: 'Group Stage' },
+  { no: 41, group: 'I', date: '22 Jun', et: '20:00', home: 'NOR', away: 'SEN', venue: 'New York/New Jersey', stage: 'Group Stage' },
+  { no: 42, group: 'I', date: '22 Jun', et: '17:00', home: 'FRA', away: 'IRQ', venue: 'Philadelphia', stage: 'Group Stage' },
+  { no: 61, group: 'I', date: '26 Jun', et: '15:00', home: 'NOR', away: 'FRA', venue: 'Boston', stage: 'Group Stage' },
+  { no: 62, group: 'I', date: '26 Jun', et: '15:00', home: 'SEN', away: 'IRQ', venue: 'Toronto', stage: 'Group Stage' },
 
   // GROUP J
-  { no: 19, group: 'J', date: '16 Jun', et: 'TBD', home: 'ARG', away: 'ALG', venue: 'Kansas City', stage: 'Group Stage' },
-  { no: 20, group: 'J', date: '16 Jun', et: 'TBD', home: 'AUT', away: 'JOR', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
-  { no: 43, group: 'J', date: '22 Jun', et: 'TBD', home: 'ARG', away: 'AUT', venue: 'Dallas', stage: 'Group Stage' },
-  { no: 44, group: 'J', date: '22 Jun', et: 'TBD', home: 'JOR', away: 'ALG', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
-  { no: 71, group: 'J', date: '27 Jun', et: 'TBD', home: 'ALG', away: 'AUT', venue: 'Atlanta', stage: 'Group Stage' },
-  { no: 72, group: 'J', date: '27 Jun', et: 'TBD', home: 'JOR', away: 'ARG', venue: 'Kansas City', stage: 'Group Stage' },
+  { no: 19, group: 'J', date: '16 Jun', et: '21:00', home: 'ARG', away: 'ALG', venue: 'Kansas City', stage: 'Group Stage' },
+  { no: 20, group: 'J', date: '16 Jun', et: '00:00', home: 'AUT', away: 'JOR', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
+  { no: 43, group: 'J', date: '22 Jun', et: '13:00', home: 'ARG', away: 'AUT', venue: 'Dallas', stage: 'Group Stage' },
+  { no: 44, group: 'J', date: '22 Jun', et: '23:00', home: 'JOR', away: 'ALG', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
+  { no: 71, group: 'J', date: '27 Jun', et: '19:30', home: 'ALG', away: 'AUT', venue: 'Atlanta', stage: 'Group Stage' },
+  { no: 72, group: 'J', date: '27 Jun', et: '19:30', home: 'JOR', away: 'ARG', venue: 'Kansas City', stage: 'Group Stage' },
 
   // GROUP K
-  { no: 23, group: 'K', date: '17 Jun', et: 'TBD', home: 'POR', away: 'COD', venue: 'Houston', stage: 'Group Stage' },
-  { no: 24, group: 'K', date: '17 Jun', et: 'TBD', home: 'UZB', away: 'COL', venue: 'Mexico City', stage: 'Group Stage' },
-  { no: 47, group: 'K', date: '23 Jun', et: 'TBD', home: 'POR', away: 'UZB', venue: 'Houston', stage: 'Group Stage' },
-  { no: 48, group: 'K', date: '23 Jun', et: 'TBD', home: 'COL', away: 'COD', venue: 'Guadalajara', stage: 'Group Stage' },
-  { no: 69, group: 'K', date: '27 Jun', et: 'TBD', home: 'COD', away: 'UZB', venue: 'Monterrey', stage: 'Group Stage' },
-  { no: 70, group: 'K', date: '27 Jun', et: 'TBD', home: 'COL', away: 'POR', venue: 'Miami', stage: 'Group Stage' },
+  { no: 23, group: 'K', date: '17 Jun', et: '13:00', home: 'POR', away: 'COD', venue: 'Houston', stage: 'Group Stage' },
+  { no: 24, group: 'K', date: '17 Jun', et: '22:00', home: 'UZB', away: 'COL', venue: 'Mexico City', stage: 'Group Stage' },
+  { no: 47, group: 'K', date: '23 Jun', et: '13:00', home: 'POR', away: 'UZB', venue: 'Houston', stage: 'Group Stage' },
+  { no: 48, group: 'K', date: '23 Jun', et: '13:00', home: 'COL', away: 'COD', venue: 'Guadalajara', stage: 'Group Stage' },
+  { no: 69, group: 'K', date: '27 Jun', et: '22:00', home: 'COD', away: 'UZB', venue: 'Monterrey', stage: 'Group Stage' },
+  { no: 70, group: 'K', date: '27 Jun', et: '22:00', home: 'COL', away: 'POR', venue: 'Miami', stage: 'Group Stage' },
 
   // GROUP L
-  { no: 21, group: 'L', date: '17 Jun', et: 'TBD', home: 'GHA', away: 'PAN', venue: 'Toronto', stage: 'Group Stage' },
-  { no: 22, group: 'L', date: '17 Jun', et: 'TBD', home: 'ENG', away: 'CRO', venue: 'Dallas', stage: 'Group Stage' },
-  { no: 45, group: 'L', date: '23 Jun', et: 'TBD', home: 'ENG', away: 'GHA', venue: 'Boston', stage: 'Group Stage' },
-  { no: 46, group: 'L', date: '23 Jun', et: 'TBD', home: 'PAN', away: 'CRO', venue: 'Toronto', stage: 'Group Stage' },
-  { no: 67, group: 'L', date: '27 Jun', et: 'TBD', home: 'PAN', away: 'ENG', venue: 'New York/New Jersey', stage: 'Group Stage' },
-  { no: 68, group: 'L', date: '27 Jun', et: 'TBD', home: 'CRO', away: 'GHA', venue: 'Philadelphia', stage: 'Group Stage' }
+  { no: 21, group: 'L', date: '17 Jun', et: '15:00', home: 'GHA', away: 'PAN', venue: 'Toronto', stage: 'Group Stage' },
+  { no: 22, group: 'L', date: '17 Jun', et: '16:00', home: 'ENG', away: 'CRO', venue: 'Dallas', stage: 'Group Stage' },
+  { no: 45, group: 'L', date: '23 Jun', et: '16:00', home: 'ENG', away: 'GHA', venue: 'Boston', stage: 'Group Stage' },
+  { no: 46, group: 'L', date: '23 Jun', et: '19:00', home: 'PAN', away: 'CRO', venue: 'Toronto', stage: 'Group Stage' },
+  { no: 67, group: 'L', date: '27 Jun', et: '17:00', home: 'PAN', away: 'ENG', venue: 'New York/New Jersey', stage: 'Group Stage' },
+  { no: 68, group: 'L', date: '27 Jun', et: '17:00', home: 'CRO', away: 'GHA', venue: 'Philadelphia', stage: 'Group Stage' }
 ];
 
 // Remove duplicates (some numbers appeared twice from raw PDF)
@@ -900,6 +1200,7 @@ let extraLinks = [];
 // COUNTRY SEARCH
 // ────────────────────────────────────────────────
 let activeCountry = null; // code like 'BRA' or null
+let activeView = 'grid'; // 'grid' or 'list'
 
 function onCountrySearch() {
   const q = document.getElementById('country-search').value.trim().toLowerCase();
@@ -911,11 +1212,11 @@ function onCountrySearch() {
   if (!q) {
     sugBox.style.display = 'none';
     activeCountry = null;
-    renderFixtures('A');
-    // re-activate Group A button (index 1 — after "All Matches")
+    renderFixtures('ALL');
+    // re-activate All Matches button (index 0)
     const btns = document.querySelectorAll('.gf-btn');
     btns.forEach(b => b.classList.remove('active'));
-    if (btns[1]) btns[1].classList.add('active');
+    if (btns[0]) btns[0].classList.add('active');
     return;
   }
 
@@ -957,11 +1258,11 @@ function clearSearch() {
   document.getElementById('search-clear').style.display = 'none';
   document.getElementById('suggestions').style.display = 'none';
   activeCountry = null;
-  // re-activate Group A (index 1 — after "All Matches")
+  // re-activate All Matches (index 0)
   const btns = document.querySelectorAll('.gf-btn');
   btns.forEach(b => b.classList.remove('active'));
-  if (btns[1]) btns[1].classList.add('active');
-  renderFixtures('A');
+  if (btns[0]) btns[0].classList.add('active');
+  renderFixtures('ALL');
 }
 
 // Close suggestions on outside click
@@ -972,9 +1273,57 @@ document.addEventListener('click', e => {
 });
 
 // ────────────────────────────────────────────────
+// VIEW SWITCHER
+// ────────────────────────────────────────────────
+function switchView(view) {
+  activeView = view;
+  
+  // Update switcher buttons classes
+  const btnGrid = document.getElementById('btn-view-grid');
+  const btnList = document.getElementById('btn-view-list');
+  
+  if (view === 'grid') {
+    btnGrid.classList.add('active');
+    btnGrid.style.background = 'var(--gold)';
+    btnGrid.style.color = 'var(--darker)';
+    
+    btnList.classList.remove('active');
+    btnList.style.background = 'transparent';
+    btnList.style.color = 'var(--muted)';
+  } else {
+    btnList.classList.add('active');
+    btnList.style.background = 'var(--gold)';
+    btnList.style.color = 'var(--darker)';
+    
+    btnGrid.classList.remove('active');
+    btnGrid.style.background = 'transparent';
+    btnGrid.style.color = 'var(--muted)';
+  }
+
+  // Update container display
+  const grid = document.getElementById('fixtures-grid');
+  if (view === 'list') {
+    grid.classList.add('list-mode');
+  } else {
+    grid.classList.remove('list-mode');
+  }
+  
+  // Re-render fixtures to use the new view layout
+  const activeGroupBtn = document.querySelector('.gf-btn.active');
+  let currentGroup = 'ALL';
+  if (activeGroupBtn) {
+    const clickAttr = activeGroupBtn.getAttribute('onclick') || '';
+    const match = clickAttr.match(/'([^']+)'/);
+    if (match) currentGroup = match[1];
+  }
+  
+  renderFixtures(currentGroup, activeCountry);
+}
+
+// ────────────────────────────────────────────────
 // RENDER FIXTURES
 // ────────────────────────────────────────────────
-function renderFixtures(group='A', country=null) {
+function renderFixtures(group='ALL', country=null) {
   const grid = document.getElementById('fixtures-grid');
   let list;
 
@@ -991,30 +1340,57 @@ function renderFixtures(group='A', country=null) {
     return;
   }
 
-  grid.innerHTML = list.map(m => {
-    const ist = etToIST(m.date, m.et);
-    return `<div class="match-card" onclick="openModal(${m.no})">
-      <div class="card-header">
-        <div class="match-no">Match #${m.no}</div>
-        <div class="group-badge">Group ${m.group}</div>
-      </div>
-      <div class="teams-row">
-        <div class="team-side">
-          <div class="team-flag">${flagImg(m.home, 44)}</div>
-          <div class="team-name">${NAMES[m.home]||m.home}</div>
+  if (activeView === 'list') {
+    grid.innerHTML = list.map(m => {
+      const ist = etToIST(m.date, m.et);
+      return `<div class="match-row-card" onclick="openModal(${m.no})">
+        <div class="mr-left">
+          <span class="mr-no">Match #${m.no}</span>
+          <span class="mr-group">Group ${m.group}</span>
         </div>
-        <div class="vs-badge">VS</div>
-        <div class="team-side">
-          <div class="team-flag">${flagImg(m.away, 44)}</div>
-          <div class="team-name">${NAMES[m.away]||m.away}</div>
+        <div class="mr-teams">
+          <div class="mr-team home">
+            <span class="mr-team-name">${NAMES[m.home]||m.home}</span>
+            <span class="mr-flag">${flagImg(m.home, 32)}</span>
+          </div>
+          <div class="mr-vs">VS</div>
+          <div class="mr-team away">
+            <span class="mr-flag">${flagImg(m.away, 32)}</span>
+            <span class="mr-team-name">${NAMES[m.away]||m.away}</span>
+          </div>
         </div>
-      </div>
-      <div class="card-footer">
-        <div class="match-time">🕐 ${ist.time} IST<br><span style="font-size:0.7rem;color:var(--muted)">${ist.date} 2026</span></div>
-        <div class="match-venue">${VENUES[m.venue]||m.venue}</div>
-      </div>
-    </div>`;
-  }).join('');
+        <div class="mr-right">
+          <div class="mr-time">🕐 ${ist.time} IST · <span class="mr-date">${ist.date} 2026</span></div>
+          <div class="mr-venue">${VENUES[m.venue]||m.venue}</div>
+        </div>
+      </div>`;
+    }).join('');
+  } else {
+    grid.innerHTML = list.map(m => {
+      const ist = etToIST(m.date, m.et);
+      return `<div class="match-card" onclick="openModal(${m.no})">
+        <div class="card-header">
+          <div class="match-no">Match #${m.no}</div>
+          <div class="group-badge">Group ${m.group}</div>
+        </div>
+        <div class="teams-row">
+          <div class="team-side">
+            <div class="team-flag">${flagImg(m.home, 44)}</div>
+            <div class="team-name">${NAMES[m.home]||m.home}</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-side">
+            <div class="team-flag">${flagImg(m.away, 44)}</div>
+            <div class="team-name">${NAMES[m.away]||m.away}</div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="match-time">🕐 ${ist.time} IST<br><span style="font-size:0.7rem;color:var(--muted)">${ist.date} 2026</span></div>
+          <div class="match-venue">${VENUES[m.venue]||m.venue}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
 }
 
 function filterGroup(g) {
@@ -1204,41 +1580,105 @@ const KO_ROUNDS = [
 
 function renderKnockout() {
   const wrap = document.getElementById('knockout-bracket');
-  wrap.innerHTML = KO_ROUNDS.map((round, ri) => {
-    const cards = round.matches.map((m, mi) => {
-      const ist = etToIST(m.date, m.et);
-      const label = round.labels ? round.labels[mi] : `Match #${m.no}`;
-      const isFinal = round.labels && mi === 1;
-      return `<div class="ko-card ${isFinal?'ko-final':''}">
-        <div class="ko-match-label">${label}</div>
-        <div class="ko-teams">
-          <div class="ko-team">
-            <div class="ko-flag-wrap"><div class="ko-flag-tbd">TBD</div></div>
-            <div class="ko-tname">TBD</div>
-          </div>
-          <div class="ko-vs">VS</div>
-          <div class="ko-team">
-            <div class="ko-flag-wrap"><div class="ko-flag-tbd">TBD</div></div>
-            <div class="ko-tname">TBD</div>
-          </div>
+  
+  // Helper to render a single match card
+  function renderMatchCard(m, round, mi) {
+    const ist = etToIST(m.date, m.et);
+    const label = round.labels ? round.labels[mi] : `Match #${m.no}`;
+    const isFinal = round.labels && mi === 1;
+    return `<div class="ko-match-card ${isFinal?'ko-final':''}">
+      <div class="ko-card-header">
+        <span class="ko-match-id">${label}</span>
+        <span class="ko-match-date">${ist.date} · ${ist.time}</span>
+      </div>
+      <div class="ko-card-teams">
+        <div class="ko-card-team">
+          <div class="ko-flag-circle"><span class="ko-tbd-text">TBD</span></div>
+          <span class="ko-team-name-ko">TBD</span>
         </div>
-        <div class="ko-footer">
-          <span>🕐 ${ist.time} IST · ${ist.date} 2026</span>
-          <span>📍 ${VENUES[m.venue]||m.venue}</span>
+        <div class="ko-card-vs-divider"></div>
+        <div class="ko-card-team">
+          <div class="ko-flag-circle"><span class="ko-tbd-text">TBD</span></div>
+          <span class="ko-team-name-ko">TBD</span>
         </div>
-      </div>`;
-    }).join('');
-    return `<div class="ko-round">
-      <div class="ko-round-label">${round.label}</div>
-      <div class="ko-cards">${cards}</div>
+      </div>
+      <div class="ko-card-venue">📍 ${VENUES[m.venue]||m.venue}</div>
+    </div>`;
+  }
+
+  // Split KO_ROUNDS
+  // Round of 32 (ri = 0): 16 matches
+  const r32_left = KO_ROUNDS[0].matches.slice(0, 8);
+  const r32_right = KO_ROUNDS[0].matches.slice(8, 16);
+
+  // Round of 16 (ri = 1): 8 matches
+  const r16_left = KO_ROUNDS[1].matches.slice(0, 4);
+  const r16_right = KO_ROUNDS[1].matches.slice(4, 8);
+
+  // Quarter-Finals (ri = 2): 4 matches
+  const qf_left = KO_ROUNDS[2].matches.slice(0, 2);
+  const qf_right = KO_ROUNDS[2].matches.slice(2, 4);
+
+  // Semi-Finals (ri = 3): 2 matches
+  const sf_left = KO_ROUNDS[3].matches.slice(0, 1);
+  const sf_right = KO_ROUNDS[3].matches.slice(1, 2);
+
+  // Finals (ri = 4): 2 matches (Bronze, Grand Final)
+  const finals = KO_ROUNDS[4].matches;
+
+  // Build Left-side Columns
+  const leftColumns = [
+    { label: 'Round of 32', matches: r32_left },
+    { label: 'Round of 16', matches: r16_left },
+    { label: 'Quarter-Finals', matches: qf_left },
+    { label: 'Semi-Finals', matches: sf_left }
+  ].map(col => {
+    const parentRound = KO_ROUNDS.find(r => r.label === col.label);
+    const cardsHTML = col.matches.map(m => renderMatchCard(m, parentRound, parentRound.matches.indexOf(m))).join('');
+    return `<div class="bracket-column">
+      <div class="ko-round-title">${col.label}</div>
+      <div style="display:flex; flex-direction:column; justify-content:space-around; flex:1; gap:16px;">
+        ${cardsHTML}
+      </div>
     </div>`;
   }).join('');
+
+  // Build Right-side Columns (Reversed order to flow right-to-left towards the center)
+  const rightColumns = [
+    { label: 'Semi-Finals', matches: sf_right },
+    { label: 'Quarter-Finals', matches: qf_right },
+    { label: 'Round of 16', matches: r16_right },
+    { label: 'Round of 32', matches: r32_right }
+  ].map(col => {
+    const parentRound = KO_ROUNDS.find(r => r.label === col.label);
+    const cardsHTML = col.matches.map(m => renderMatchCard(m, parentRound, parentRound.matches.indexOf(m))).join('');
+    return `<div class="bracket-column">
+      <div class="ko-round-title">${col.label}</div>
+      <div style="display:flex; flex-direction:column; justify-content:space-around; flex:1; gap:16px;">
+        ${cardsHTML}
+      </div>
+    </div>`;
+  }).join('');
+
+  // Center column for Finals (Grand Final above Bronze Final)
+  const centerCardsHTML = [finals[1], finals[0]].map(m => {
+    const originalIndex = m === finals[1] ? 1 : 0;
+    return renderMatchCard(m, KO_ROUNDS[4], originalIndex);
+  }).join('');
+  const centerColumn = `<div class="bracket-column center-finals" style="min-width:280px; justify-content: center; gap: 40px;">
+    <div class="ko-round-title" style="border-bottom-color: var(--gold);">🏆 Finals</div>
+    <div style="display:flex; flex-direction:column; justify-content:center; flex:1; gap:48px;">
+      ${centerCardsHTML}
+    </div>
+  </div>`;
+
+  wrap.innerHTML = `<div class="bracket-wrapper">${leftColumns}${centerColumn}${rightColumns}</div>`;
 }
 
 // ────────────────────────────────────────────────
 // INIT
 // ────────────────────────────────────────────────
-renderFixtures('A');
+renderFixtures('ALL');
 renderGroups();
 renderPlayers('goals');
 renderLinks();
