@@ -475,7 +475,7 @@ footer span { color:var(--gold); }
       <p class="hero-tagline">USA &nbsp;·&nbsp; CANADA &nbsp;·&nbsp; MEXICO &nbsp;·&nbsp; 11 Jun – 19 Jul 2026</p>
       <p style="color:var(--muted);font-size:0.78rem;margin-top:8px;">All times in Indian Standard Time (IST = ET + 9h 30m)</p>
     </div>
-    <div class="trophy-wrap"><img src="FIFA26.png" alt="FIFA World Cup 2026 Trophy" style="width:140px;height:140px;object-fit:contain;filter:drop-shadow(0 0 30px rgba(201,168,76,0.6));animation:float 3s ease-in-out infinite;"></div>
+    <div class="trophy-wrap"><img src="FIFA26.png" alt="FIFA World Cup 2026 Trophy" style="width:320px;height:320px;object-fit:contain;filter:drop-shadow(0 0 30px rgba(201,168,76,0.6));animation:float 3s ease-in-out infinite;"></div>
   </div>
   <!-- NAV -->
   <nav>
@@ -492,7 +492,30 @@ footer span { color:var(--gold); }
 <!-- FIXTURES PANEL -->
 <div class="panel active" id="panel-fixtures">
   <h2 class="section-title">Match <span>Schedule</span></h2>
-  <div class="notice">📌 All times shown in IST (Indian Standard Time). Click any match card for details.</div>
+  <div id="ist-toast" style="
+    position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(100px);
+    background:rgba(201,168,76,0.95); color:#0A0E1A;
+    padding:12px 24px; border-radius:30px;
+    font-family:'Barlow Condensed',sans-serif; font-size:0.95rem; letter-spacing:1px;
+    font-weight:600; white-space:nowrap;
+    box-shadow:0 8px 32px rgba(0,0,0,0.4);
+    z-index:9999; opacity:0;
+    transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1), opacity 0.5s ease;
+  ">📌 All times shown in IST · Click any match card for details</div>
+  
+  <script>
+    window.addEventListener('load', () => {
+      const t = document.getElementById('ist-toast');
+      setTimeout(() => {
+        t.style.opacity = '1';
+        t.style.transform = 'translateX(-50%) translateY(0)';
+      }, 400);
+      setTimeout(() => {
+        t.style.opacity = '0';
+        t.style.transform = 'translateX(-50%) translateY(100px)';
+      }, 3200);
+    });
+  </script>
 
   <!-- Country Search -->
   <div style="position:relative;max-width:340px;margin-bottom:16px;">
