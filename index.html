@@ -737,6 +737,135 @@ footer span { color:var(--gold); }
   text-overflow: ellipsis;
 }
 
+
+/* ── SCORE STYLINGS ── */
+.score-win {
+  color: var(--green) !important;
+  text-shadow: 0 0 10px rgba(46,204,113,0.3);
+}
+.score-lose {
+  color: var(--accent2) !important;
+  text-shadow: 0 0 10px rgba(232,56,42,0.3);
+}
+.score-draw {
+  color: #3498db !important;
+  text-shadow: 0 0 10px rgba(52,152,219,0.3);
+}
+.list-score {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  width: 36px;
+  text-align: center;
+  padding-bottom: 2px;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+}
+.card-score {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  opacity: 1 !important;
+}
+
+/* ── COMPLETED & LIVE MATCH STYLINGS ── */
+.match-card.is-completed {
+  border-color: rgba(46, 204, 113, 0.45) !important;
+  background: linear-gradient(145deg, #0F1628 0%, rgba(46, 204, 113, 0.04) 100%) !important;
+}
+.match-row-card.is-completed {
+  border-color: rgba(46, 204, 113, 0.4) !important;
+  border-left: 3px solid var(--green) !important;
+  background: linear-gradient(90deg, rgba(46, 204, 113, 0.03) 0%, #0F1628 100%) !important;
+}
+
+@keyframes live-beat {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(232, 56, 42, 0.4);
+    border-color: rgba(232, 56, 42, 0.5) !important;
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px 4px rgba(232, 56, 42, 0.25);
+    border-color: var(--accent2) !important;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(232, 56, 42, 0);
+    border-color: rgba(232, 56, 42, 0.5) !important;
+  }
+}
+.match-card.is-live {
+  animation: live-beat 2s infinite ease-in-out;
+  z-index: 10;
+}
+
+@keyframes live-beat-list {
+  0% {
+    transform: translateX(0) scale(1);
+    box-shadow: 0 0 0 0 rgba(232, 56, 42, 0.4);
+    border-color: rgba(232, 56, 42, 0.5) !important;
+  }
+  50% {
+    transform: translateX(4px) scale(1.006);
+    box-shadow: 0 0 12px 3px rgba(232, 56, 42, 0.2);
+    border-color: var(--accent2) !important;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    box-shadow: 0 0 0 0 rgba(232, 56, 42, 0);
+    border-color: rgba(232, 56, 42, 0.5) !important;
+  }
+}
+.match-row-card.is-live {
+  animation: live-beat-list 2s infinite ease-in-out;
+  z-index: 10;
+}
+
+.live-badge {
+  background: rgba(232,56,42,0.15);
+  color: #FF6B5B;
+  border: 1px solid rgba(232,56,42,0.4);
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+@keyframes live-dot-blink {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+.live-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent2);
+  border-radius: 50%;
+  display: inline-block;
+  animation: live-dot-blink 1s infinite;
+  box-shadow: 0 0 6px var(--accent2);
+}
+
+.finished-badge {
+  background: rgba(46,204,113,0.15);
+  color: var(--green);
+  border: 1px solid rgba(46,204,113,0.4);
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
 </style>
 </head>
 <body>
@@ -904,7 +1033,7 @@ footer span { color:var(--gold); }
           <div class="modal-flag" id="m-flag1">🇲🇽</div>
           <div class="modal-tname" id="m-team1">Mexico</div>
         </div>
-        <div class="modal-vs">VS</div>
+        <div class="modal-vs" id="m-vs">VS</div>
         <div class="modal-team">
           <div class="modal-flag" id="m-flag2">🇿🇦</div>
           <div class="modal-tname" id="m-team2">South Africa</div>
@@ -1343,21 +1472,44 @@ function renderFixtures(group='ALL', country=null) {
   if (activeView === 'list') {
     grid.innerHTML = list.map(m => {
       const ist = etToIST(m.date, m.et);
-      return `<div class="match-row-card" onclick="openModal(${m.no})">
+      
+      const hasScore = m.homeScore !== undefined && m.awayScore !== undefined && m.homeScore !== null && m.awayScore !== null;
+      const isLive = m.isLive === true;
+      let homeClass = '';
+      let awayClass = '';
+      if (hasScore) {
+        if (m.homeScore > m.awayScore) {
+          homeClass = 'score-win';
+          awayClass = 'score-lose';
+        } else if (m.homeScore < m.awayScore) {
+          homeClass = 'score-lose';
+          awayClass = 'score-win';
+        } else {
+          homeClass = 'score-draw';
+          awayClass = 'score-draw';
+        }
+      }
+
+      return `<div class="match-row-card ${hasScore ? 'is-completed' : ''} ${isLive ? 'is-live' : ''}" onclick="openModal(${m.no})">
         <div class="mr-left">
-          <span class="mr-no">Match #${m.no}</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span class="mr-no">Match #${m.no}</span>
+            ${isLive ? '<span class="live-badge" style="padding:1px 6px;"><span class="live-dot" style="width:5px;height:5px;"></span>LIVE</span>' : ''}
+          </div>
           <span class="mr-group">Group ${m.group}</span>
         </div>
         <div class="mr-teams">
+          ${hasScore ? `<span class="list-score ${homeClass}">${m.homeScore}</span>` : '<span class="list-score" style="border-bottom:none;visibility:hidden;"></span>'}
           <div class="mr-team home">
             <span class="mr-team-name">${NAMES[m.home]||m.home}</span>
             <span class="mr-flag">${flagImg(m.home, 32)}</span>
           </div>
-          <div class="mr-vs">VS</div>
+          <div class="mr-vs">${hasScore ? ':' : 'VS'}</div>
           <div class="mr-team away">
             <span class="mr-flag">${flagImg(m.away, 32)}</span>
             <span class="mr-team-name">${NAMES[m.away]||m.away}</span>
           </div>
+          ${hasScore ? `<span class="list-score ${awayClass}">${m.awayScore}</span>` : '<span class="list-score" style="border-bottom:none;visibility:hidden;"></span>'}
         </div>
         <div class="mr-right">
           <div class="mr-time">🕐 ${ist.time} IST · <span class="mr-date">${ist.date} 2026</span></div>
@@ -1368,17 +1520,40 @@ function renderFixtures(group='ALL', country=null) {
   } else {
     grid.innerHTML = list.map(m => {
       const ist = etToIST(m.date, m.et);
-      return `<div class="match-card" onclick="openModal(${m.no})">
+      
+      const hasScore = m.homeScore !== undefined && m.awayScore !== undefined && m.homeScore !== null && m.awayScore !== null;
+      const isLive = m.isLive === true;
+      let homeClass = '';
+      let awayClass = '';
+      if (hasScore) {
+        if (m.homeScore > m.awayScore) {
+          homeClass = 'score-win';
+          awayClass = 'score-lose';
+        } else if (m.homeScore < m.awayScore) {
+          homeClass = 'score-lose';
+          awayClass = 'score-win';
+        } else {
+          homeClass = 'score-draw';
+          awayClass = 'score-draw';
+        }
+      }
+
+      return `<div class="match-card ${hasScore ? 'is-completed' : ''} ${isLive ? 'is-live' : ''}" onclick="openModal(${m.no})">
         <div class="card-header">
           <div class="match-no">Match #${m.no}</div>
-          <div class="group-badge">Group ${m.group}</div>
+          <div style="display:flex; gap:6px; align-items:center;">
+            ${isLive ? '<span class="live-badge"><span class="live-dot"></span>LIVE</span>' : ''}
+            <div class="group-badge">Group ${m.group}</div>
+          </div>
         </div>
         <div class="teams-row">
           <div class="team-side">
             <div class="team-flag">${flagImg(m.home, 44)}</div>
             <div class="team-name">${NAMES[m.home]||m.home}</div>
           </div>
-          <div class="vs-badge">VS</div>
+          <div class="vs-badge card-score">
+            ${hasScore ? `<span class="${homeClass}">${m.homeScore}</span> <span style="font-size:1.1rem;opacity:0.3;margin:0 4px;">-</span> <span class="${awayClass}">${m.awayScore}</span>` : 'VS'}
+          </div>
           <div class="team-side">
             <div class="team-flag">${flagImg(m.away, 44)}</div>
             <div class="team-name">${NAMES[m.away]||m.away}</div>
@@ -1421,6 +1596,39 @@ function openModal(no) {
   document.getElementById('m-date').textContent = ist.date + ' 2026';
   document.getElementById('m-time').textContent = ist.time + ' IST';
   document.getElementById('m-venue').textContent = VENUES[m.venue]||m.venue;
+
+  // Render score in modal if completed or live
+  const modalVs = document.getElementById('m-vs');
+  const hasScore = m.homeScore !== undefined && m.awayScore !== undefined && m.homeScore !== null && m.awayScore !== null;
+  const isLive = m.isLive === true;
+
+  // Add badge to stage string
+  let statusText = `Group Stage · Group ${m.group}`;
+  if (isLive) {
+    statusText += ` <span class="live-badge" style="display:inline-flex;margin-left:8px;vertical-align:middle;"><span class="live-dot"></span>LIVE</span>`;
+  } else if (hasScore) {
+    statusText += ` <span class="finished-badge" style="display:inline-flex;margin-left:8px;vertical-align:middle;">FULL TIME</span>`;
+  }
+  document.getElementById('m-stage').innerHTML = statusText;
+
+  if (hasScore || isLive) {
+    let homeClass = '';
+    let awayClass = '';
+    if (m.homeScore > m.awayScore) {
+      homeClass = 'score-win';
+      awayClass = 'score-lose';
+    } else if (m.homeScore < m.awayScore) {
+      homeClass = 'score-lose';
+      awayClass = 'score-win';
+    } else {
+      homeClass = 'score-draw';
+      awayClass = 'score-draw';
+    }
+    modalVs.innerHTML = `<span class="${homeClass}">${m.homeScore}</span><span style="font-size:1.8rem;opacity:0.4;margin:0 12px;">-</span><span class="${awayClass}">${m.awayScore}</span>`;
+  } else {
+    modalVs.textContent = 'VS';
+  }
+
   document.getElementById('modal').classList.add('open');
 }
 function closeModal(e) {
