@@ -1,7 +1,9 @@
 // 🌐 Third-Party Streaming Websites
 window.THIRD_PARTY_SITES = [
   { name: "Epic Sports", link: "https://www.epicsports.in/" },
-  { name: "Live Sports", link: "https://livsport.pages.dev/" }
+  { name: "Live Sports", link: "https://livsport.pages.dev/" },
+  { name: "Sports Live", link: "https://livsport.dpdns.org/" },
+  { name: "Live Score", link: "https://www.liverscore.net/" }
 ];
 
 // 🔗 Direct Stream Links
