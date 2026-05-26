@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:image" content="preview.jpg" />
 <title>FIFA World Cup 2026 — Match Schedule</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="link.js"></script>
@@ -867,6 +868,67 @@ footer span { color:var(--gold); }
   display: flex;
   align-items: center;
 }
+
+/* ── DONATION FLOATING BUTTON ── */
+.donation-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  color: var(--darker);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(201,168,76,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  z-index: 999;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s;
+}
+.donation-btn:hover {
+  transform: scale(1.15) rotate(8deg);
+  box-shadow: 0 10px 30px rgba(201,168,76,0.55);
+}
+.donation-btn:active {
+  transform: scale(0.95);
+}
+
+/* ── BUG REPORT FLOATING BUTTON ── */
+.bug-report-btn {
+  position: fixed;
+  bottom: 88px;
+  right: 24px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  z-index: 999;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s, border-color 0.2s, color 0.2s;
+  text-decoration: none;
+}
+.bug-report-btn:hover {
+  transform: scale(1.15) rotate(-8deg);
+  background: rgba(232, 56, 42, 0.15);
+  border-color: rgba(232, 56, 42, 0.4);
+  color: #FF6B5B;
+  box-shadow: 0 8px 24px rgba(232, 56, 42, 0.25);
+}
+.bug-report-btn:active {
+  transform: scale(0.95);
+}
 </style>
 </head>
 <body>
@@ -1028,6 +1090,41 @@ footer span { color:var(--gold); }
     <input type="text" id="link-name" placeholder="Stream Name (e.g. My Custom Stream)">
     <input type="url" id="link-url" placeholder="https://...">
     <button onclick="addLink()">+ Add Link</button>
+  </div>
+</div>
+
+<!-- BUG REPORT BUTTON -->
+<a href="https://github.com/Sree-Ram-MS/FIFA26/issues/new" target="_blank" rel="noopener" class="bug-report-btn" title="Report a Bug">🪲</a>
+
+<!-- DONATION BUTTON -->
+<button class="donation-btn" onclick="openDonationModal()" title="Support the Project">💖</button>
+
+<!-- DONATION MODAL -->
+<div class="modal-overlay" id="donation-modal" onclick="closeDonationModal(event)">
+  <div class="modal" style="max-width: 400px; text-align: center;">
+    <div class="modal-bg"></div>
+    <button class="modal-close" onclick="closeDonationModalBtn()">✕</button>
+    <div class="modal-body" style="padding: 28px;">
+      <div style="font-size: 3rem; margin-bottom: 12px; filter: drop-shadow(0 0 15px rgba(201,168,76,0.3));">🪙</div>
+      <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 2px; color: var(--gold); margin-bottom: 8px;">Support the Project</h3>
+      <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; line-height: 1.5;">If you find this FIFA 2026 match schedule and live dashboard helpful, consider supporting the developer!</p>
+      
+      <!-- QR Code Image -->
+      <div style="background: white; padding: 12px; border-radius: 8px; display: inline-block; margin-bottom: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); border: 2px solid var(--gold);">
+        <img src="donation_qr.png" alt="Scan to Donate" style="width: 180px; height: 180px; display: block; border-radius: 4px;" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=sreeramms@upi%26pn=FIFA26%26cu=INR';">
+      </div>
+      
+      <!-- UPI Details -->
+      <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--card-border); border-radius: 6px; padding: 12px 14px; margin-bottom: 20px; text-align: center;">
+        <span style="font-size: 0.65rem; text-transform: uppercase; color: var(--muted); letter-spacing: 1.5px; display: block; margin-bottom: 4px;">UPI ID</span>
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--gold); letter-spacing: 1px;">sreeramms@upi</span>
+      </div>
+      
+      <!-- Redirect Link -->
+      <a href="upi://pay?pa=sreeramms@upi&pn=FIFA26&cu=INR" class="nav-btn active" style="text-decoration: none; display: block; text-align: center; font-size: 0.95rem; font-weight: 700; letter-spacing: 1px;">
+        ⚡ Pay via UPI App
+      </a>
+    </div>
   </div>
 </div>
 
@@ -1799,6 +1896,16 @@ function deleteCustomLink(index) {
 
 function loadCSVLinks() {
   renderLinks();
+}
+
+function openDonationModal() {
+  document.getElementById('donation-modal').classList.add('open');
+}
+function closeDonationModal(e) {
+  if (e.target.id === 'donation-modal') document.getElementById('donation-modal').classList.remove('open');
+}
+function closeDonationModalBtn() {
+  document.getElementById('donation-modal').classList.remove('open');
 }
 
 // ────────────────────────────────────────────────
