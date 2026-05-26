@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FIFA World Cup 2026 — Match Schedule</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="link.js"></script>
 <style>
 :root {
   --gold: #C9A84C;
@@ -1008,10 +1009,23 @@ footer span { color:var(--gold); }
 <!-- WATCH PANEL -->
 <div class="panel" id="panel-watch">
   <h2 class="section-title">Watch <span>Live</span></h2>
-  <div class="notice">📡 Add your own streaming links below. Click any card to open.</div>
-  <div class="links-grid" id="links-grid"></div>
-  <div class="add-link-form">
-    <input type="text" id="link-name" placeholder="Channel / Platform name">
+
+  <!-- Official Section -->
+  <h3 class="ko-round-label" style="margin-top:24px; margin-bottom:14px; font-size:1.2rem;">📺 Official Broadcasters</h3>
+  <div class="links-grid" id="links-grid-official" style="margin-bottom:32px;"></div>
+  
+  <!-- Third Party Sites -->
+  <h3 class="ko-round-label" style="margin-top:24px; margin-bottom:14px; font-size:1.2rem;">🌐 Third-Party Streaming Sites</h3>
+  <div class="links-grid" id="links-grid-sites" style="margin-bottom:32px;"></div>
+  
+  <!-- Direct Links -->
+  <h3 class="ko-round-label" style="margin-top:24px; margin-bottom:14px; font-size:1.2rem;">🔗 Direct Stream Feeds</h3>
+  <div class="links-grid" id="links-grid-direct" style="margin-bottom:32px;"></div>
+
+  <!-- Manual Add Form -->
+  <h3 class="ko-round-label" style="margin-top:40px; margin-bottom:14px; font-size:1.1rem; border-bottom-color: rgba(255,255,255,0.07);">➕ Add Custom Stream Link</h3>
+  <div class="add-link-form" style="margin-top: 10px; border-top: none; padding-top: 0;">
+    <input type="text" id="link-name" placeholder="Stream Name (e.g. My Custom Stream)">
     <input type="url" id="link-url" placeholder="https://...">
     <button onclick="addLink()">+ Add Link</button>
   </div>
@@ -1318,12 +1332,10 @@ const PLAYER_STATS = {
 };
 
 const DEFAULT_LINKS = [
-  {name:'JioTV', url:'https://www.jiotv.com', icon:'📱', desc:'Watch on JioTV (India)'},
-  {name:'SonyLIV', url:'https://www.sonyliv.com', icon:'🎬', desc:'Sony Sports Network India'},
-  {name:'FIFA+', url:'https://plus.fifa.com', icon:'🏆', desc:'Official FIFA streaming'},
-  {name:'YouTube — FIFA', url:'https://www.youtube.com/@fifaworldcup', icon:'▶️', desc:'Highlights & clips'},
+  {name:'ZEE5', url:'https://www.zee5.com', icon:'📺', desc:'Official broadcast of FIFA in India'},
+  {name:'FIFA+', url:'https://plus.fifa.com', icon:'🏆', desc:'Official FIFA streaming'}
 ];
-let extraLinks = [];
+let extraLinks = JSON.parse(localStorage.getItem('fifa_extra_links') || '[]');
 
 // ────────────────────────────────────────────────
 // COUNTRY SEARCH
@@ -1696,24 +1708,96 @@ function showStat(cat) {
 // WATCH LINKS
 // ────────────────────────────────────────────────
 function renderLinks() {
-  const grid = document.getElementById('links-grid');
-  const all = [...DEFAULT_LINKS, ...extraLinks];
-  grid.innerHTML = all.map(l => `
-    <div class="link-card">
+  const officialGrid = document.getElementById('links-grid-official');
+  const sitesGrid = document.getElementById('links-grid-sites');
+  const directGrid = document.getElementById('links-grid-direct');
+
+  // Helper to map links to HTML cards
+  const cardHTML = (l) => `
+    <div class="link-card" style="position: relative;">
       <a href="${l.url}" target="_blank" rel="noopener">
         <div class="link-icon">${l.icon||'🔗'}</div>
         <div class="link-title">${l.name}</div>
         <div class="link-desc">${l.desc||l.url}</div>
       </a>
-    </div>`).join('');
+      ${l.isCustom ? `
+        <button onclick="deleteCustomLink(${l.index})" style="
+          position: absolute; top: 8px; right: 8px;
+          background: rgba(232,56,42,0.15); border: 1px solid rgba(232,56,42,0.3);
+          color: #FF6B5B; width: 22px; height: 22px; border-radius: 50%;
+          cursor: pointer; display: flex; align-items: center; justify-content: center;
+          font-size: 0.75rem; transition: background 0.2s;
+        " onmouseover="this.style.background='rgba(232,56,42,0.35)'" onmouseout="this.style.background='rgba(232,56,42,0.15)'" title="Delete Link">✕</button>
+      ` : ''}
+    </div>`;
+
+  // 1. Official
+  officialGrid.innerHTML = DEFAULT_LINKS.map(l => cardHTML({
+    name: l.name,
+    url: l.url,
+    icon: l.icon || '📺',
+    desc: l.desc,
+    isCustom: false
+  })).join('');
+
+  // 2. Third Party Sites
+  const sites = (window.THIRD_PARTY_SITES || []).map(l => ({
+    name: l.name || '',
+    url: l.link || l.url || '',
+    icon: l.icon || '🌐',
+    desc: l.desc || 'Third-Party Stream Website',
+    isCustom: false
+  }));
+  if (sites.length === 0) {
+    sitesGrid.innerHTML = `<div style="color:var(--muted); font-size:0.85rem; padding:10px 0; grid-column: 1/-1; text-align: center;">No streaming sites configured.</div>`;
+  } else {
+    sitesGrid.innerHTML = sites.map(cardHTML).join('');
+  }
+
+  // 3. Direct Feeds
+  const directs = [
+    ...(window.DIRECT_LINKS || []).map(l => ({
+      name: l.name || '',
+      url: l.link || l.url || '',
+      icon: l.icon || '🔗',
+      desc: l.desc || 'Direct stream player feed',
+      isCustom: false
+    })),
+    ...extraLinks.map((l, index) => ({
+      name: l.name,
+      url: l.url,
+      icon: l.icon || '📺',
+      desc: l.desc || 'Custom stream link',
+      isCustom: true,
+      index: index
+    }))
+  ];
+  if (directs.length === 0) {
+    directGrid.innerHTML = `<div style="color:var(--muted); font-size:0.85rem; padding:10px 0; grid-column: 1/-1; text-align: center;">No direct feeds configured.</div>`;
+  } else {
+    directGrid.innerHTML = directs.map(cardHTML).join('');
+  }
 }
+
 function addLink() {
   const name = document.getElementById('link-name').value.trim();
   const url = document.getElementById('link-url').value.trim();
   if (!name || !url) return;
-  extraLinks.push({name, url, icon:'📺', desc:url});
+  extraLinks.push({name, url, icon:'📺', desc:'Added by user'});
+  localStorage.setItem('fifa_extra_links', JSON.stringify(extraLinks));
   document.getElementById('link-name').value = '';
   document.getElementById('link-url').value = '';
+  renderLinks();
+}
+
+function deleteCustomLink(index) {
+  event.stopPropagation(); // Prevent opening the link when clicking delete
+  extraLinks.splice(index, 1);
+  localStorage.setItem('fifa_extra_links', JSON.stringify(extraLinks));
+  renderLinks();
+}
+
+function loadCSVLinks() {
   renderLinks();
 }
 
@@ -1891,6 +1975,7 @@ renderGroups();
 renderPlayers('goals');
 renderLinks();
 renderKnockout();
+loadCSVLinks();
 </script>
 </body>
 </html>
