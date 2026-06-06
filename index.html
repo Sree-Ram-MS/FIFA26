@@ -683,6 +683,13 @@
       max-width: 700px;
     }
 
+    .rankings-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
     .player-row {
       display: flex;
       align-items: center;
@@ -1714,6 +1721,7 @@
         <button class="nav-btn" onclick="showPanel('groups')">📊 Group Tables</button>
         <button class="nav-btn" onclick="showPanel('knockout')">🏆 Knockout Bracket</button>
         <button class="nav-btn" onclick="showPanel('players')">🌟 Top Players</button>
+        <button class="nav-btn" onclick="showPanel('rankings')">📈 FIFA Rankings</button>
         <button class="nav-btn" onclick="showPanel('watch')">📺 Watch Live</button>
       </div>
     </nav>
@@ -1844,6 +1852,13 @@
       <button class="stat-tab" onclick="showStat('speed')">⚡ Speed</button>
     </div>
     <div class="players-list" id="players-list"></div>
+  </div>
+
+  <!-- FIFA RANKINGS PANEL -->
+  <div class="panel" id="panel-rankings">
+    <h2 class="section-title">FIFA Men's <span>World Rankings</span></h2>
+    <div class="notice">📈 Official FIFA Men's World Rankings. Ranks and points reflect the official June 6, 2026 update.</div>
+    <div class="rankings-list" id="rankings-list"></div>
   </div>
 
   <!-- WATCH PANEL -->
@@ -2036,6 +2051,7 @@
 
   <script src="data/result.js"></script>
   <script src="data/players.js"></script>
+  <script src="data/rankings.js"></script>
   <script>
     // ────────────────────────────────────────────────
     // DATA
@@ -2837,6 +2853,30 @@
     }
 
     // ────────────────────────────────────────────────
+    // FIFA RANKINGS
+    // ────────────────────────────────────────────────
+    function renderRankings() {
+      const list = document.getElementById('rankings-list');
+      if (!list || !window.FIFA_RANKINGS) return;
+      list.innerHTML = window.FIFA_RANKINGS.map((team) => {
+        const iso = (window.FIFA_ISO && window.FIFA_ISO[team.code]) || 'un';
+        const name = (window.FIFA_NAMES && window.FIFA_NAMES[team.code]) || team.code;
+        const flag = `<img src="https://flagcdn.com/w320/${iso}.png" width="38" height="38" alt="${name}" style="border-radius:50%;object-fit:cover;display:block;box-shadow:0 2px 8px rgba(0,0,0,0.35);" onerror="this.style.visibility='hidden'">`;
+        return `
+    <div class="player-row">
+      <div class="rank ${team.rank <= 10 ? 'top' : ''}">#${team.rank}</div>
+      <div style="flex-shrink: 0; display: flex; align-items: center;">
+        ${flag}
+      </div>
+      <div class="player-info">
+        <div class="player-name">${name}</div>
+      </div>
+      <div class="player-stat" style="font-size: 1.5rem; min-width: 120px;">${team.points.toFixed(2)} pts</div>
+    </div>`;
+      }).join('');
+    }
+
+    // ────────────────────────────────────────────────
     // WATCH LINKS
     // ────────────────────────────────────────────────
     function renderLinks() {
@@ -3203,6 +3243,7 @@
     renderFixtures('ALL');
     renderGroups();
     renderPlayers('goals');
+    renderRankings();
     renderLinks();
     renderKnockout();
     loadCSVLinks();
