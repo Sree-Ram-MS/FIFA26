@@ -1695,6 +1695,30 @@
         transform: translateX(0) translateY(0);
       }
     }
+
+    /* ── FIXTURES DATE GROUP HEADER ── */
+    .fixtures-date-header {
+      grid-column: 1 / -1;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 12px 16px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.5px;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #btn-group-date:hover:not(.active) {
+      color: var(--gold) !important;
+    }
   </style>
 </head>
 
@@ -1758,21 +1782,36 @@
     <!-- Controls Bar -->
     <div
       style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:20px;">
-      <!-- Country Search -->
-      <div style="position:relative; width:100%; max-width:340px;">
-        <span
-          style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:1rem;pointer-events:none;">🔍</span>
-        <input id="country-search" type="text" placeholder="Search country (e.g. Brazil, Spain…)"
-          oninput="onCountrySearch()" autocomplete="off" style="width:100%;padding:10px 36px 10px 38px;background:var(--card-bg);border:1px solid var(--card-border);
-               border-radius:5px;color:var(--text);font-family:'Barlow',sans-serif;font-size:0.9rem;
-               outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold)'"
-          onblur="this.style.borderColor='var(--card-border)'">
-        <button id="search-clear" onclick="clearSearch()"
-          style="display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);
-               background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;line-height:1;">✕</button>
-        <div id="suggestions" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:100;
-               background:var(--card-bg);border:1px solid var(--gold);border-radius:5px;overflow:hidden;
-               box-shadow:0 8px 24px rgba(0,0,0,0.4);"></div>
+      <!-- Country Search and Group by Date (Grouped on the left side) -->
+      <div style="display:flex; align-items:center; flex-wrap:wrap; gap:12px; flex:1; min-width:300px;">
+        <!-- Country Search -->
+        <div style="position:relative; width:100%; max-width:340px;">
+          <span
+            style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:1rem;pointer-events:none;">🔍</span>
+          <input id="country-search" type="text" placeholder="Search country (e.g. Brazil, Spain…)"
+            oninput="onCountrySearch()" autocomplete="off" style="width:100%;padding:10px 36px 10px 38px;background:var(--card-bg);border:1px solid var(--card-border);
+                 border-radius:5px;color:var(--text);font-family:'Barlow',sans-serif;font-size:0.9rem;
+                 outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold)'"
+            onblur="this.style.borderColor='var(--card-border)'">
+          <button id="search-clear" onclick="clearSearch()"
+            style="display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);
+                 background:none;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;line-height:1;">✕</button>
+          <div id="suggestions" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:100;
+                 background:var(--card-bg);border:1px solid var(--gold);border-radius:5px;overflow:hidden;
+                 box-shadow:0 8px 24px rgba(0,0,0,0.4);"></div>
+        </div>
+
+        <!-- Group by Date Toggle -->
+        <div class="group-switcher"
+          style="display:flex; background:var(--card-bg); border:1px solid var(--card-border); border-radius:6px; padding:4px; gap:4px;">
+          <button id="btn-group-date" onclick="toggleGroupByDate()" title="Group matches by date" style="
+          padding: 8px 12px; border-radius:4px; border:none; cursor:pointer; transition:all 0.2s;
+          background: transparent; color: var(--muted); display: flex; align-items: center; justify-content: center;
+          font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px; gap: 6px;
+        ">
+            <span>📅 Group by Date</span>
+          </button>
+        </div>
       </div>
 
       <!-- View Switcher Toggle -->
@@ -2057,34 +2096,9 @@
     // DATA
     // ────────────────────────────────────────────────
 
-    // ET to IST = +9h30m
-    // Returns { time: "HH:MM", date: "12 Jun" or same as input }
-    function etToIST(dateStr, etTime) {
-      if (!etTime || etTime === 'TBD') {
-        return { time: 'TBD', date: dateStr };
-      }
-      const [h, m] = etTime.split(':').map(Number);
-      if (isNaN(h) || isNaN(m)) {
-        return { time: etTime, date: dateStr };
-      }
-      let ih = h + 9, im = m + 30;
-      if (im >= 60) { ih++; im -= 60; }
-      const pad = n => String(n).padStart(2, '0');
-
-      if (ih < 24) {
-        return { time: `${pad(ih)}:${pad(im)}`, date: dateStr };
-      }
-
-      // Crossed midnight — compute next calendar date
-      ih -= 24;
-      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-      const parts = dateStr.split(' '); // e.g. ["11","Jun"]
-      let day = parseInt(parts[0]);
-      let monIdx = months.indexOf(parts[1]);
-      day++;
-      if (day > daysInMonth[monIdx]) { day = 1; monIdx++; }
-      return { time: `${pad(ih)}:${pad(im)}`, date: `${day} ${months[monIdx]}` };
+    // Returns { time: "HH:MM", date: "12 Jun" }
+    function etToIST(dateStr, timeVal) {
+      return { time: timeVal || 'TBD', date: dateStr };
     }
 
     // FIFA code → ISO 3166-1 alpha-2 (lowercase) for Flagpedia/Flagcdn API
@@ -2147,101 +2161,111 @@
     };
 
     const MATCHES = [
-      // GROUP A
-      { no: 1, group: 'A', date: '11 Jun', et: '15:00', home: 'MEX', away: 'RSA', venue: 'Mexico City', stage: 'Group Stage' },
-      { no: 2, group: 'A', date: '12 Jun', et: '22:00', home: 'KOR', away: 'CZE', venue: 'Guadalajara', stage: 'Group Stage' },
-      { no: 25, group: 'A', date: '18 Jun', et: '12:00', home: 'CZE', away: 'RSA', venue: 'Atlanta', stage: 'Group Stage' },
-      { no: 28, group: 'A', date: '18 Jun', et: '21:00', home: 'MEX', away: 'KOR', venue: 'Guadalajara', stage: 'Group Stage' },
-      { no: 53, group: 'A', date: '24 Jun', et: '21:00', home: 'CZE', away: 'MEX', venue: 'Mexico City', stage: 'Group Stage' },
-      { no: 54, group: 'A', date: '24 Jun', et: '21:00', home: 'RSA', away: 'KOR', venue: 'Monterrey', stage: 'Group Stage' },
+      // 12 JUN
+      { no: 1, group: 'A', date: '12 Jun', time: '00:30', home: 'MEX', away: 'RSA', venue: 'Mexico City', stage: 'Group Stage' },
+      { no: 2, group: 'A', date: '12 Jun', time: '07:30', home: 'KOR', away: 'CZE', venue: 'Guadalajara', stage: 'Group Stage' },
 
-      // GROUP B
-      { no: 3, group: 'B', date: '12 Jun', et: '15:00', home: 'CAN', away: 'BIH', venue: 'Toronto', stage: 'Group Stage' },
-      { no: 8, group: 'B', date: '13 Jun', et: '15:00', home: 'QAT', away: 'SUI', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
-      { no: 26, group: 'B', date: '18 Jun', et: '15:00', home: 'SUI', away: 'BIH', venue: 'Los Angeles', stage: 'Group Stage' },
-      { no: 27, group: 'B', date: '18 Jun', et: '18:00', home: 'CAN', away: 'QAT', venue: 'Vancouver', stage: 'Group Stage' },
-      { no: 51, group: 'B', date: '24 Jun', et: '15:00', home: 'SUI', away: 'CAN', venue: 'Vancouver', stage: 'Group Stage' },
-      { no: 52, group: 'B', date: '24 Jun', et: '15:00', home: 'BIH', away: 'QAT', venue: 'Seattle', stage: 'Group Stage' },
+      // 13 JUN
+      { no: 3, group: 'B', date: '13 Jun', time: '00:30', home: 'CAN', away: 'BIH', venue: 'Toronto', stage: 'Group Stage' },
+      { no: 4, group: 'D', date: '13 Jun', time: '06:30', home: 'USA', away: 'PAR', venue: 'Los Angeles', stage: 'Group Stage' },
 
-      // GROUP C
-      { no: 5, group: 'C', date: '13 Jun', et: '21:00', home: 'HAI', away: 'SCO', venue: 'Boston', stage: 'Group Stage' },
-      { no: 7, group: 'C', date: '13 Jun', et: '21:00', home: 'BRA', away: 'MAR', venue: 'New York/New Jersey', stage: 'Group Stage' },
-      { no: 29, group: 'C', date: '19 Jun', et: '20:30', home: 'BRA', away: 'HAI', venue: 'Philadelphia', stage: 'Group Stage' },
-      { no: 30, group: 'C', date: '19 Jun', et: '18:00', home: 'SCO', away: 'MAR', venue: 'Boston', stage: 'Group Stage' },
-      { no: 49, group: 'C', date: '24 Jun', et: '18:00', home: 'SCO', away: 'BRA', venue: 'Miami', stage: 'Group Stage' },
-      { no: 50, group: 'C', date: '24 Jun', et: '18:00', home: 'MAR', away: 'HAI', venue: 'Atlanta', stage: 'Group Stage' },
+      // 14 JUN
+      { no: 5, group: 'B', date: '14 Jun', time: '00:30', home: 'QAT', away: 'SUI', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
+      { no: 6, group: 'C', date: '14 Jun', time: '03:30', home: 'BRA', away: 'MAR', venue: 'New York/New Jersey', stage: 'Group Stage' },
+      { no: 7, group: 'C', date: '14 Jun', time: '06:30', home: 'HAI', away: 'SCO', venue: 'Boston', stage: 'Group Stage' },
+      { no: 8, group: 'D', date: '14 Jun', time: '09:30', home: 'AUS', away: 'TUR', venue: 'Vancouver', stage: 'Group Stage' },
+      { no: 9, group: 'E', date: '14 Jun', time: '22:30', home: 'GER', away: 'CUW', venue: 'Houston', stage: 'Group Stage' },
 
-      // GROUP D
-      { no: 4, group: 'D', date: '12 Jun', et: '21:00', home: 'USA', away: 'PAR', venue: 'Los Angeles', stage: 'Group Stage' },
-      { no: 6, group: 'D', date: '13 Jun', et: '00:00', home: 'AUS', away: 'TUR', venue: 'Vancouver', stage: 'Group Stage' },
-      { no: 31, group: 'D', date: '19 Jun', et: '23:00', home: 'TUR', away: 'PAR', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
-      { no: 32, group: 'D', date: '19 Jun', et: '15:00', home: 'USA', away: 'AUS', venue: 'Seattle', stage: 'Group Stage' },
-      { no: 59, group: 'D', date: '25 Jun', et: '22:00', home: 'TUR', away: 'USA', venue: 'Los Angeles', stage: 'Group Stage' },
-      { no: 60, group: 'D', date: '25 Jun', et: '22:00', home: 'PAR', away: 'AUS', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
+      // 15 JUN
+      { no: 10, group: 'F', date: '15 Jun', time: '01:30', home: 'NED', away: 'JPN', venue: 'Dallas', stage: 'Group Stage' },
+      { no: 11, group: 'E', date: '15 Jun', time: '04:30', home: 'CIV', away: 'ECU', venue: 'Philadelphia', stage: 'Group Stage' },
+      { no: 12, group: 'F', date: '15 Jun', time: '07:30', home: 'SWE', away: 'TUN', venue: 'Monterrey', stage: 'Group Stage' },
+      { no: 13, group: 'H', date: '15 Jun', time: '21:30', home: 'ESP', away: 'CPV', venue: 'Atlanta', stage: 'Group Stage' },
 
-      // GROUP E
-      { no: 9, group: 'E', date: '14 Jun', et: '19:00', home: 'CIV', away: 'ECU', venue: 'Philadelphia', stage: 'Group Stage' },
-      { no: 10, group: 'E', date: '14 Jun', et: '13:00', home: 'GER', away: 'CUW', venue: 'Houston', stage: 'Group Stage' },
-      { no: 33, group: 'E', date: '20 Jun', et: '16:00', home: 'GER', away: 'CIV', venue: 'Toronto', stage: 'Group Stage' },
-      { no: 34, group: 'E', date: '20 Jun', et: '20:00', home: 'ECU', away: 'CUW', venue: 'Kansas City', stage: 'Group Stage' },
-      { no: 55, group: 'E', date: '25 Jun', et: '16:00', home: 'CUW', away: 'CIV', venue: 'Philadelphia', stage: 'Group Stage' },
-      { no: 56, group: 'E', date: '25 Jun', et: '16:00', home: 'ECU', away: 'GER', venue: 'New York/New Jersey', stage: 'Group Stage' },
+      // 16 JUN
+      { no: 14, group: 'G', date: '16 Jun', time: '00:30', home: 'BEL', away: 'EGY', venue: 'Seattle', stage: 'Group Stage' },
+      { no: 15, group: 'H', date: '16 Jun', time: '03:30', home: 'KSA', away: 'URU', venue: 'Miami', stage: 'Group Stage' },
+      { no: 16, group: 'G', date: '16 Jun', time: '06:30', home: 'IRN', away: 'NZL', venue: 'Los Angeles', stage: 'Group Stage' },
 
-      // GROUP F
-      { no: 11, group: 'F', date: '14 Jun', et: '16:00', home: 'NED', away: 'JPN', venue: 'Dallas', stage: 'Group Stage' },
-      { no: 12, group: 'F', date: '14 Jun', et: '22:00', home: 'SWE', away: 'TUN', venue: 'Monterrey', stage: 'Group Stage' },
-      { no: 35, group: 'F', date: '20 Jun', et: '13:00', home: 'NED', away: 'SWE', venue: 'Houston', stage: 'Group Stage' },
-      { no: 36, group: 'F', date: '20 Jun', et: '00:00', home: 'TUN', away: 'JPN', venue: 'Monterrey', stage: 'Group Stage' },
-      { no: 57, group: 'F', date: '25 Jun', et: '15:00', home: 'JPN', away: 'SWE', venue: 'Dallas', stage: 'Group Stage' },
-      { no: 58, group: 'F', date: '25 Jun', et: '19:00', home: 'TUN', away: 'NED', venue: 'Kansas City', stage: 'Group Stage' },
+      // 17 JUN
+      { no: 17, group: 'I', date: '17 Jun', time: '00:30', home: 'FRA', away: 'SEN', venue: 'New York/New Jersey', stage: 'Group Stage' },
+      { no: 18, group: 'I', date: '17 Jun', time: '03:30', home: 'IRQ', away: 'NOR', venue: 'Boston', stage: 'Group Stage' },
+      { no: 19, group: 'J', date: '17 Jun', time: '06:30', home: 'ARG', away: 'ALG', venue: 'Kansas City', stage: 'Group Stage' },
+      { no: 20, group: 'J', date: '17 Jun', time: '09:30', home: 'AUT', away: 'JOR', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
+      { no: 21, group: 'K', date: '17 Jun', time: '22:30', home: 'POR', away: 'COD', venue: 'Houston', stage: 'Group Stage' },
 
-      // GROUP G
-      { no: 15, group: 'G', date: '15 Jun', et: '21:00', home: 'IRN', away: 'NZL', venue: 'Los Angeles', stage: 'Group Stage' },
-      { no: 16, group: 'G', date: '15 Jun', et: '15:00', home: 'BEL', away: 'EGY', venue: 'Seattle', stage: 'Group Stage' },
-      { no: 39, group: 'G', date: '21 Jun', et: '15:00', home: 'BEL', away: 'IRN', venue: 'Los Angeles', stage: 'Group Stage' },
-      { no: 40, group: 'G', date: '21 Jun', et: '21:00', home: 'NZL', away: 'EGY', venue: 'Vancouver', stage: 'Group Stage' },
-      { no: 63, group: 'G', date: '26 Jun', et: '22:00', home: 'EGY', away: 'IRN', venue: 'Seattle', stage: 'Group Stage' },
-      { no: 64, group: 'G', date: '26 Jun', et: '23:00', home: 'NZL', away: 'BEL', venue: 'Vancouver', stage: 'Group Stage' },
+      // 18 JUN
+      { no: 22, group: 'L', date: '18 Jun', time: '01:30', home: 'ENG', away: 'CRO', venue: 'Dallas', stage: 'Group Stage' },
+      { no: 23, group: 'L', date: '18 Jun', time: '04:30', home: 'GHA', away: 'PAN', venue: 'Toronto', stage: 'Group Stage' },
+      { no: 24, group: 'K', date: '18 Jun', time: '07:30', home: 'UZB', away: 'COL', venue: 'Mexico City', stage: 'Group Stage' },
+      { no: 25, group: 'A', date: '18 Jun', time: '21:30', home: 'CZE', away: 'RSA', venue: 'Atlanta', stage: 'Group Stage' },
 
-      // GROUP H
-      { no: 13, group: 'H', date: '15 Jun', et: '18:00', home: 'KSA', away: 'URU', venue: 'Miami', stage: 'Group Stage' },
-      { no: 14, group: 'H', date: '15 Jun', et: '12:00', home: 'ESP', away: 'CPV', venue: 'Atlanta', stage: 'Group Stage' },
-      { no: 37, group: 'H', date: '21 Jun', et: '18:00', home: 'URU', away: 'CPV', venue: 'Miami', stage: 'Group Stage' },
-      { no: 38, group: 'H', date: '21 Jun', et: '12:00', home: 'ESP', away: 'KSA', venue: 'Atlanta', stage: 'Group Stage' },
-      { no: 65, group: 'H', date: '26 Jun', et: '20:00', home: 'CPV', away: 'KSA', venue: 'Houston', stage: 'Group Stage' },
-      { no: 66, group: 'H', date: '26 Jun', et: '20:00', home: 'URU', away: 'ESP', venue: 'Guadalajara', stage: 'Group Stage' },
+      // 19 JUN
+      { no: 26, group: 'B', date: '19 Jun', time: '00:30', home: 'SUI', away: 'BIH', venue: 'Los Angeles', stage: 'Group Stage' },
+      { no: 27, group: 'B', date: '19 Jun', time: '03:30', home: 'CAN', away: 'QAT', venue: 'Vancouver', stage: 'Group Stage' },
+      { no: 28, group: 'A', date: '19 Jun', time: '06:30', home: 'MEX', away: 'KOR', venue: 'Guadalajara', stage: 'Group Stage' },
 
-      // GROUP I
-      { no: 17, group: 'I', date: '16 Jun', et: '15:00', home: 'FRA', away: 'SEN', venue: 'New York/New Jersey', stage: 'Group Stage' },
-      { no: 18, group: 'I', date: '16 Jun', et: '18:00', home: 'IRQ', away: 'NOR', venue: 'Boston', stage: 'Group Stage' },
-      { no: 41, group: 'I', date: '22 Jun', et: '20:00', home: 'NOR', away: 'SEN', venue: 'New York/New Jersey', stage: 'Group Stage' },
-      { no: 42, group: 'I', date: '22 Jun', et: '17:00', home: 'FRA', away: 'IRQ', venue: 'Philadelphia', stage: 'Group Stage' },
-      { no: 61, group: 'I', date: '26 Jun', et: '15:00', home: 'NOR', away: 'FRA', venue: 'Boston', stage: 'Group Stage' },
-      { no: 62, group: 'I', date: '26 Jun', et: '15:00', home: 'SEN', away: 'IRQ', venue: 'Toronto', stage: 'Group Stage' },
+      // 20 JUN
+      { no: 29, group: 'D', date: '20 Jun', time: '00:30', home: 'USA', away: 'AUS', venue: 'Seattle', stage: 'Group Stage' },
+      { no: 30, group: 'C', date: '20 Jun', time: '03:30', home: 'SCO', away: 'MAR', venue: 'Boston', stage: 'Group Stage' },
+      { no: 31, group: 'C', date: '20 Jun', time: '06:00', home: 'BRA', away: 'HAI', venue: 'Philadelphia', stage: 'Group Stage' },
+      { no: 32, group: 'D', date: '20 Jun', time: '08:30', home: 'TUR', away: 'PAR', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
+      { no: 33, group: 'F', date: '20 Jun', time: '22:30', home: 'NED', away: 'SWE', venue: 'Houston', stage: 'Group Stage' },
 
-      // GROUP J
-      { no: 19, group: 'J', date: '16 Jun', et: '21:00', home: 'ARG', away: 'ALG', venue: 'Kansas City', stage: 'Group Stage' },
-      { no: 20, group: 'J', date: '16 Jun', et: '00:00', home: 'AUT', away: 'JOR', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
-      { no: 43, group: 'J', date: '22 Jun', et: '13:00', home: 'ARG', away: 'AUT', venue: 'Dallas', stage: 'Group Stage' },
-      { no: 44, group: 'J', date: '22 Jun', et: '23:00', home: 'JOR', away: 'ALG', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
-      { no: 71, group: 'J', date: '27 Jun', et: '19:30', home: 'ALG', away: 'AUT', venue: 'Atlanta', stage: 'Group Stage' },
-      { no: 72, group: 'J', date: '27 Jun', et: '19:30', home: 'JOR', away: 'ARG', venue: 'Kansas City', stage: 'Group Stage' },
+      // 21 JUN
+      { no: 34, group: 'E', date: '21 Jun', time: '01:30', home: 'GER', away: 'CIV', venue: 'Toronto', stage: 'Group Stage' },
+      { no: 35, group: 'E', date: '21 Jun', time: '05:30', home: 'ECU', away: 'CUW', venue: 'Kansas City', stage: 'Group Stage' },
+      { no: 36, group: 'F', date: '21 Jun', time: '09:30', home: 'TUN', away: 'JPN', venue: 'Monterrey', stage: 'Group Stage' },
+      { no: 37, group: 'H', date: '21 Jun', time: '21:30', home: 'ESP', away: 'KSA', venue: 'Atlanta', stage: 'Group Stage' },
 
-      // GROUP K
-      { no: 23, group: 'K', date: '17 Jun', et: '13:00', home: 'POR', away: 'COD', venue: 'Houston', stage: 'Group Stage' },
-      { no: 24, group: 'K', date: '17 Jun', et: '22:00', home: 'UZB', away: 'COL', venue: 'Mexico City', stage: 'Group Stage' },
-      { no: 47, group: 'K', date: '23 Jun', et: '13:00', home: 'POR', away: 'UZB', venue: 'Houston', stage: 'Group Stage' },
-      { no: 48, group: 'K', date: '23 Jun', et: '13:00', home: 'COL', away: 'COD', venue: 'Guadalajara', stage: 'Group Stage' },
-      { no: 69, group: 'K', date: '27 Jun', et: '22:00', home: 'COD', away: 'UZB', venue: 'Monterrey', stage: 'Group Stage' },
-      { no: 70, group: 'K', date: '27 Jun', et: '22:00', home: 'COL', away: 'POR', venue: 'Miami', stage: 'Group Stage' },
+      // 22 JUN
+      { no: 38, group: 'G', date: '22 Jun', time: '00:30', home: 'BEL', away: 'IRN', venue: 'Los Angeles', stage: 'Group Stage' },
+      { no: 39, group: 'H', date: '22 Jun', time: '03:30', home: 'URU', away: 'CPV', venue: 'Miami', stage: 'Group Stage' },
+      { no: 40, group: 'G', date: '22 Jun', time: '06:30', home: 'NZL', away: 'EGY', venue: 'Vancouver', stage: 'Group Stage' },
+      { no: 41, group: 'J', date: '22 Jun', time: '22:30', home: 'ARG', away: 'AUT', venue: 'Dallas', stage: 'Group Stage' },
 
-      // GROUP L
-      { no: 21, group: 'L', date: '17 Jun', et: '15:00', home: 'GHA', away: 'PAN', venue: 'Toronto', stage: 'Group Stage' },
-      { no: 22, group: 'L', date: '17 Jun', et: '16:00', home: 'ENG', away: 'CRO', venue: 'Dallas', stage: 'Group Stage' },
-      { no: 45, group: 'L', date: '23 Jun', et: '16:00', home: 'ENG', away: 'GHA', venue: 'Boston', stage: 'Group Stage' },
-      { no: 46, group: 'L', date: '23 Jun', et: '19:00', home: 'PAN', away: 'CRO', venue: 'Toronto', stage: 'Group Stage' },
-      { no: 67, group: 'L', date: '27 Jun', et: '17:00', home: 'PAN', away: 'ENG', venue: 'New York/New Jersey', stage: 'Group Stage' },
-      { no: 68, group: 'L', date: '27 Jun', et: '17:00', home: 'CRO', away: 'GHA', venue: 'Philadelphia', stage: 'Group Stage' }
+      // 23 JUN
+      { no: 42, group: 'I', date: '23 Jun', time: '02:30', home: 'FRA', away: 'IRQ', venue: 'Philadelphia', stage: 'Group Stage' },
+      { no: 43, group: 'I', date: '23 Jun', time: '05:30', home: 'NOR', away: 'SEN', venue: 'New York/New Jersey', stage: 'Group Stage' },
+      { no: 44, group: 'J', date: '23 Jun', time: '08:30', home: 'JOR', away: 'ALG', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
+      { no: 45, group: 'K', date: '23 Jun', time: '22:30', home: 'POR', away: 'UZB', venue: 'Houston', stage: 'Group Stage' },
+
+      // 24 JUN
+      { no: 46, group: 'L', date: '24 Jun', time: '01:30', home: 'ENG', away: 'GHA', venue: 'Boston', stage: 'Group Stage' },
+      { no: 47, group: 'L', date: '24 Jun', time: '04:30', home: 'PAN', away: 'CRO', venue: 'Toronto', stage: 'Group Stage' },
+      { no: 48, group: 'K', date: '24 Jun', time: '07:30', home: 'COL', away: 'COD', venue: 'Guadalajara', stage: 'Group Stage' },
+
+      // 25 JUN
+      { no: 49, group: 'B', date: '25 Jun', time: '00:30', home: 'SUI', away: 'CAN', venue: 'Vancouver', stage: 'Group Stage' },
+      { no: 50, group: 'B', date: '25 Jun', time: '00:30', home: 'BIH', away: 'QAT', venue: 'Seattle', stage: 'Group Stage' },
+      { no: 51, group: 'C', date: '25 Jun', time: '03:30', home: 'MAR', away: 'HAI', venue: 'Atlanta', stage: 'Group Stage' },
+      { no: 52, group: 'C', date: '25 Jun', time: '03:30', home: 'SCO', away: 'BRA', venue: 'Miami', stage: 'Group Stage' },
+      { no: 53, group: 'A', date: '25 Jun', time: '06:30', home: 'RSA', away: 'KOR', venue: 'Monterrey', stage: 'Group Stage' },
+      { no: 54, group: 'A', date: '25 Jun', time: '06:30', home: 'CZE', away: 'MEX', venue: 'Mexico City', stage: 'Group Stage' },
+
+      // 26 JUN
+      { no: 55, group: 'E', date: '26 Jun', time: '01:30', home: 'CUW', away: 'CIV', venue: 'Philadelphia', stage: 'Group Stage' },
+      { no: 56, group: 'E', date: '26 Jun', time: '01:30', home: 'ECU', away: 'GER', venue: 'New York/New Jersey', stage: 'Group Stage' },
+      { no: 57, group: 'F', date: '26 Jun', time: '04:30', home: 'TUN', away: 'NED', venue: 'Kansas City', stage: 'Group Stage' },
+      { no: 58, group: 'F', date: '26 Jun', time: '04:30', home: 'JPN', away: 'SWE', venue: 'Dallas', stage: 'Group Stage' },
+      { no: 59, group: 'D', date: '26 Jun', time: '07:30', home: 'TUR', away: 'USA', venue: 'Los Angeles', stage: 'Group Stage' },
+      { no: 60, group: 'D', date: '26 Jun', time: '07:30', home: 'PAR', away: 'AUS', venue: 'San Francisco Bay Area', stage: 'Group Stage' },
+
+      // 27 JUN
+      { no: 61, group: 'I', date: '27 Jun', time: '00:30', home: 'NOR', away: 'FRA', venue: 'Boston', stage: 'Group Stage' },
+      { no: 62, group: 'I', date: '27 Jun', time: '00:30', home: 'SEN', away: 'IRQ', venue: 'Toronto', stage: 'Group Stage' },
+      { no: 63, group: 'H', date: '27 Jun', time: '05:30', home: 'CPV', away: 'KSA', venue: 'Houston', stage: 'Group Stage' },
+      { no: 64, group: 'H', date: '27 Jun', time: '05:30', home: 'URU', away: 'ESP', venue: 'Guadalajara', stage: 'Group Stage' },
+      { no: 65, group: 'G', date: '27 Jun', time: '08:30', home: 'NZL', away: 'BEL', venue: 'Vancouver', stage: 'Group Stage' },
+      { no: 66, group: 'G', date: '27 Jun', time: '08:30', home: 'EGY', away: 'IRN', venue: 'Seattle', stage: 'Group Stage' },
+
+      // 28 JUN
+      { no: 67, group: 'L', date: '28 Jun', time: '02:30', home: 'PAN', away: 'ENG', venue: 'New York/New Jersey', stage: 'Group Stage' },
+      { no: 68, group: 'L', date: '28 Jun', time: '02:30', home: 'CRO', away: 'GHA', venue: 'Philadelphia', stage: 'Group Stage' },
+      { no: 69, group: 'K', date: '28 Jun', time: '05:00', home: 'COL', away: 'POR', venue: 'Miami', stage: 'Group Stage' },
+      { no: 70, group: 'K', date: '28 Jun', time: '05:00', home: 'COD', away: 'UZB', venue: 'Monterrey', stage: 'Group Stage' },
+      { no: 71, group: 'J', date: '28 Jun', time: '07:30', home: 'ALG', away: 'AUT', venue: 'Atlanta', stage: 'Group Stage' },
+      { no: 72, group: 'J', date: '28 Jun', time: '07:30', home: 'JOR', away: 'ARG', venue: 'Kansas City', stage: 'Group Stage' }
     ];
 
     // Remove duplicates (some numbers appeared twice from raw PDF)
@@ -2318,6 +2342,40 @@
       });
     }
     integrateMatchResults();
+
+    // Precompute IST date and time for all matches
+    ALL_MATCHES.forEach(m => {
+      const ist = etToIST(m.date, m.time || m.et);
+      m.istDate = ist.date;
+      m.istTime = ist.time;
+    });
+
+    // Helper: Convert YYYY-MM-DD to "D MMM" (e.g. "2026-06-12" -> "12 Jun")
+    function formatDateToISTString(dateVal) {
+      if (!dateVal) return null;
+      const [year, month, day] = dateVal.split('-').map(Number);
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return `${day} ${months[month - 1]}`;
+    }
+
+    // Helper: Convert "D MMM" to YYYY-MM-DD (e.g. "12 Jun" -> "2026-06-12")
+    function formatISTStringToDate(istStr) {
+      if (!istStr) return '';
+      const [day, mon] = istStr.split(' ');
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const monthIdx = months.indexOf(mon);
+      if (monthIdx === -1) return '';
+      const pad = n => String(n).padStart(2, '0');
+      return `2026-${pad(monthIdx + 1)}-${pad(day)}`;
+    }
+
+    // Helper: Parse "D MMM" to a Date object (year 2026)
+    function parseISTDate(istDateStr) {
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const [day, mon] = istDateStr.split(' ');
+      const monthIdx = months.indexOf(mon);
+      return new Date(2026, monthIdx, parseInt(day));
+    }
 
     // Groups data
     const GROUPS = {
@@ -2470,46 +2528,76 @@
     // ────────────────────────────────────────────────
     // RENDER FIXTURES
     // ────────────────────────────────────────────────
-    function renderFixtures(group = 'ALL', country = null) {
-      const grid = document.getElementById('fixtures-grid');
-      let list;
+    let activeGroupDate = false;
 
-      if (country) {
-        list = ALL_MATCHES.filter(m => m.home === country || m.away === country);
-      } else if (group === 'ALL') {
-        list = [...ALL_MATCHES].sort((a, b) => a.no - b.no);
-      } else {
-        list = ALL_MATCHES.filter(m => m.group === group);
+    function toggleGroupByDate() {
+      activeGroupDate = !activeGroupDate;
+      const btn = document.getElementById('btn-group-date');
+      if (btn) {
+        if (activeGroupDate) {
+          btn.style.background = 'var(--gold)';
+          btn.style.color = 'var(--darker)';
+          btn.classList.add('active');
+        } else {
+          btn.style.background = 'transparent';
+          btn.style.color = 'var(--muted)';
+          btn.classList.remove('active');
+        }
       }
 
-      if (list.length === 0) {
-        grid.innerHTML = `<div style="color:var(--muted);font-size:0.9rem;grid-column:1/-1;padding:40px 0;text-align:center;">No matches found.</div>`;
-        return;
+      // Re-render fixtures to use the new grouping layout
+      const activeGroupBtn = document.querySelector('.gf-btn.active');
+      let currentGroup = 'ALL';
+      if (activeGroupBtn) {
+        const clickAttr = activeGroupBtn.getAttribute('onclick') || '';
+        const match = clickAttr.match(/'([^']+)'/);
+        if (match) currentGroup = match[1];
       }
 
-      if (activeView === 'list') {
-        grid.innerHTML = list.map(m => {
-          const ist = etToIST(m.date, m.et);
+      renderFixtures(currentGroup, activeCountry);
+    }
 
-          const hasScore = m.homeScore !== undefined && m.awayScore !== undefined && m.homeScore !== null && m.awayScore !== null;
-          const isLive = m.isLive === true;
-          const hasHighlight = m.highlight && m.highlight.trim() !== '';
-          let homeClass = '';
-          let awayClass = '';
-          if (hasScore) {
-            if (m.homeScore > m.awayScore) {
-              homeClass = 'score-win';
-              awayClass = 'score-lose';
-            } else if (m.homeScore < m.awayScore) {
-              homeClass = 'score-lose';
-              awayClass = 'score-win';
-            } else {
-              homeClass = 'score-draw';
-              awayClass = 'score-draw';
-            }
-          }
+    function getGroupHeaderLabel(istDateStr) {
+      // Local time context is June 11, 2026.
+      const todayObj = new Date(2026, 5, 11);
+      const tomorrowObj = new Date(2026, 5, 12);
+      
+      const parsedDate = parseISTDate(istDateStr);
+      
+      if (parsedDate.getDate() === todayObj.getDate() && parsedDate.getMonth() === todayObj.getMonth()) {
+        return "Group Stage · Today";
+      }
+      if (parsedDate.getDate() === tomorrowObj.getDate() && parsedDate.getMonth() === tomorrowObj.getMonth()) {
+        return "Group Stage · Tomorrow";
+      }
+      
+      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      const dayName = days[parsedDate.getDay()];
+      return `Group Stage · ${dayName}, ${istDateStr}`;
+    }
 
-          return `<div class="match-row-card ${hasScore ? 'is-completed' : ''} ${isLive ? 'is-live' : ''}" onclick="openModal(${m.no})">
+    function renderMatchRow(m) {
+      const ist = etToIST(m.date, m.time || m.et);
+
+      const hasScore = m.homeScore !== undefined && m.awayScore !== undefined && m.homeScore !== null && m.awayScore !== null;
+      const isLive = m.isLive === true;
+      const hasHighlight = m.highlight && m.highlight.trim() !== '';
+      let homeClass = '';
+      let awayClass = '';
+      if (hasScore) {
+        if (m.homeScore > m.awayScore) {
+          homeClass = 'score-win';
+          awayClass = 'score-lose';
+        } else if (m.homeScore < m.awayScore) {
+          homeClass = 'score-lose';
+          awayClass = 'score-win';
+        } else {
+          homeClass = 'score-draw';
+          awayClass = 'score-draw';
+        }
+      }
+
+      return `<div class="match-row-card ${hasScore ? 'is-completed' : ''} ${isLive ? 'is-live' : ''}" onclick="openModal(${m.no})">
         <div class="mr-left">
           <div style="display:flex; align-items:center; gap:6px;">
             <span class="mr-no">Match #${m.no} ${hasHighlight ? '<span style="font-size:0.95rem;" title="Match Highlights Available">🎥</span>' : ''}</span>
@@ -2535,30 +2623,30 @@
           <div class="mr-venue">${VENUES[m.venue] || m.venue}</div>
         </div>
       </div>`;
-        }).join('');
-      } else {
-        grid.innerHTML = list.map(m => {
-          const ist = etToIST(m.date, m.et);
+    }
 
-          const hasScore = m.homeScore !== undefined && m.awayScore !== undefined && m.homeScore !== null && m.awayScore !== null;
-          const isLive = m.isLive === true;
-          const hasHighlight = m.highlight && m.highlight.trim() !== '';
-          let homeClass = '';
-          let awayClass = '';
-          if (hasScore) {
-            if (m.homeScore > m.awayScore) {
-              homeClass = 'score-win';
-              awayClass = 'score-lose';
-            } else if (m.homeScore < m.awayScore) {
-              homeClass = 'score-lose';
-              awayClass = 'score-win';
-            } else {
-              homeClass = 'score-draw';
-              awayClass = 'score-draw';
-            }
-          }
+    function renderMatchCard(m) {
+      const ist = etToIST(m.date, m.time || m.et);
 
-          return `<div class="match-card ${hasScore ? 'is-completed' : ''} ${isLive ? 'is-live' : ''}" onclick="openModal(${m.no})">
+      const hasScore = m.homeScore !== undefined && m.awayScore !== undefined && m.homeScore !== null && m.awayScore !== null;
+      const isLive = m.isLive === true;
+      const hasHighlight = m.highlight && m.highlight.trim() !== '';
+      let homeClass = '';
+      let awayClass = '';
+      if (hasScore) {
+        if (m.homeScore > m.awayScore) {
+          homeClass = 'score-win';
+          awayClass = 'score-lose';
+        } else if (m.homeScore < m.awayScore) {
+          homeClass = 'score-lose';
+          awayClass = 'score-win';
+        } else {
+          homeClass = 'score-draw';
+          awayClass = 'score-draw';
+        }
+      }
+
+      return `<div class="match-card ${hasScore ? 'is-completed' : ''} ${isLive ? 'is-live' : ''}" onclick="openModal(${m.no})">
         <div class="card-header">
           <div class="match-no">Match #${m.no} ${hasHighlight ? '<span style="font-size:0.95rem; margin-left: 4px;" title="Match Highlights Available">🎥</span>' : ''}</div>
           <div style="display:flex; gap:6px; align-items:center;">
@@ -2584,6 +2672,68 @@
           <div class="match-venue">${VENUES[m.venue] || m.venue}</div>
         </div>
       </div>`;
+    }
+
+    // ────────────────────────────────────────────────
+    // RENDER FIXTURES
+    // ────────────────────────────────────────────────
+    function renderFixtures(group = 'ALL', country = null) {
+      const grid = document.getElementById('fixtures-grid');
+      let list;
+
+      if (country) {
+        list = ALL_MATCHES.filter(m => m.home === country || m.away === country);
+      } else if (group === 'ALL') {
+        list = [...ALL_MATCHES].sort((a, b) => a.no - b.no);
+      } else {
+        list = ALL_MATCHES.filter(m => m.group === group);
+      }
+
+      if (list.length === 0) {
+        grid.innerHTML = `<div style="color:var(--muted);font-size:0.9rem;grid-column:1/-1;padding:40px 0;text-align:center;">No matches found.</div>`;
+        return;
+      }
+
+      if (activeGroupDate) {
+        // Group list by istDate
+        const groups = {};
+        list.forEach(m => {
+          if (!groups[m.istDate]) {
+            groups[m.istDate] = [];
+          }
+          groups[m.istDate].push(m);
+        });
+
+        // Generate HTML with date headers
+        let html = '';
+        const sortedDates = Object.keys(groups).sort((a, b) => {
+          return parseISTDate(a) - parseISTDate(b);
+        });
+
+        sortedDates.forEach(dateStr => {
+          const label = getGroupHeaderLabel(dateStr);
+          html += `<div class="fixtures-date-header">${label}</div>`;
+          
+          const matchesHtml = groups[dateStr].map(m => {
+            if (activeView === 'list') {
+              return renderMatchRow(m);
+            } else {
+              return renderMatchCard(m);
+            }
+          }).join('');
+          
+          html += matchesHtml;
+        });
+        
+        grid.innerHTML = html;
+      } else {
+        // Render flat
+        grid.innerHTML = list.map(m => {
+          if (activeView === 'list') {
+            return renderMatchRow(m);
+          } else {
+            return renderMatchCard(m);
+          }
         }).join('');
       }
     }
@@ -2633,7 +2783,7 @@
     function openModal(no) {
       const m = ALL_MATCHES.find(x => x.no === no);
       if (!m) return;
-      const ist = etToIST(m.date, m.et);
+      const ist = etToIST(m.date, m.time || m.et);
       document.getElementById('m-no').textContent = `Match #${m.no}`;
       document.getElementById('m-stage').textContent = `Group Stage · Group ${m.group}`;
       document.getElementById('m-flag1').innerHTML = flagImg(m.home, 72);
@@ -3069,7 +3219,7 @@
 
       // Helper to render a single match card
       function renderMatchCard(m, round, mi) {
-        const ist = etToIST(m.date, m.et);
+        const ist = etToIST(m.date, m.time || m.et);
         const label = round.labels ? round.labels[mi] : `Match #${m.no}`;
         const isFinal = round.labels && mi === 1;
         return `<div class="ko-match-card ${isFinal ? 'ko-final' : ''}">
