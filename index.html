@@ -3318,17 +3318,18 @@
 
     function getMatchTimestamp(match) {
       const months = {
-        Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
-        Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
+        Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
+        Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'
       };
       const parts = match.date.split(' ');
-      const day = parseInt(parts[0]);
+      const day = parts[0].padStart(2, '0');
       const month = months[parts[1]];
-      const [h, m] = match.et.split(':').map(Number);
+      const timeVal = match.time || match.et || '00:00';
       
-      // Eastern Daylight Time in June is UTC-4. Convert to UTC timestamp.
-      const utcMs = Date.UTC(2026, month, day, h + 4, m);
-      return utcMs;
+      // Since the time in match is IST:
+      // Construct date string as YYYY-MM-DDTHH:MM:00+05:30 (IST offset)
+      const isoStr = `2026-${month}-${day}T${timeVal}:00+05:30`;
+      return Date.parse(isoStr);
     }
 
     function startCountdown() {
