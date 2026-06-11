@@ -1,7 +1,9 @@
 // 🌐 Third-Party Streaming Websites
 window.THIRD_PARTY_SITES = [
+  { name: "1Ball", link: "https://1ball.pk/"},
   { name: "90Live", link: "https://www.90live.in/" },
   { name: "CazéTV", link: "https://www.youtube.com/cazetv" },
+  { name: "Dami Tv", link: "https://dami-tv.pro/" },
   { name: "Easy Web TV", link: "https://zhangboheng.github.io/Easy-Web-TV-M3u8/routes/tv.html" },
   { name: "Epic Sports", link: "https://www.epicsports.in/" },
   { name: "Famelack", link: "https://famelack.com/" },
@@ -17,6 +19,8 @@ window.THIRD_PARTY_SITES = [
   { name: "Sports90", link: "https://www.sports90.in/" },
   { name: "Sportsflair", link: "https://www.sportsflair.in/" },
   { name: "StreamSports99", link: "https://streamsports99.fun/" },
+  { name: "Stream Ninja", link: "https://streamninja.xyz/"},
+  { name: "Stream Corner", link:"https://streamcorner.fyi/fifa-world-cup"},
   { name: "Total Sports Live", link: "https://www.totalsportslive.co.zw/" },
   { name: "Yalla Live", link: "https://yallalive.soccer/" },
   { name: "Yalla Shoot", link: "https://www.yallashoot360.com/" },
