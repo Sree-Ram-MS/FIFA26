@@ -28,8 +28,23 @@ window.THIRD_PARTY_SITES = [
 
 // 🔗 Direct Stream Links
 window.DIRECT_LINKS = [
-  { name: "English Main Feed", link: "https://noball.pages.dev/English/" },
-  { name: "Spanish Commentary Feed", link: "https://noball.pages.dev/Spanish/" },
-  { name: "Hindi Regional Broadcast", link: "https://noball.pages.dev/Hindi/" },
-  { name: "Ultra HD Backup Stream", link: "https://noball.pages.dev/Backup/" }
+  // FIFA World Cup Opening Ceremony
+  { name: "TSN", link: "https://fifa.allsports877.workers.dev/?play=7&stream=0" },
+  { name: "Tv sports", link: "https://fifa.allsports877.workers.dev/?play=7&stream=1" },
+  { name: "Telemundo", link: "https://fifa.allsports877.workers.dev/?play=7&stream=2" },
+  { name: "Vix", link: "https://fifa.allsports877.workers.dev/?play=7&stream=3" },
+  { name: "Spanish", link: "https://fifa.allsports877.workers.dev/?play=7&stream=4" },
+  { name: "France", link: "https://fifa.allsports877.workers.dev/?play=7&stream=5" },
+  { name: "Caze TV", link: "https://footsters.api-live.workers.dev/?play=10001&stream=2" },
+
+  // Mexico Vs South Africa - World Cup 2026
+  { name: "Fox Sports Hd", link: "https://footxweb.pages.dev/Fox" },
+  { name: "Caze Tv Hd", link: "https://footxweb.pages.dev/Cazetv" },
+  { name: "France Tv Hd", link: "https://footxweb.pages.dev/FRTV" },
+  { name: "Cignal Tv Hd", link: "https://footxweb.pages.dev/CLTV" },
+  { name: "Tsn Sports Hd", link: "https://footxweb.pages.dev/Tsn4" },
+  { name: "Sportv Hd", link: "https://footxweb.pages.dev/sportv" },
+  { name: "Telemundo Hd", link: "https://footxweb.pages.dev/Telemundo" },
+  { name: "Ios Working - Worldwide", link: "https://footxweb.pages.dev/ios?id=T1" }
 ];
+
