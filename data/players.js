@@ -2,18 +2,18 @@
 // Modify this file to update goals, assists, saves, ratings, and speeds of top players.
 window.PLAYER_STATS = {
   goals: [
-    { name: 'Kylian Mbappé', team: 'France', iso: 'fr', val: 0 },
-    { name: 'Erling Haaland', team: 'Norway', iso: 'no', val: 0 },
-    { name: 'Lionel Messi', team: 'Argentina', iso: 'ar', val: 0 },
-    { name: 'Harry Kane', team: 'England', iso: 'gb-eng', val: 0 },
-    { name: 'Vinicius Jr.', team: 'Brazil', iso: 'br', val: 0 },
+    { name: 'Hwang In-beom', team: 'South Korea', iso: 'kr', val: 1 },
+    { name: 'Julián Quiñones', team: 'Mexico', iso: 'mx', val: 1 },
+    { name: 'Ladislav Krejčí', team: 'Czechia', iso: 'cz', val: 1 },
+    { name: 'Oh Hyeon-gyu', team: 'South Korea', iso: 'kr', val: 1 },
+    { name: 'Raúl Jiménez', team: 'Mexico', iso: 'mx', val: 1 },
   ],
   assists: [
-    { name: 'Pedri', team: 'Spain', iso: 'es', val: 0 },
-    { name: 'Kevin De Bruyne', team: 'Belgium', iso: 'be', val: 0 },
-    { name: 'Lionel Messi', team: 'Argentina', iso: 'ar', val: 0 },
-    { name: 'Luka Modrić', team: 'Croatia', iso: 'hr', val: 0 },
-    { name: 'Jamal Musiala', team: 'Germany', iso: 'de', val: 0 },
+    { name: 'Érik Lira', team: 'Mexico', iso: 'mx', val: 1 },
+    { name: 'Hwang In-beom', team: 'South Korea', iso: 'kr', val: 1 },
+    { name: 'Lee Kang-in', team: 'South Korea', iso: 'kr', val: 1 },
+    { name: 'Roberto Alvarado', team: 'Mexico', iso: 'mx', val: 1 },
+    { name: 'Vladimír Coufal', team: 'Czechia', iso: 'cz', val: 1 },
   ],
   saves: [
     { name: 'Alisson Becker', team: 'Brazil', iso: 'br', val: 0 },

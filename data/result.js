@@ -1,23 +1,23 @@
 // FIFA World Cup 2026 live scores, scorers timeline, and highlights catalog
 // Modify this file to update the match scores, players, times, and YouTube highlights.
 window.MATCH_RESULTS = {
-  {
-no: 1,
-homeTeam: "Mexico",
-awayTeam: "South Africa",
-home: { "Quiñones": "9'", "Jiménez": "67'" },
-away: {},
-highlight: ""
-}
+  1: {
+    no: 1,
+    homeTeam: "Mexico",
+    awayTeam: "South Africa",
+    home: { "Quiñones": "9'", "Jiménez": "67'" },
+    away: {},
+    highlight: ""
+  },
 
-  // 2: {
-  //   no: 2,
-  //   homeTeam: "Korea Republic",
-  //   awayTeam: "Czechia",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
+  2: {
+    no: 2,
+    homeTeam: "South Korea",
+    awayTeam: "Czech Republic",
+    home: { "Hwang In-beom": "66'", "Oh Hyeon-gyu": "79'" },
+    away: { "Ladislav Krejčí": "58'" },
+    highlight: ""
+}
   // 3: {
   //   no: 3,
   //   homeTeam: "Canada",
