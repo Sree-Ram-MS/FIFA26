@@ -7,7 +7,7 @@ window.MATCH_RESULTS = {
     awayTeam: "South Africa",
     home: { "Quiñones": "9'", "Jiménez": "67'" },
     away: {},
-    highlight: ""
+    highlight: "https://youtu.be/PmevGCkUtM8?si=c84NL3kekj0kv_RJ"
   },
 
   2: {
@@ -16,7 +16,7 @@ window.MATCH_RESULTS = {
     awayTeam: "Czech Republic",
     home: { "Hwang In-beom": "66'", "Oh Hyeon-gyu": "79'" },
     away: { "Ladislav Krejčí": "58'" },
-    highlight: ""
+    highlight: "https://youtu.be/Mi5rre1mUlE?si=VJx-z_-tMvz-kg3Z"
   },
 
   3: {
