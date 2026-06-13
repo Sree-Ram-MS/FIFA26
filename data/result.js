@@ -17,23 +17,25 @@ window.MATCH_RESULTS = {
     home: { "Hwang In-beom": "66'", "Oh Hyeon-gyu": "79'" },
     away: { "Ladislav Krejčí": "58'" },
     highlight: ""
-}
-  // 3: {
-  //   no: 3,
-  //   homeTeam: "Canada",
-  //   awayTeam: "Bosnia & Herzegovina",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 4: {
-  //   no: 4,
-  //   homeTeam: "USA",
-  //   awayTeam: "Paraguay",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
+  },
+
+  3: {
+    no: 3,
+    homeTeam: "Canada",
+    awayTeam: "Bosnia and Herzegovina",
+    home: { "Cyle Larin": "78'" },
+    away: { "Jovo Lukić": "21'" },
+    highlight: ""
+  },
+
+  4: {
+    no: 4,
+    homeTeam: "USA",
+    awayTeam: "Paraguay",
+    home: { "Damián Bobadilla (OG)": "7'", "Folarin Balogun": "31', 45+5'", "Giovanni Reyna": "97'" },
+    away: { "Mauricio": "73'" },
+    highlight: ""
+  }
   // 5: {
   //   no: 5,
   //   homeTeam: "Haiti",
