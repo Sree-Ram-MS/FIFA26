@@ -28,23 +28,21 @@ window.THIRD_PARTY_SITES = [
 
 // 🔗 Direct Stream Links
 window.DIRECT_LINKS = [
-  // FIFA World Cup Opening Ceremony
-  { name: "TSN", link: "https://fifa.allsports877.workers.dev/?play=7&stream=0" },
-  { name: "Tv sports", link: "https://fifa.allsports877.workers.dev/?play=7&stream=1" },
-  { name: "Telemundo", link: "https://fifa.allsports877.workers.dev/?play=7&stream=2" },
-  { name: "Vix", link: "https://fifa.allsports877.workers.dev/?play=7&stream=3" },
-  { name: "Spanish", link: "https://fifa.allsports877.workers.dev/?play=7&stream=4" },
-  { name: "France", link: "https://fifa.allsports877.workers.dev/?play=7&stream=5" },
-  { name: "Caze TV", link: "https://footsters.api-live.workers.dev/?play=10001&stream=2" },
-
-  // Mexico Vs South Africa - World Cup 2026
-  { name: "Fox Sports Hd", link: "https://footxweb.pages.dev/Fox" },
-  { name: "Caze Tv Hd", link: "https://footxweb.pages.dev/Cazetv" },
-  { name: "France Tv Hd", link: "https://footxweb.pages.dev/FRTV" },
-  { name: "Cignal Tv Hd", link: "https://footxweb.pages.dev/CLTV" },
-  { name: "Tsn Sports Hd", link: "https://footxweb.pages.dev/Tsn4" },
-  { name: "Sportv Hd", link: "https://footxweb.pages.dev/sportv" },
+  { name: "NTV English Hd", link: "https://footxweb.pages.dev/CLTV" },
+  { name: "Fox Sports Hd", link: "https://footxweb.pages.dev/FS1" },
+  { name: "ORF Sports Hd", link: "https://footxweb.pages.dev/ORF" },
+  { name: "VRT Sports Hd", link: "https://footxweb.pages.dev/VRT" },
+  { name: "ZDF Sports Hd", link: "https://footxweb.pages.dev/ZDF" },
+  { name: "Zee Hindi Hd", link: "https://footxweb.pages.dev/ZHindi" },
+  { name: "Zee Bangla Hd", link: "https://footxweb.pages.dev/ZBangla" },
+  { name: "Caze Sports Hd", link: "https://footlinkz.pages.dev/?id=CZE2" },
+  { name: "Tipik Sports Hd", link: "https://footxweb.pages.dev/Tipik" },
+  { name: "Sporza Hd [50 Fps]", link: "https://footxweb.pages.dev/Sporza" },
+  { name: "HM English Hd", link: "https://footlinkz.pages.dev/?id=HM" },
+  { name: "DSports Argentina Hd", link: "https://footlinkz.pages.dev/?id=D1" },
+  { name: "Unifi Tv - [Best For IND Users]", link: "https://footxweb.pages.dev/Fifatv1" },
   { name: "Telemundo Hd", link: "https://footxweb.pages.dev/Telemundo" },
-  { name: "Ios Working - Worldwide", link: "https://footxweb.pages.dev/ios?id=T1" }
+  { name: "Ios Working - Worldwide", link: "https://footxweb.pages.dev/ios/?id=T1" },
+  { name: "Ios Working - Worldwide", link: "https://footxweb.pages.dev/ios/?id=T2" },
+  { name: "Caze Tv - Up to 60 Fps", link: "https://run-machine-hd.pages.dev/?id=caze-tv" }
 ];
-
