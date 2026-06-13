@@ -28,21 +28,17 @@ window.THIRD_PARTY_SITES = [
 
 // 🔗 Direct Stream Links
 window.DIRECT_LINKS = [
-  { name: "NTV English Hd", link: "https://footxweb.pages.dev/CLTV" },
-  { name: "Fox Sports Hd", link: "https://footxweb.pages.dev/FS1" },
-  { name: "ORF Sports Hd", link: "https://footxweb.pages.dev/ORF" },
-  { name: "VRT Sports Hd", link: "https://footxweb.pages.dev/VRT" },
-  { name: "ZDF Sports Hd", link: "https://footxweb.pages.dev/ZDF" },
-  { name: "Zee Hindi Hd", link: "https://footxweb.pages.dev/ZHindi" },
-  { name: "Zee Bangla Hd", link: "https://footxweb.pages.dev/ZBangla" },
-  { name: "Caze Sports Hd", link: "https://footlinkz.pages.dev/?id=CZE2" },
-  { name: "Tipik Sports Hd", link: "https://footxweb.pages.dev/Tipik" },
-  { name: "Sporza Hd [50 Fps]", link: "https://footxweb.pages.dev/Sporza" },
-  { name: "HM English Hd", link: "https://footlinkz.pages.dev/?id=HM" },
-  { name: "DSports Argentina Hd", link: "https://footlinkz.pages.dev/?id=D1" },
-  { name: "Unifi Tv - [Best For IND Users]", link: "https://footxweb.pages.dev/Fifatv1" },
-  { name: "Telemundo Hd", link: "https://footxweb.pages.dev/Telemundo" },
-  { name: "Ios Working - Worldwide", link: "https://footxweb.pages.dev/ios/?id=T1" },
-  { name: "Ios Working - Worldwide", link: "https://footxweb.pages.dev/ios/?id=T2" },
-  { name: "Caze Tv - Up to 60 Fps", link: "https://run-machine-hd.pages.dev/?id=caze-tv" }
+  { name: "Fox Sports Hd", link: "https://cxfoot.pages.dev/?id=FOX" },
+  { name: "Fox Sports FHD [60FPS]", link: "https://cxfoot.pages.dev/?id=FOX" },
+  { name: "NTV English Hd", link: "https://cxfoot.pages.dev/?id=NTV" },
+  { name: "Telemundo Hd", link: "https://cxfoot.pages.dev/?id=TELE" },
+  { name: "DSports Argentina Hd", link: "https://cxfoot.pages.dev/?id=DS" },
+  { name: "M6 Francis Hd", link: "https://cxfoot.pages.dev/?id=M6" },
+  { name: "CazeTv Brasil Hd [60FPS]", link: "https://cxfoot.pages.dev/?id=CAZE" },
+  { name: "Fussball 4k UHD [Supporting Devices]", link: "https://cxfoot.pages.dev/?id=FB4K" },
+  { name: "Fussball Dutch Hd", link: "https://cxfoot.pages.dev/?id=SPZA" },
+  { name: "H!ñd! + Bêñgãl!", link: "https://telegram.me/fifawcbycxf" },
+  { name: "Tsn Sports 4 Hd [Use Any VPN]", link: "https://cxfoot.pages.dev/?id=Tsn4" },
+  { name: "Ios Working - Worldwide", link: "https://cxfoot.pages.dev/c1?id=U1" },
+  { name: "Ios Working - Worldwide", link: "https://cxfoot.pages.dev/c1?id=U2" }
 ];
