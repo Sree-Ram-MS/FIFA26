@@ -35,15 +35,17 @@ window.MATCH_RESULTS = {
     home: { "Damián Bobadilla (OG)": "7'", "Folarin Balogun": "31', 45+5'", "Giovanni Reyna": "97'" },
     away: { "Mauricio": "73'" },
     highlight: ""
-  }
-  // 5: {
-  //   no: 5,
-  //   homeTeam: "Haiti",
-  //   awayTeam: "Scotland",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
+  },
+
+  5: {
+    no: 5,
+    homeTeam: "Qatar",
+    awayTeam: "Switzerland",
+    home: { "Boualem Khoukhi": "90+4'" },
+    away: { "Breel Embolo": "16'(P)" },
+    highlight: ""
+   }
+
   // 6: {
   //   no: 6,
   //   homeTeam: "Australia",
