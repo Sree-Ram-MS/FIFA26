@@ -42,3 +42,9 @@ window.DIRECT_LINKS = [
   { name: "Ios Working - Worldwide", link: "https://cxfoot.pages.dev/c1?id=U1" },
   { name: "Ios Working - Worldwide", link: "https://cxfoot.pages.dev/c1?id=U2" }
 ];
+
+// 🎬 Match Highlights Portals
+window.HIGHLIGHT_LINKS = [
+  { name: "Refooty", link:"https://refooty.com/" },
+];
+

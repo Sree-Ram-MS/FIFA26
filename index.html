@@ -1820,6 +1820,11 @@
     </h3>
     <div class="links-grid" id="links-grid-direct" style="margin-bottom:32px;"></div>
 
+    <!-- Match Highlights -->
+    <h3 class="ko-round-label" style="margin-top:24px; margin-bottom:14px; font-size:1.2rem;">🎬 Match Highlights
+    </h3>
+    <div class="links-grid" id="links-grid-highlights" style="margin-bottom:32px;"></div>
+
     <!-- Manual Add Form -->
     <h3 class="ko-round-label"
       style="margin-top:40px; margin-bottom:14px; font-size:1.1rem; border-bottom-color: rgba(255,255,255,0.07);">➕ Add
@@ -2910,6 +2915,7 @@
       const officialGrid = document.getElementById('links-grid-official');
       const sitesGrid = document.getElementById('links-grid-sites');
       const directGrid = document.getElementById('links-grid-direct');
+      const highlightsGrid = document.getElementById('links-grid-highlights');
 
       // Helper to map links to HTML cards
       const cardHTML = (l) => `
@@ -2931,62 +2937,96 @@
     </div>`;
 
       // 1. Official
-      officialGrid.innerHTML = DEFAULT_LINKS.map(l => cardHTML({
-        name: l.name,
-        url: l.url,
-        icon: l.icon || '📺',
-        desc: l.desc,
-        isCustom: false
-      })).join('');
-
-      // 2. Third Party Sites (with dynamic favicon logos)
-      const sites = (window.THIRD_PARTY_SITES || []).map(l => {
-        const urlStr = l.link || l.url || '';
-        let domain = '';
-        try {
-          domain = new URL(urlStr).hostname;
-        } catch (e) {}
-
-        const faviconUrl = domain 
-          ? `https://www.google.com/s2/favicons?sz=64&domain=${domain}` 
-          : null;
-
-        return {
-          name: l.name || '',
-          url: urlStr,
-          icon: l.icon || (faviconUrl ? `<img src="${faviconUrl}" alt="${l.name}" onerror="this.outerHTML='🌐'">` : '🌐'),
-          desc: l.desc || domain || 'Third-Party Stream Website',
-          isCustom: false
-        };
-      });
-      if (sites.length === 0) {
-        sitesGrid.innerHTML = `<div style="color:var(--muted); font-size:0.85rem; padding:10px 0; grid-column: 1/-1; text-align: center;">No streaming sites configured.</div>`;
-      } else {
-        sitesGrid.innerHTML = sites.map(cardHTML).join('');
-      }
-
-      // 3. Direct Feeds
-      const directs = [
-        ...(window.DIRECT_LINKS || []).map(l => ({
-          name: l.name || '',
-          url: l.link || l.url || '',
-          icon: l.icon || '🔗',
-          desc: l.desc || 'Direct stream player feed',
-          isCustom: false
-        })),
-        ...extraLinks.map((l, index) => ({
+      if (officialGrid) {
+        officialGrid.innerHTML = DEFAULT_LINKS.map(l => cardHTML({
           name: l.name,
           url: l.url,
           icon: l.icon || '📺',
-          desc: l.desc || 'Custom stream link',
-          isCustom: true,
-          index: index
-        }))
-      ];
-      if (directs.length === 0) {
-        directGrid.innerHTML = `<div style="color:var(--muted); font-size:0.85rem; padding:10px 0; grid-column: 1/-1; text-align: center;">No direct feeds configured.</div>`;
-      } else {
-        directGrid.innerHTML = directs.map(cardHTML).join('');
+          desc: l.desc,
+          isCustom: false
+        })).join('');
+      }
+
+      // 2. Third Party Sites (with dynamic favicon logos)
+      if (sitesGrid) {
+        const sites = (window.THIRD_PARTY_SITES || []).map(l => {
+          const urlStr = l.link || l.url || '';
+          let domain = '';
+          try {
+            domain = new URL(urlStr).hostname;
+          } catch (e) {}
+
+          const faviconUrl = domain 
+            ? `https://www.google.com/s2/favicons?sz=64&domain=${domain}` 
+            : null;
+
+          return {
+            name: l.name || '',
+            url: urlStr,
+            icon: l.icon || (faviconUrl ? `<img src="${faviconUrl}" alt="${l.name}" onerror="this.outerHTML='🌐'">` : '🌐'),
+            desc: l.desc || domain || 'Third-Party Stream Website',
+            isCustom: false
+          };
+        });
+        if (sites.length === 0) {
+          sitesGrid.innerHTML = `<div style="color:var(--muted); font-size:0.85rem; padding:10px 0; grid-column: 1/-1; text-align: center;">No streaming sites configured.</div>`;
+        } else {
+          sitesGrid.innerHTML = sites.map(cardHTML).join('');
+        }
+      }
+
+      // 3. Direct Feeds
+      if (directGrid) {
+        const directs = [
+          ...(window.DIRECT_LINKS || []).map(l => ({
+            name: l.name || '',
+            url: l.link || l.url || '',
+            icon: l.icon || '🔗',
+            desc: l.desc || 'Direct stream player feed',
+            isCustom: false
+          })),
+          ...extraLinks.map((l, index) => ({
+            name: l.name,
+            url: l.url,
+            icon: l.icon || '📺',
+            desc: l.desc || 'Custom stream link',
+            isCustom: true,
+            index: index
+          }))
+        ];
+        if (directs.length === 0) {
+          directGrid.innerHTML = `<div style="color:var(--muted); font-size:0.85rem; padding:10px 0; grid-column: 1/-1; text-align: center;">No direct feeds configured.</div>`;
+        } else {
+          directGrid.innerHTML = directs.map(cardHTML).join('');
+        }
+      }
+
+      // 4. Highlights
+      if (highlightsGrid) {
+        const highlights = (window.HIGHLIGHT_LINKS || []).map(l => {
+          const urlStr = l.link || l.url || '';
+          let domain = '';
+          try {
+            domain = new URL(urlStr).hostname;
+          } catch (e) {}
+
+          const faviconUrl = domain 
+            ? `https://www.google.com/s2/favicons?sz=64&domain=${domain}` 
+            : null;
+
+          return {
+            name: l.name || '',
+            url: urlStr,
+            icon: l.icon || (faviconUrl ? `<img src="${faviconUrl}" alt="${l.name}" onerror="this.outerHTML='🎬'">` : '🎬'),
+            desc: l.desc || domain || 'Match Highlights Portal',
+            isCustom: false
+          };
+        });
+        if (highlights.length === 0) {
+          highlightsGrid.innerHTML = `<div style="color:var(--muted); font-size:0.85rem; padding:10px 0; grid-column: 1/-1; text-align: center;">No highlights links configured.</div>`;
+        } else {
+          highlightsGrid.innerHTML = highlights.map(cardHTML).join('');
+        }
       }
     }
 
