@@ -28,20 +28,25 @@ window.THIRD_PARTY_SITES = [
 
 // 🔗 Direct Stream Links
 window.DIRECT_LINKS = [
-  { name: "Fox Sports Hd", link: "https://cxfoot.pages.dev/?id=FOX" },
-  { name: "Fox Sports FHD [60FPS]", link: "https://cxfoot.pages.dev/?id=FOX" },
-  { name: "NTV English Hd", link: "https://cxfoot.pages.dev/?id=NTV" },
-  { name: "Telemundo Hd", link: "https://cxfoot.pages.dev/?id=TELE" },
-  { name: "DSports Argentina Hd", link: "https://cxfoot.pages.dev/?id=DS" },
-  { name: "M6 Francis Hd", link: "https://cxfoot.pages.dev/?id=M6" },
-  { name: "CazeTv Brasil Hd [60FPS]", link: "https://cxfoot.pages.dev/?id=CAZE" },
-  { name: "Fussball 4k UHD [Supporting Devices]", link: "https://cxfoot.pages.dev/?id=FB4K" },
-  { name: "Fussball Dutch Hd", link: "https://cxfoot.pages.dev/?id=SPZA" },
-  { name: "H!ñd! + Bêñgãl!", link: "https://telegram.me/fifawcbycxf" },
-  { name: "Tsn Sports 4 Hd [Use Any VPN]", link: "https://cxfoot.pages.dev/?id=Tsn4" },
-  { name: "Ios Working - Worldwide", link: "https://cxfoot.pages.dev/c1?id=U1" },
-  { name: "Ios Working - Worldwide", link: "https://cxfoot.pages.dev/c1?id=U2" }
+  { name: "Fox Sports English Hd", link: "https://footlinkz.pages.dev/FX2" },
+  { name: "DSports Argentina Hd", link: "https://footlinkz.pages.dev/?id=D1" },
+  { name: "NTV English Hd", link: "https://footxweb.pages.dev/CLTV" },
+  { name: "Telemundo Hd", link: "https://footxweb.pages.dev/Telemundo" },
+  { name: "Fox Sports Hd", link: "https://cxfooot.pages.dev/?id=FOX1" },
+  { name: "Fox Sports FHD [60FPS]", link: "https://cxfooot.pages.dev/?id=FOX" },
+  { name: "NTV English Hd", link: "https://cxfooot.pages.dev/?id=NTV" },
+  { name: "Tsn Sports 1 Hd", link: "https://cxfooot.pages.dev/?id=Tsn1" },
+  { name: "Telemundo Hd", link: "https://cxfooot.pages.dev/?id=TELE" },
+  { name: "DSports Argentina Hd", link: "https://cxfooot.pages.dev/?id=DS" },
+  { name: "Fussball Dutch Hd [50FPS]", link: "https://cxfooot.pages.dev/?id=FB" },
+  { name: "M6 Fransis Hd", link: "https://cxfooot.pages.dev/?id=M6" },
+  { name: "CazeTv Brasil Hd [60FPS]", link: "https://cxfooot.pages.dev/?id=CAZE" },
+  { name: "Fussball 4K UHD [Supporting Devices]", link: "https://cxfooot.pages.dev/?id=FB4K" },
+  { name: "H!ñd! & Bêñgâl!", link: "https://telegram.me/fifawcbycxf" },
+  { name: "Ios Working - Worldwide", link: "https://cxfooot.pages.dev/c1?id=U1" },
+  { name: "Ios Working - Worldwide", link: "https://cxfooot.pages.dev/c1?id=U2" }
 ];
+
 
 // 🎬 Match Highlights Portals
 window.HIGHLIGHT_LINKS = [
