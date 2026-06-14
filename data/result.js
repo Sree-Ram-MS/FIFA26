@@ -44,32 +44,35 @@ window.MATCH_RESULTS = {
     home: { "Boualem Khoukhi": "90+4'" },
     away: { "Breel Embolo": "16'(P)" },
     highlight: ""
-   }
+  },
 
-  // 6: {
-  //   no: 6,
-  //   homeTeam: "Australia",
-  //   awayTeam: "Türkiye",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 7: {
-  //   no: 7,
-  //   homeTeam: "Brazil",
-  //   awayTeam: "Morocco",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 8: {
-  //   no: 8,
-  //   homeTeam: "Qatar",
-  //   awayTeam: "Switzerland",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
+  6: {
+    no: 6,
+    homeTeam: "Brazil",
+    awayTeam: "Morocco",
+    home: { "Vinícius Júnior": "32'" },
+    away: { "Ismael Saibari": "21'" },
+    highlight: ""
+  },
+
+  7: {
+    no: 7,
+    homeTeam: "Haiti",
+    awayTeam: "Scotland",
+    home: {},
+    away: { "John McGinn": "27'" },
+    highlight: ""
+  },
+
+  8: {
+    no: 8,
+    homeTeam: "Australia",
+    awayTeam: "Türkiye",
+    home: { "Nestory Irankunda": "26'", "Connor Metcalfe": "74'" },
+    away: {},
+    highlight: ""
+  }
+  
   // 9: {
   //   no: 9,
   //   homeTeam: "Côte d'Ivoire",
