@@ -71,40 +71,43 @@ window.MATCH_RESULTS = {
     home: { "Nestory Irankunda": "26'", "Connor Metcalfe": "74'" },
     away: {},
     highlight: ""
+  },
+
+  9: {
+    no: 9,
+    homeTeam: "Ivory Coast",
+    awayTeam: "Ecuador",
+    home: { "Amad Diallo": "90'" },
+    away: {},
+    highlight: ""
+  },
+
+  10: {
+    no: 10,
+    homeTeam: "Germany",
+    awayTeam: "Curaçao",
+    home: { "Felix Nmecha": "6'", "Nico Schlotterbeck": "38'", "Kai Havertz": "45+5' (P), 88'", "Jamal Musiala": "47'", "Nathaniel Brown": "68'", "Deniz Undav": "78'" },
+    away: { "Livano Comenencia": "21'" },
+    highlight: ""
+  },
+
+  11: {
+    no: 11,
+    homeTeam: "Netherlands",
+    awayTeam: "Japan",
+    home: { "Virgil van Dijk": "51'", "Crysencio Summerville": "64'" },
+    away: { "Keito Nakamura": "57'", "Daichi Kamada": "88'" },
+    highlight: ""
+  },
+
+  12: {
+    no: 12,
+    homeTeam: "Sweden",
+    awayTeam: "Tunisia",
+    home: { "Yasin Ayari": "7', 90+6'", "Alexander Isak": "30'", "Viktor Gyökeres": "59'", "Mattias Svanberg": "84'" },
+    away: { "Omar Rekik": "43'" },
+    highlight: ""
   }
-  
-  // 9: {
-  //   no: 9,
-  //   homeTeam: "Côte d'Ivoire",
-  //   awayTeam: "Ecuador",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 10: {
-  //   no: 10,
-  //   homeTeam: "Germany",
-  //   awayTeam: "Curaçao",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 11: {
-  //   no: 11,
-  //   homeTeam: "Netherlands",
-  //   awayTeam: "Japan",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 12: {
-  //   no: 12,
-  //   homeTeam: "Sweden",
-  //   awayTeam: "Tunisia",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
   // 13: {
   //   no: 13,
   //   homeTeam: "Saudi Arabia",
