@@ -3,10 +3,10 @@
 window.PLAYER_STATS = {
   goals: [
     { name: "Niclas Füllkrug", team: "Germany", iso: "de", val: 3 },
+    { name: "Elijah Just", team: "New Zealand", iso: "nz", val: 2 },
     { name: "Kai Havertz", team: "Germany", iso: "de", val: 2 },
     { name: "Yasin Ayari", team: "Sweden", iso: "se", val: 2 },
-    { name: "Folarin Balogun", team: "USA", iso: "us", val: 2 },
-    { name: "John McGinn", team: "Scotland", iso: "gb", val: 2 }
+    { name: "Folarin Balogun", team: "USA", iso: "us", val: 2 }
   ],
   assists: [
     { name: "Jamal Musiala", team: "Germany", iso: "de", val: 3 },
@@ -18,9 +18,9 @@ window.PLAYER_STATS = {
   saves: [
     { name: "Maxime Crépeau", team: "Canada", iso: "ca", val: 5 },
     { name: "Zion Suzuki", team: "Japan", iso: "jp", val: 5 },
+    { name: "Mohammed Al-Owais", team: "Saudi Arabia", iso: "sa", val: 5 },
     { name: "Yassine Bounou", team: "Morocco", iso: "ma", val: 4 },
-    { name: "Matt Turner", team: "USA", iso: "us", val: 4 },
-    { name: "Mathew Ryan", team: "Australia", iso: "au", val: 4 }
+    { name: "Matt Turner", team: "USA", iso: "us", val: 4 }
   ],
   rating: [
     { name: "Niclas Füllkrug", team: "Germany", iso: "de", val: 9.5 },

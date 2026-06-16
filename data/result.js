@@ -107,39 +107,43 @@ window.MATCH_RESULTS = {
     home: { "Yasin Ayari": "7', 90+6'", "Alexander Isak": "30'", "Viktor Gyökeres": "59'", "Mattias Svanberg": "84'" },
     away: { "Omar Rekik": "43'" },
     highlight: ""
+  },
+
+  13: {
+    no: 13,
+    homeTeam: "Spain",
+    awayTeam: "Cabo Verde",
+    home: {},
+    away: {},
+    highlight: ""
+  },
+
+  14: {
+    no: 14,
+    homeTeam: "Belgium",
+    awayTeam: "Egypt",
+    home: { "Mohamed Hany (OG)": "66'" },
+    away: { "Emam Ashour": "19'" },
+    highlight: ""
+  },
+
+  15: {
+    no: 15,
+    homeTeam: "Saudi Arabia",
+    awayTeam: "Uruguay",
+    home: { "Abdulelah Al Amri": "41'" },
+    away: { "Maxi Araujo": "80'" },
+    highlight: ""
+  },
+
+  16: {
+    no: 16,
+    homeTeam: "Iran",
+    awayTeam: "New Zealand",
+    home: { "Ramin Rezaeian": "31'", "Mohammad Mohebi": "63'" },
+    away: { "Elijah Just": "6', 54'" },
+    highlight: ""
   }
-  // 13: {
-  //   no: 13,
-  //   homeTeam: "Saudi Arabia",
-  //   awayTeam: "Uruguay",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 14: {
-  //   no: 14,
-  //   homeTeam: "Spain",
-  //   awayTeam: "Cabo Verde",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 15: {
-  //   no: 15,
-  //   homeTeam: "IR Iran",
-  //   awayTeam: "New Zealand",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 16: {
-  //   no: 16,
-  //   homeTeam: "Belgium",
-  //   awayTeam: "Egypt",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
   // 17: {
   //   no: 17,
   //   homeTeam: "France",
