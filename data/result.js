@@ -143,31 +143,35 @@ window.MATCH_RESULTS = {
     home: { "Ramin Rezaeian": "31'", "Mohammad Mohebi": "63'" },
     away: { "Elijah Just": "6', 54'" },
     highlight: ""
-  }
-  // 17: {
-  //   no: 17,
-  //   homeTeam: "France",
-  //   awayTeam: "Senegal",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 18: {
-  //   no: 18,
-  //   homeTeam: "Iraq",
-  //   awayTeam: "Norway",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 19: {
-  //   no: 19,
-  //   homeTeam: "Argentina",
-  //   awayTeam: "Algeria",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
+  },
+
+  17: {
+    no: 17,
+    homeTeam: "France",
+    awayTeam: "Senegal",
+    home: { "Kylian Mbappé": "66', 90+6'", "Bradley Barcola": "82'" },
+    away: { "Ibrahim Mbaye": "90+5'" },
+    highlight: ""
+  },
+
+  18: {
+    no: 18,
+    homeTeam: "Iraq",
+    awayTeam: "Norway",
+    home: { "Aymen Hussein": "39'" },
+    away: { "Erling Haaland": "29', 43'", "Leo Østigård": "76'", "Aymen Hussein (OG)": "90+6'" },
+    highlight: ""
+  },
+
+  19: {
+    no: 19,
+    homeTeam: "Argentina",
+    awayTeam: "Algeria",
+    home: { "Lionel Messi": "17', 60', 76'" },
+    away: {},
+    highlight: ""
+  },
+
   // 20: {
   //   no: 20,
   //   homeTeam: "Austria",
