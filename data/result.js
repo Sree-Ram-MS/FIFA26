@@ -172,46 +172,51 @@ window.MATCH_RESULTS = {
     highlight: ""
   },
 
-  // 20: {
-  //   no: 20,
-  //   homeTeam: "Austria",
-  //   awayTeam: "Jordan",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 21: {
-  //   no: 21,
-  //   homeTeam: "Ghana",
-  //   awayTeam: "Panama",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 22: {
-  //   no: 22,
-  //   homeTeam: "England",
-  //   awayTeam: "Croatia",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 23: {
-  //   no: 23,
-  //   homeTeam: "Portugal",
-  //   awayTeam: "Congo DR",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 24: {
-  //   no: 24,
-  //   homeTeam: "Uzbekistan",
-  //   awayTeam: "Colombia",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
+  20: {
+    no: 20,
+    homeTeam: "Austria",
+    awayTeam: "Jordan",
+    home: { "Romano Schmid": "21'", "Yazan Al-Arab (OG)": "76'", "Marko Arnautović": "90+12' (P)" },
+    away: { "Ali Olwan": "50'" },
+    highlight: ""
+  },
+
+  21: {
+    no: 21,
+    homeTeam: "Portugal",
+    awayTeam: "DR Congo",
+    home: { "João Neves": "6'" },
+    away: { "Yoane Wissa": "45+5'" },
+    highlight: ""
+  },
+
+  22: {
+    no: 22,
+    homeTeam: "England",
+    awayTeam: "Croatia",
+    home: { "Harry Kane": "12' (P), 42'", "Jude Bellingham": "47'", "Marcus Rashford": "85'" },
+    away: { "Martin Baturina": "36'", "Petar Musa": "45+5'" },
+    highlight: ""
+  },
+
+  23: {
+    no: 23,
+    homeTeam: "Ghana",
+    awayTeam: "Panama",
+    home: { "Caleb Yirenkyi": "90+5'" },
+    away: {},
+    highlight: ""
+  },
+
+  24: {
+    no: 24,
+    homeTeam: "Uzbekistan",
+    awayTeam: "Colombia",
+    home: { "Abbosbek Fayzullaev": "60'" },
+    away: { "Daniel Muñoz": "40'", "Luis Díaz": "65'", "Jaminton Campaz": "90+9'" },
+    highlight: ""
+  }
+
   // 25: {
   //   no: 25,
   //   homeTeam: "Czechia",

@@ -3,28 +3,28 @@
 window.PLAYER_STATS = {
   goals: [
     { name: "Lionel Messi", team: "Argentina", iso: "ar", val: 3 },
-    { name: "Elijah Just", team: "New Zealand", iso: "nz", val: 2 },
-    { name: "Folarin Balogun", team: "USA", iso: "us", val: 2 },
+    { name: "Erling Haaland", team: "Norway", iso: "no", val: 2 },
+    { name: "Yasin Ayari", team: "Sweden", iso: "se", val: 2 },
     { name: "Kai Havertz", team: "Germany", iso: "de", val: 2 },
-    { name: "Yasin Ayari", team: "Sweden", iso: "se", val: 2 }
+    { name: "Kylian Mbappé", team: "France", iso: "fr", val: 2 }
   ],
   assists: [
-    { name: "Joshua Kimmich", team: "Germany", iso: "de", val: 2 },
-    { name: "Deniz Undav", team: "Germany", iso: "de", val: 2 },
+    { name: "Chris Wood", team: "New Zealand", iso: "nz", val: 2 },
+    { name: "Alexander Isak", team: "Sweden", iso: "se", val: 2 },
     { name: "Ryan Gravenberch", team: "Netherlands", iso: "nl", val: 2 },
-    { name: "Hwang In-beom", team: "South Korea", iso: "kr", val: 1 },
-    { name: "Christian Pulisic", team: "USA", iso: "us", val: 1 }
+    { name: "Joshua Kimmich", team: "Germany", iso: "de", val: 2 },
+    { name: "Deniz Undav", team: "Germany", iso: "de", val: 2 }
   ],
   saves: [
+    { name: "Mohammed Al Owais", team: "Saudi Arabia", iso: "sa", val: 9 },
     { name: "Patrick Beach", team: "Australia", iso: "au", val: 8 },
     { name: "Vozinha", team: "Cape Verde Islands", iso: "cv", val: 7 },
     { name: "Mahmud Abunada", team: "Qatar", iso: "qa", val: 5 },
-    { name: "Maxime Crépeau", team: "Canada", iso: "ca", val: 5 },
-    { name: "Zion Suzuki", team: "Japan", iso: "jp", val: 5 }
+    { name: "Maxime Crépeau", team: "Canada", iso: "ca", val: 5 }
   ],
   rating: [
-    { name: "Lionel Messi", team: "Argentina", iso: "ar", val: 9.60 },
-    { name: "Vozinha", team: "Cape Verde Islands", iso: "cv", val: 8.95 },
+    { name: "Lionel Messi", team: "Argentina", iso: "ar", val: 9.50 },
+    { name: "Vozinha", team: "Cape Verde Islands", iso: "cv", val: 8.97 },
     { name: "Yasin Ayari", team: "Sweden", iso: "se", val: 8.94 },
     { name: "Nico Schlotterbeck", team: "Germany", iso: "de", val: 8.93 },
     { name: "Folarin Balogun", team: "USA", iso: "us", val: 8.90 }
