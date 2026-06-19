@@ -215,40 +215,43 @@ window.MATCH_RESULTS = {
     home: { "Abbosbek Fayzullaev": "60'" },
     away: { "Daniel Muñoz": "40'", "Luis Díaz": "65'", "Jaminton Campaz": "90+9'" },
     highlight: ""
-  }
+  },
 
-  // 25: {
-  //   no: 25,
-  //   homeTeam: "Czechia",
-  //   awayTeam: "South Africa",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 26: {
-  //   no: 26,
-  //   homeTeam: "Switzerland",
-  //   awayTeam: "Bosnia & Herzegovina",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 27: {
-  //   no: 27,
-  //   homeTeam: "Canada",
-  //   awayTeam: "Qatar",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 28: {
-  //   no: 28,
-  //   homeTeam: "Mexico",
-  //   awayTeam: "Korea Republic",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
+  25: {
+    no: 25,
+    homeTeam: "Czech Republic",
+    awayTeam: "South Africa",
+    home: { "Michal Sadílek": "6'" },
+    away: { "Teboho Mokoena": "83' (P)" },
+    highlight: ""
+  },
+
+  26: {
+    no: 26,
+    homeTeam: "Switzerland",
+    awayTeam: "Bosnia and Herzegovina",
+    home: { "Johan Manzambi": "74', 90'", "Rubén Vargas": "84'", "Granit Xhaka": "90+7' (P)" },
+    away: { "Ermin Mahmić": "90+3'" },
+    highlight: ""
+  },
+
+  27: {
+    no: 27,
+    homeTeam: "Canada",
+    awayTeam: "Qatar",
+    home: { "Cyle Larin": "16'", "Jonathan David": "29', 45+3', 90+2'", "Nathan Saliba": "64'", "Mohammed Manai (OG)": "75'" },
+    away: {},
+    highlight: ""
+  },
+
+  28: {
+    no: 28,
+    homeTeam: "Mexico",
+    awayTeam: "South Korea",
+    home: { "Luis Romo": "50'" },
+    away: {},
+    highlight: ""
+  }
   // 29: {
   //   no: 29,
   //   homeTeam: "Brazil",
