@@ -251,31 +251,35 @@ window.MATCH_RESULTS = {
     home: { "Luis Romo": "50'" },
     away: {},
     highlight: ""
-  }
-  // 29: {
-  //   no: 29,
-  //   homeTeam: "Brazil",
-  //   awayTeam: "Haiti",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 30: {
-  //   no: 30,
-  //   homeTeam: "Scotland",
-  //   awayTeam: "Morocco",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 31: {
-  //   no: 31,
-  //   homeTeam: "Türkiye",
-  //   awayTeam: "Paraguay",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
+  },
+
+  29: {
+    no: 29,
+    homeTeam: "USA",
+    awayTeam: "Australia",
+    home: { "Cameron Burgess (OG)": "11'", "Alex Freeman": "43'" },
+    away: {},
+    highlight: ""
+  },
+
+  30: {
+    no: 30,
+    homeTeam: "Scotland",
+    awayTeam: "Morocco",
+    home: {},
+    away: { "Ismael Saibari": "2'" },
+    highlight: ""
+  },
+
+  31: {
+    no: 31,
+    homeTeam: "Brazil",
+    awayTeam: "Haiti",
+    home: { "Matheus Cunha": "23', 36'", "Vinícius Júnior": "45+3'" },
+    away: {},
+    highlight: ""
+  },
+
   // 32: {
   //   no: 32,
   //   homeTeam: "USA",
