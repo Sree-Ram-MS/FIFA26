@@ -280,70 +280,76 @@ window.MATCH_RESULTS = {
     highlight: ""
   },
 
-  // 32: {
-  //   no: 32,
-  //   homeTeam: "USA",
-  //   awayTeam: "Australia",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 33: {
-  //   no: 33,
-  //   homeTeam: "Germany",
-  //   awayTeam: "Côte d'Ivoire",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 34: {
-  //   no: 34,
-  //   homeTeam: "Ecuador",
-  //   awayTeam: "Curaçao",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 35: {
-  //   no: 35,
-  //   homeTeam: "Netherlands",
-  //   awayTeam: "Sweden",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 36: {
-  //   no: 36,
-  //   homeTeam: "Tunisia",
-  //   awayTeam: "Japan",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 37: {
-  //   no: 37,
-  //   homeTeam: "Uruguay",
-  //   awayTeam: "Cabo Verde",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 38: {
-  //   no: 38,
-  //   homeTeam: "Spain",
-  //   awayTeam: "Saudi Arabia",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 39: {
-  //   no: 39,
-  //   homeTeam: "Belgium",
-  //   awayTeam: "IR Iran",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
+  32: {
+    no: 32,
+    homeTeam: "Türkiye",
+    awayTeam: "Paraguay",
+    home: {},
+    away: { "Matías Galarza": "2'" },
+    highlight: ""
+  },
+
+  33: {
+    no: 33,
+    homeTeam: "Netherlands",
+    awayTeam: "Sweden",
+    home: { "Brian Brobbey": "5', 17'", "Cody Gakpo": "47', 54'", "Crysencio Summerville": "89'" },
+    away: { "Anthony Elanga": "59'" },
+    highlight: ""
+  },
+
+  34: {
+    no: 34,
+    homeTeam: "Ecuador",
+    awayTeam: "Curaçao",
+    home: {},
+    away: {},
+    highlight: ""
+  },
+
+  35: {
+    no: 35,
+    homeTeam: "Tunisia",
+    awayTeam: "Japan",
+    home: {},
+    away: { "Daichi Kamada": "4'", "Ayase Ueda": "31', 83'", "Junya Ito": "69'" },
+    highlight: ""
+  },
+
+  36: {
+    no: 36,
+    homeTeam: "Spain",
+    awayTeam: "Saudi Arabia",
+    home: { "Lamine Yamal": "10'", "Mikel Oyarzabal": "21', 24'", "Hassan Altambakti (OG)": "49'" },
+    away: {},
+    highlight: ""
+  },
+  37: {
+    no: 37,
+    homeTeam: "Belgium",
+    awayTeam: "Iran",
+    home: {},
+    away: {},
+    highlight: ""
+  },
+
+  38: {
+    no: 38,
+    homeTeam: "Uruguay",
+    awayTeam: "Cabo Verde",
+    home: { "Maximiliano Araújo": "44'", "Agustín Canobbio": "45+6'" },
+    away: { "Kevin Pina": "21'", "Hélio Varela": "61'" },
+    highlight: ""
+  },
+
+  39: {
+    no: 39,
+    homeTeam: "New Zealand",
+    awayTeam: "Egypt",
+    home: { "Finn Surman": "15'" },
+    away: { "Mostafa Ziko": "58'", "Mohamed Salah": "67'", "Trézéguet": "82'" },
+    highlight: ""
+  }
   // 40: {
   //   no: 40,
   //   homeTeam: "New Zealand",
