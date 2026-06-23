@@ -73,17 +73,9 @@ window.MATCH_RESULTS = {
     highlight: ""
   },
 
+
   9: {
     no: 9,
-    homeTeam: "Ivory Coast",
-    awayTeam: "Ecuador",
-    home: { "Amad Diallo": "90'" },
-    away: {},
-    highlight: ""
-  },
-
-  10: {
-    no: 10,
     homeTeam: "Germany",
     awayTeam: "Curaçao",
     home: { "Felix Nmecha": "6'", "Nico Schlotterbeck": "38'", "Kai Havertz": "45+5' (P), 88'", "Jamal Musiala": "47'", "Nathaniel Brown": "68'", "Deniz Undav": "78'" },
@@ -91,12 +83,21 @@ window.MATCH_RESULTS = {
     highlight: ""
   },
 
-  11: {
-    no: 11,
+  10: {
+    no: 10,
     homeTeam: "Netherlands",
     awayTeam: "Japan",
     home: { "Virgil van Dijk": "51'", "Crysencio Summerville": "64'" },
     away: { "Keito Nakamura": "57'", "Daichi Kamada": "88'" },
+    highlight: ""
+  },
+
+  11: {
+    no: 11,
+    homeTeam: "Ivory Coast",
+    awayTeam: "Ecuador",
+    home: { "Amad Diallo": "90'" },
+    away: {},
     highlight: ""
   },
 
@@ -300,6 +301,15 @@ window.MATCH_RESULTS = {
 
   34: {
     no: 34,
+    homeTeam: "Germany",
+    awayTeam: "Côte d'Ivoire",
+    home: { "Deniz Undav": "68', 90+4'" },
+    away: { "Franck Kessié": "30'" },
+    highlight: ""
+  },
+
+  35: {
+    no: 35,
     homeTeam: "Ecuador",
     awayTeam: "Curaçao",
     home: {},
@@ -307,8 +317,8 @@ window.MATCH_RESULTS = {
     highlight: ""
   },
 
-  35: {
-    no: 35,
+  36: {
+    no: 36,
     homeTeam: "Tunisia",
     awayTeam: "Japan",
     home: {},
@@ -316,16 +326,17 @@ window.MATCH_RESULTS = {
     highlight: ""
   },
 
-  36: {
-    no: 36,
+  37: {
+    no: 37,
     homeTeam: "Spain",
     awayTeam: "Saudi Arabia",
     home: { "Lamine Yamal": "10'", "Mikel Oyarzabal": "21', 24'", "Hassan Altambakti (OG)": "49'" },
     away: {},
     highlight: ""
   },
-  37: {
-    no: 37,
+
+  38: {
+    no: 38,
     homeTeam: "Belgium",
     awayTeam: "Iran",
     home: {},
@@ -333,8 +344,8 @@ window.MATCH_RESULTS = {
     highlight: ""
   },
 
-  38: {
-    no: 38,
+  39: {
+    no: 39,
     homeTeam: "Uruguay",
     awayTeam: "Cabo Verde",
     home: { "Maximiliano Araújo": "44'", "Agustín Canobbio": "45+6'" },
@@ -342,46 +353,50 @@ window.MATCH_RESULTS = {
     highlight: ""
   },
 
-  39: {
-    no: 39,
+  40: {
+    no: 40,
     homeTeam: "New Zealand",
     awayTeam: "Egypt",
     home: { "Finn Surman": "15'" },
     away: { "Mostafa Ziko": "58'", "Mohamed Salah": "67'", "Trézéguet": "82'" },
     highlight: ""
+  },
+
+  41: {
+    no: 41,
+    homeTeam: "Argentina",
+    awayTeam: "Austria",
+    home: { "Lionel Messi": "38', 90+5'" },
+    away: {},
+    highlight: ""
+  },
+
+  42: {
+    no: 42,
+    homeTeam: "France",
+    awayTeam: "Iraq",
+    home: { "Kylian Mbappé": "14', 54'", "Ousmane Dembélé": "66'" },
+    away: {},
+    highlight: ""
+  },
+
+  43: {
+    no: 43,
+    homeTeam: "Norway",
+    awayTeam: "Senegal",
+    home: { "Marcus Holmgren Pedersen": "43'", "Erling Haaland": "48', 58'" },
+    away: { "Ismaïla Sarr": "53', 90+3'" },
+    highlight: ""
+  },
+
+  44: {
+    no: 44,
+    homeTeam: "Jordan",
+    awayTeam: "Algeria",
+    home: { "Nizar Al-Rashdan": "36'" },
+    away: { "Nadhir Benbouali": "69'", "Amine Gouiri": "82'" },
+    highlight: ""
   }
-  // 40: {
-  //   no: 40,
-  //   homeTeam: "New Zealand",
-  //   awayTeam: "Egypt",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 41: {
-  //   no: 41,
-  //   homeTeam: "Norway",
-  //   awayTeam: "Senegal",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 42: {
-  //   no: 42,
-  //   homeTeam: "France",
-  //   awayTeam: "Iraq",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 43: {
-  //   no: 43,
-  //   homeTeam: "Argentina",
-  //   awayTeam: "Austria",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
   // 44: {
   //   no: 44,
   //   homeTeam: "Jordan",

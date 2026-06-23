@@ -2,11 +2,11 @@
 // Modify this file to update goals, assists, saves, ratings, and speeds of top players.
 window.PLAYER_STATS = {
   goals: [
+    { name: "Lionel Messi", team: "Argentina", iso: "ar", val: 5 },
+    { name: "Kylian Mbappé", team: "France", iso: "fr", val: 4 },
+    { name: "Erling Haaland", team: "Norway", iso: "no", val: 4 },
     { name: "Deniz Undav", team: "Germany", iso: "de", val: 3 },
-    { name: "Jonathan David", team: "Canada", iso: "ca", val: 3 },
-    { name: "Lionel Messi", team: "Argentina", iso: "ar", val: 3 },
-    { name: "Mikel Oyarzabal", team: "Spain", iso: "es", val: 2 },
-    { name: "Cody Gakpo", team: "Netherlands", iso: "nl", val: 2 }
+    { name: "Jonathan David", team: "Canada", iso: "ca", val: 3 }
   ],
   assists: [
     { name: "Alexander Isak", team: "Sweden", iso: "se", val: 3 },
@@ -23,11 +23,11 @@ window.PLAYER_STATS = {
     { name: "Vozinha", team: "Cape Verde", iso: "cv", val: 7 }
   ],
   rating: [
-    { name: "Lionel Messi", team: "Argentina", iso: "ar", val: 9.66 },
+    { name: "Lionel Messi", team: "Argentina", iso: "ar", val: 9.75 },
+    { name: "Kylian Mbappé", team: "France", iso: "fr", val: 9.60 },
     { name: "Ramin Rezaeian", team: "Iran", iso: "ir", val: 9.58 },
     { name: "Jonathan David", team: "Canada", iso: "ca", val: 9.54 },
-    { name: "Mohamed Salah", team: "Egypt", iso: "eg", val: 9.48 },
-    { name: "Lamine Yamal", team: "Spain", iso: "es", val: 9.40 }
+    { name: "Mohamed Salah", team: "Egypt", iso: "eg", val: 9.48 }
   ],
   speed: [
     { name: "Jordan Bos", team: "Australia", iso: "au", val: 36.7 },
