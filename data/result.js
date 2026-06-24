@@ -396,39 +396,44 @@ window.MATCH_RESULTS = {
     home: { "Nizar Al-Rashdan": "36'" },
     away: { "Nadhir Benbouali": "69'", "Amine Gouiri": "82'" },
     highlight: ""
+  },
+
+  45: {
+    no: 45,
+    homeTeam: "Portugal",
+    awayTeam: "Uzbekistan",
+    home: { "Cristiano Ronaldo": "6', 39'", "Nuno Mendes": "17'", "Abduvohid Nematov (OG)": "60'", "Rafael Leão": "87'" },
+    away: {},
+    highlight: ""
+  },
+
+  46: {
+    no: 46,
+    homeTeam: "England",
+    awayTeam: "Ghana",
+    home: {},
+    away: {},
+    highlight: ""
+  },
+
+  47: {
+    no: 47,
+    homeTeam: "Panama",
+    awayTeam: "Croatia",
+    home: {},
+    away: { "Ante Budimir": "54'" },
+    highlight: ""
+  },
+
+  48: {
+    no: 48,
+    homeTeam: "Colombia",
+    awayTeam: "DR Congo",
+    home: { "Daniel Muñoz": "76'" },
+    away: {},
+    highlight: ""
   }
-  // 44: {
-  //   no: 44,
-  //   homeTeam: "Jordan",
-  //   awayTeam: "Algeria",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 45: {
-  //   no: 45,
-  //   homeTeam: "England",
-  //   awayTeam: "Ghana",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 46: {
-  //   no: 46,
-  //   homeTeam: "Panama",
-  //   awayTeam: "Croatia",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 47: {
-  //   no: 47,
-  //   homeTeam: "Portugal",
-  //   awayTeam: "Uzbekistan",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
+
   // 48: {
   //   no: 48,
   //   homeTeam: "Colombia",
