@@ -432,48 +432,62 @@ window.MATCH_RESULTS = {
     home: { "Daniel Muñoz": "76'" },
     away: {},
     highlight: ""
+  },
+
+  49: {
+    no: 49,
+    homeTeam: "Switzerland",
+    awayTeam: "Canada",
+    home: { "Rubén Vargas": "46'", "Johan Manzambi": "57'" },
+    away: { "Promise David": "76'" },
+    highlight: ""
+  },
+
+  50: {
+    no: 50,
+    homeTeam: "Bosnia-Herzegovina",
+    awayTeam: "Qatar",
+    home: { "Kerim Alajbegović": "29'", "Mahmud Abunada (OG)": "34'", "Ermin Mahmić": "80'" },
+    away: { "Hassan Al-Haydos": "42'" },
+    highlight: ""
+  },
+
+  51: {
+    no: 51,
+    homeTeam: "Morocco",
+    awayTeam: "Haiti",
+    home: { "Achraf Hakimi": "39'", "Ismael Saibari": "45+1'", "Soufiane Rahimi": "78'", "Gessime Yassine": "89'" },
+    away: { "Yassine Bounou (OG)": "10'", "Wilson Isidor": "43'" },
+    highlight: ""
+  },
+
+  52: {
+    no: 52,
+    homeTeam: "Scotland",
+    awayTeam: "Brazil",
+    home: {},
+    away: { "Vinícius Júnior": "7', 45'", "Matheus Cunha": "60'" },
+    highlight: ""
+  },
+
+  53: {
+    no: 53,
+    homeTeam: "South Korea",
+    awayTeam: "South Africa",
+    home: {},
+    away: { "Thapelo Maseko": "63'" },
+    highlight: ""
+  },
+
+  54: {
+    no: 54,
+    homeTeam: "Czechia",
+    awayTeam: "Mexico",
+    home: {},
+    away: { "Mateo Chávez": "55'", "Julián Quiñones": "61'", "Álvaro Fidalgo": "90'" },
+    highlight: ""
   }
 
-  // 48: {
-  //   no: 48,
-  //   homeTeam: "Colombia",
-  //   awayTeam: "Congo DR",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 49: {
-  //   no: 49,
-  //   homeTeam: "Scotland",
-  //   awayTeam: "Brazil",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 50: {
-  //   no: 50,
-  //   homeTeam: "Morocco",
-  //   awayTeam: "Haiti",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 51: {
-  //   no: 51,
-  //   homeTeam: "Switzerland",
-  //   awayTeam: "Canada",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 52: {
-  //   no: 52,
-  //   homeTeam: "Bosnia & Herzegovina",
-  //   awayTeam: "Qatar",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
   // 53: {
   //   no: 53,
   //   homeTeam: "Czechia",

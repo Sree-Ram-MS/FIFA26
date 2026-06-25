@@ -4,16 +4,16 @@ window.PLAYER_STATS = {
   goals: [
     { name: "Lionel Messi", team: "Argentina", iso: "ar", val: 5 },
     { name: "Erling Haaland", team: "Norway", iso: "no", val: 4 },
+    { name: "Vinícius Júnior", team: "Brazil", iso: "br", val: 4 },
     { name: "Kylian Mbappé", team: "France", iso: "fr", val: 4 },
-    { name: "Deniz Undav", team: "Germany", iso: "de", val: 3 },
     { name: "Jonathan David", team: "Canada", iso: "ca", val: 3 }
   ],
   assists: [
     { name: "Alexander Isak", team: "Sweden", iso: "se", val: 3 },
     { name: "Michael Olise", team: "France", iso: "fr", val: 3 },
-    { name: "Joshua Kimmich", team: "Germany", iso: "de", val: 2 },
-    { name: "Brahim Díaz", team: "Morocco", iso: "ma", val: 2 },
-    { name: "Denzel Dumfries", team: "Netherlands", iso: "nl", val: 2 }
+    { name: "Bruno Guimarães", team: "Brazil", iso: "br", val: 3 },
+    { name: "Breel Embolo", team: "Switzerland", iso: "ch", val: 2 },
+    { name: "Joshua Kimmich", team: "Germany", iso: "de", val: 2 }
   ],
   saves: [
     { name: "Eloy Room", team: "Curaçao", iso: "cw", val: 20 },
@@ -24,16 +24,16 @@ window.PLAYER_STATS = {
   ],
   rating: [
     { name: "Lionel Messi", team: "Argentina", iso: "ar", val: 9.18 },
-    { name: "Erling Haaland", team: "Norway", iso: "no", val: 9.17 },
+    { name: "Kylian Mbappé", team: "France", iso: "fr", val: 9.13 },
+    { name: "Erling Haaland", team: "Norway", iso: "no", val: 9.11 },
     { name: "Harry Kane", team: "England", iso: "gb-eng", val: 9.01 },
-    { name: "Kylian Mbappé", team: "France", iso: "fr", val: 9.00 },
-    { name: "Jonathan David", team: "Canada", iso: "ca", val: 8.95 }
+    { name: "Luis Díaz", team: "Colombia", iso: "co", val: 8.94 }
   ],
   speed: [
     { name: "Jordan Bos", team: "Australia", iso: "au", val: 36.7 },
-    { name: "Kylian Mbappé", team: "France", iso: "fr", val: 36.1 },
-    { name: "Karim Adeyemi", team: "Germany", iso: "de", val: 35.8 },
-    { name: "Sirlord Conteh", team: "Germany", iso: "de", val: 35.4 },
-    { name: "Mohamed Touré", team: "Australia", iso: "au", val: 35.2 }
+    { name: "Erling Haaland", team: "Norway", iso: "no", val: 36.5 },
+    { name: "Abdukodir Khusanov", team: "Uzbekistan", iso: "uz", val: 36.5 },
+    { name: "Mohamed Touré", team: "Australia", iso: "au", val: 35.8 },
+    { name: "Kylian Mbappé", team: "France", iso: "fr", val: 35.7 }
   ]
 };
