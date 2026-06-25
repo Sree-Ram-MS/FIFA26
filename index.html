@@ -2158,6 +2158,62 @@
       seen.add(key); return true;
     });
 
+    const KO_ROUNDS = [
+      {
+        label: 'Round of 32', matches: [
+          { no: 73, date: '29 Jun', et: '15:00', venue: 'Los Angeles' },
+          { no: 74, date: '29 Jun', et: '16:30', venue: 'Houston' },
+          { no: 75, date: '29 Jun', et: '21:00', venue: 'Dallas' },
+          { no: 76, date: '30 Jun', et: '13:00', venue: 'New York/New Jersey' },
+          { no: 77, date: '30 Jun', et: '17:00', venue: 'Philadelphia' },
+          { no: 78, date: '30 Jun', et: '13:00', venue: 'Kansas City' },
+          { no: 79, date: '1 Jul', et: '21:00', venue: 'Mexico City' },
+          { no: 80, date: '1 Jul', et: '12:00', venue: 'Seattle' },
+          { no: 81, date: '2 Jul', et: '20:00', venue: 'Miami' },
+          { no: 82, date: '2 Jul', et: '16:00', venue: 'Atlanta' },
+          { no: 83, date: '3 Jul', et: '19:00', venue: 'Toronto' },
+          { no: 84, date: '3 Jul', et: '15:00', venue: 'Boston' },
+          { no: 85, date: '3 Jul', et: '23:00', venue: 'San Francisco Bay Area' },
+          { no: 86, date: '3 Jul', et: '18:00', venue: 'Guadalajara' },
+          { no: 87, date: '4 Jul', et: '21:30', venue: 'New York/New Jersey' },
+          { no: 88, date: '4 Jul', et: '14:00', venue: 'Vancouver' },
+        ]
+      },
+      {
+        label: 'Round of 16', matches: [
+          { no: 89, date: '5 Jul', et: '17:00', venue: 'Dallas' },
+          { no: 90, date: '5 Jul', et: '13:00', venue: 'New York/New Jersey' },
+          { no: 91, date: '5 Jul', et: '16:00', venue: 'Los Angeles' },
+          { no: 92, date: '6 Jul', et: '20:00', venue: 'Houston' },
+          { no: 93, date: '6 Jul', et: '15:00', venue: 'Miami' },
+          { no: 94, date: '6 Jul', et: '20:00', venue: 'Atlanta' },
+          { no: 95, date: '7 Jul', et: '12:00', venue: 'Seattle' },
+          { no: 96, date: '7 Jul', et: '16:00', venue: 'Philadelphia' },
+        ]
+      },
+      {
+        label: 'Quarter-Finals', matches: [
+          { no: 97, date: '9 Jul', et: '16:00', venue: 'Dallas' },
+          { no: 98, date: '9 Jul', et: '15:00', venue: 'New York/New Jersey' },
+          { no: 99, date: '10 Jul', et: '17:00', venue: 'Los Angeles' },
+          { no: 100, date: '10 Jul', et: '21:00', venue: 'Miami' },
+        ]
+      },
+      {
+        label: 'Semi-Finals', matches: [
+          { no: 101, date: '14 Jul', et: '15:00', venue: 'Dallas' },
+          { no: 102, date: '15 Jul', et: '15:00', venue: 'New York/New Jersey' },
+        ]
+      },
+      {
+        label: 'Finals', matches: [
+          { no: 103, date: '18 Jul', et: '17:00', venue: 'Miami' },
+          { no: 104, date: '19 Jul', et: '15:00', venue: 'New York/New Jersey' },
+        ],
+        labels: ['🥉 Bronze Final', '🏆 Grand Final']
+      },
+    ];
+
     // Helper: Normalize and format goal scorers' minutes (adds single quote if missing, handles numbers/strings)
     function formatMinutes(val) {
       if (val === undefined || val === null) return '';
@@ -2221,6 +2277,45 @@
             NAMES[m.away] = res.awayTeam;
           }
         }
+      });
+
+      // Integrate knockout stage matches
+      KO_ROUNDS.forEach(round => {
+        round.matches.forEach(m => {
+          if (window.MATCH_RESULTS && window.MATCH_RESULTS[m.no]) {
+            const res = window.MATCH_RESULTS[m.no];
+            m.home = res.homeCode || m.home || '';
+            m.away = res.awayCode || m.away || '';
+            
+            const hasPlayed = res.home !== undefined && res.away !== undefined;
+            m.homeScore = hasPlayed ? countGoals(res.home) : (res.homeScore !== undefined ? res.homeScore : null);
+            m.awayScore = hasPlayed ? countGoals(res.away) : (res.awayScore !== undefined ? res.awayScore : null);
+            
+            m.isLive = res.isLive || false;
+            m.highlight = res.highlight || '';
+
+            m.scorers = { home: {}, away: {} };
+            if (res.home) {
+              for (const player in res.home) {
+                m.scorers.home[player] = formatMinutes(res.home[player]);
+              }
+            }
+            if (res.away) {
+              for (const player in res.away) {
+                m.scorers.away[player] = formatMinutes(res.away[player]);
+              }
+            }
+
+            if (res.homeTeam) {
+              m.homeName = res.homeTeam;
+              if (m.home) NAMES[m.home] = res.homeTeam;
+            }
+            if (res.awayTeam) {
+              m.awayName = res.awayTeam;
+              if (m.away) NAMES[m.away] = res.awayTeam;
+            }
+          }
+        });
       });
     }
     integrateMatchResults();
@@ -2663,15 +2758,34 @@
     // MODAL
     // ────────────────────────────────────────────────
     function openModal(no) {
-      const m = ALL_MATCHES.find(x => x.no === no);
+      let m = ALL_MATCHES.find(x => x.no === no);
+      let isKnockout = false;
+      if (!m) {
+        for (const round of KO_ROUNDS) {
+          const found = round.matches.find(x => x.no === no);
+          if (found) {
+            m = { ...found, stage: round.label };
+            isKnockout = true;
+            break;
+          }
+        }
+      }
       if (!m) return;
+      
       const ist = etToIST(m.date, m.time || m.et);
-      document.getElementById('m-no').textContent = `Match #${m.no}`;
-      document.getElementById('m-stage').textContent = `Group Stage · Group ${m.group}`;
-      document.getElementById('m-flag1').innerHTML = flagImg(m.home, 72);
-      document.getElementById('m-team1').textContent = NAMES[m.home] || m.home;
-      document.getElementById('m-flag2').innerHTML = flagImg(m.away, 72);
-      document.getElementById('m-team2').textContent = NAMES[m.away] || m.away;
+      
+      document.getElementById('m-no').textContent = isKnockout ? (m.stage === 'Finals' ? (no === 104 ? '🏆 Grand Final' : '🥉 Bronze Final') : `Match #${m.no}`) : `Match #${m.no}`;
+      
+      const homeCode = m.home || '';
+      const awayCode = m.away || '';
+      const homeName = m.homeName || (homeCode ? (NAMES[homeCode] || homeCode) : 'TBD');
+      const awayName = m.awayName || (awayCode ? (NAMES[awayCode] || awayCode) : 'TBD');
+
+      document.getElementById('m-flag1').innerHTML = homeCode ? flagImg(homeCode, 72) : `<div class="ko-flag-circle" style="width:72px; height:72px; font-size:1.2rem;"><span class="ko-tbd-text" style="font-size:1rem;">TBD</span></div>`;
+      document.getElementById('m-team1').textContent = homeName;
+      document.getElementById('m-flag2').innerHTML = awayCode ? flagImg(awayCode, 72) : `<div class="ko-flag-circle" style="width:72px; height:72px; font-size:1.2rem;"><span class="ko-tbd-text" style="font-size:1rem;">TBD</span></div>`;
+      document.getElementById('m-team2').textContent = awayName;
+      
       document.getElementById('m-date').textContent = ist.date + ' 2026';
       document.getElementById('m-time').textContent = ist.time + ' IST';
       document.getElementById('m-venue').textContent = VENUES[m.venue] || m.venue;
@@ -2682,7 +2796,7 @@
       const isLive = m.isLive === true;
 
       // Add badge to stage string
-      let statusText = `Group Stage · Group ${m.group}`;
+      let statusText = isKnockout ? m.stage : `Group Stage · Group ${m.group}`;
       if (isLive) {
         statusText += ` <span class="live-badge" style="display:inline-flex;margin-left:8px;vertical-align:middle;"><span class="live-dot"></span>LIVE</span>`;
       } else if (hasScore) {
@@ -3075,62 +3189,6 @@
     // ────────────────────────────────────────────────
     // KNOCKOUT BRACKET
     // ────────────────────────────────────────────────
-    const KO_ROUNDS = [
-      {
-        label: 'Round of 32', matches: [
-          { no: 73, date: '29 Jun', et: '15:00', venue: 'Los Angeles' },
-          { no: 74, date: '29 Jun', et: '16:30', venue: 'Houston' },
-          { no: 75, date: '29 Jun', et: '21:00', venue: 'Dallas' },
-          { no: 76, date: '30 Jun', et: '13:00', venue: 'New York/New Jersey' },
-          { no: 77, date: '30 Jun', et: '17:00', venue: 'Philadelphia' },
-          { no: 78, date: '30 Jun', et: '13:00', venue: 'Kansas City' },
-          { no: 79, date: '1 Jul', et: '21:00', venue: 'Mexico City' },
-          { no: 80, date: '1 Jul', et: '12:00', venue: 'Seattle' },
-          { no: 81, date: '2 Jul', et: '20:00', venue: 'Miami' },
-          { no: 82, date: '2 Jul', et: '16:00', venue: 'Atlanta' },
-          { no: 83, date: '3 Jul', et: '19:00', venue: 'Toronto' },
-          { no: 84, date: '3 Jul', et: '15:00', venue: 'Boston' },
-          { no: 85, date: '3 Jul', et: '23:00', venue: 'San Francisco Bay Area' },
-          { no: 86, date: '3 Jul', et: '18:00', venue: 'Guadalajara' },
-          { no: 87, date: '4 Jul', et: '21:30', venue: 'New York/New Jersey' },
-          { no: 88, date: '4 Jul', et: '14:00', venue: 'Vancouver' },
-        ]
-      },
-      {
-        label: 'Round of 16', matches: [
-          { no: 89, date: '5 Jul', et: '17:00', venue: 'Dallas' },
-          { no: 90, date: '5 Jul', et: '13:00', venue: 'New York/New Jersey' },
-          { no: 91, date: '5 Jul', et: '16:00', venue: 'Los Angeles' },
-          { no: 92, date: '6 Jul', et: '20:00', venue: 'Houston' },
-          { no: 93, date: '6 Jul', et: '15:00', venue: 'Miami' },
-          { no: 94, date: '6 Jul', et: '20:00', venue: 'Atlanta' },
-          { no: 95, date: '7 Jul', et: '12:00', venue: 'Seattle' },
-          { no: 96, date: '7 Jul', et: '16:00', venue: 'Philadelphia' },
-        ]
-      },
-      {
-        label: 'Quarter-Finals', matches: [
-          { no: 97, date: '9 Jul', et: '16:00', venue: 'Dallas' },
-          { no: 98, date: '9 Jul', et: '15:00', venue: 'New York/New Jersey' },
-          { no: 99, date: '10 Jul', et: '17:00', venue: 'Los Angeles' },
-          { no: 100, date: '10 Jul', et: '21:00', venue: 'Miami' },
-        ]
-      },
-      {
-        label: 'Semi-Finals', matches: [
-          { no: 101, date: '14 Jul', et: '15:00', venue: 'Dallas' },
-          { no: 102, date: '15 Jul', et: '15:00', venue: 'New York/New Jersey' },
-        ]
-      },
-      {
-        label: 'Finals', matches: [
-          { no: 103, date: '18 Jul', et: '17:00', venue: 'Miami' },
-          { no: 104, date: '19 Jul', et: '15:00', venue: 'New York/New Jersey' },
-        ],
-        labels: ['🥉 Bronze Final', '🏆 Grand Final']
-      },
-    ];
-
     function renderKnockout() {
       const wrap = document.getElementById('knockout-bracket');
 
@@ -3139,20 +3197,62 @@
         const ist = etToIST(m.date, m.time || m.et);
         const label = round.labels ? round.labels[mi] : `Match #${m.no}`;
         const isFinal = round.labels && mi === 1;
-        return `<div class="ko-match-card ${isFinal ? 'ko-final' : ''}">
+        
+        const homeCode = m.home || '';
+        const awayCode = m.away || '';
+        const homeName = m.homeName || (homeCode ? (NAMES[homeCode] || homeCode) : 'TBD');
+        const awayName = m.awayName || (awayCode ? (NAMES[awayCode] || awayCode) : 'TBD');
+
+        const hasScore = m.homeScore !== undefined && m.awayScore !== undefined && m.homeScore !== null && m.awayScore !== null;
+        
+        let homeClass = '';
+        let awayClass = '';
+        if (hasScore) {
+          if (m.homeScore > m.awayScore) {
+            homeClass = 'score-win';
+            awayClass = 'score-lose';
+          } else if (m.homeScore < m.awayScore) {
+            homeClass = 'score-lose';
+            awayClass = 'score-win';
+          } else {
+            homeClass = 'score-draw';
+            awayClass = 'score-draw';
+          }
+        }
+
+        const homeFlagHtml = homeCode 
+          ? flagImg(homeCode, 28) 
+          : `<div class="ko-flag-circle"><span class="ko-tbd-text">TBD</span></div>`;
+        const awayFlagHtml = awayCode 
+          ? flagImg(awayCode, 28) 
+          : `<div class="ko-flag-circle"><span class="ko-tbd-text">TBD</span></div>`;
+
+        const homeScoreHtml = hasScore 
+          ? `<span class="ko-score-val" style="margin-left:auto; font-weight:bold; font-size:1.1rem; color:var(--gold);">${m.homeScore}</span>` 
+          : '';
+        const awayScoreHtml = hasScore 
+          ? `<span class="ko-score-val" style="margin-left:auto; font-weight:bold; font-size:1.1rem; color:var(--gold);">${m.awayScore}</span>` 
+          : '';
+
+        const clickable = (homeCode || awayCode) ? `onclick="openModal(${m.no})"` : '';
+        const cursorStyle = (homeCode || awayCode) ? 'style="cursor: pointer;"' : '';
+
+        return `<div class="ko-match-card ${isFinal ? 'ko-final' : ''} ${m.isLive ? 'is-live' : ''}" ${clickable} ${cursorStyle}>
       <div class="ko-card-header">
         <span class="ko-match-id">${label}</span>
         <span class="ko-match-date">${ist.date} · ${ist.time}</span>
       </div>
       <div class="ko-card-teams">
-        <div class="ko-card-team">
-          <div class="ko-flag-circle"><span class="ko-tbd-text">TBD</span></div>
-          <span class="ko-team-name-ko">TBD</span>
+        <div class="ko-card-team ${homeClass}">
+          ${homeFlagHtml}
+          <span class="ko-team-name-ko" title="${homeName}">${homeName}</span>
+          ${homeScoreHtml}
         </div>
         <div class="ko-card-vs-divider"></div>
-        <div class="ko-card-team">
-          <div class="ko-flag-circle"><span class="ko-tbd-text">TBD</span></div>
-          <span class="ko-team-name-ko">TBD</span>
+        <div class="ko-card-team ${awayClass}">
+          ${awayFlagHtml}
+          <span class="ko-team-name-ko" title="${awayName}">${awayName}</span>
+          ${awayScoreHtml}
         </div>
       </div>
       <div class="ko-card-venue">📍 ${VENUES[m.venue] || m.venue}</div>
