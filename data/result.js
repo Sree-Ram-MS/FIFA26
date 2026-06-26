@@ -472,10 +472,10 @@ window.MATCH_RESULTS = {
 
   53: {
     no: 53,
-    homeTeam: "South Korea",
-    awayTeam: "South Africa",
-    home: {},
-    away: { "Thapelo Maseko": "63'" },
+    homeTeam: "South Africa",
+    awayTeam: "South Korea",
+    home: { "Thapelo Maseko": "63'" },
+    away: {},
     highlight: ""
   },
 
@@ -639,43 +639,193 @@ window.MATCH_RESULTS = {
   //   highlight: ""
   // },
 
-// KNOCKOUT STAGE
+// KNOCKOUT STAGE //
 
   73: {
     no: 73,
     homeCode: "RSA",
     awayCode: "CAN",
-    homeTeam: "South Africa",
-    awayTeam: "Canada",
-    home: {"Test": "12', 105'"},
-    away: {"Another": "45', 118'"},
-    aet: true,
-    pso: { home: 5, away: 4, homeSeq: "⚽⚽⚽⚽⚽", awaySeq: "⚽⚽⚽❌⚽" },
-    highlight: ""
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
   },
 
   74: {
     no: 74,
-    homeCode: "KOR",
-    awayCode: "CZE",
-    homeTeam: "Korea Republic",
-    awayTeam: "Czechia",
-    home: { "Heung-min Son": "24'" },
-    away: { "Patrik Schick": "88'" },
-    aet: true,
-    pso: { home: 3, away: 5 },
-    highlight: ""
+    homeCode: "GER",
+    // awayCode: "",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
   },
 
-  89: {
-    no: 89,
-    homeCode: "RSA",
-    awayCode: "CZE",
-    homeTeam: "South Africa",
-    awayTeam: "Czechia",
-    home: { "Percy Tau": "42'" },
-    away: { "Tomáš Souček": "67', 89'" },
-    aet: false,
-    highlight: ""
+  75: {
+    no: 75,
+    homeCode: "NED",
+    awayCode: "MAR",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+
+  76: {
+    no: 76,
+    // homeCode: "BRA",
+    // awayCode: "JPN",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+
+  77: {
+    no: 77,
+    // homeCode: "",
+    // awayCode: "",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+
+  78: {
+    no: 78,
+    homeCode: "CIV",
+    awayCode: "NOR",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+
+  79: {
+    no: 79,
+    homeCode: "MEX",
+    // awayCode: "",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+
+  80: {
+    no: 80,
+    // homeCode: "",
+    // awayCode: "",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+
+  81: {
+    no: 81,
+    homeCode: "USA",
+    awayCode: "BIH",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+
+  82: {
+    no: 82,
+    // homeCode: "",
+    // awayCode: "",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+
+  83: {
+    no: 83,
+    // homeCode: "",
+    // awayCode: "",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+
+  84: {
+    no: 84,
+    homeCode: "FRA",
+    // awayCode: "",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+
+  85: {
+    no: 85,
+    // homeCode: "SUI",
+    // awayCode: "",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+
+  86: {
+    no: 86,
+    homeCode: "ARG",
+    // awayCode: "",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+
+  87: {
+    no: 87,
+    // homeCode: "",
+    // awayCode: "",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+
+  88: {
+    no: 88,
+    homeCode: "AUS",
+    // awayCode: "",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
   }
+
+  // Round 16 //
+  // , 89: {
+  //   no: 89,
+  //   // homeCode: "",
+  //   // awayCode: "",
+  //   // home: {},
+  //   // away: {},
+  //   // aet: false,
+  //   // pso: { home: null, away: null },
+  //   // highlight: ""
+  // }
 };

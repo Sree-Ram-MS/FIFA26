@@ -1635,6 +1635,177 @@
     #btn-group-date:hover:not(.active) {
       color: var(--gold) !important;
     }
+    /* ── FULL-WIDTH INTEGRATED KNOCKOUT PANEL ── */
+    #panel-knockout.active {
+      display: block !important;
+      max-width: none !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 32px !important;
+      background: transparent;
+    }
+
+    .fs-ko-body {
+      position: relative;
+      width: 100%;
+    }
+
+    /* SVG Connector Line Container */
+    .fs-ko-svg-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #panel-knockout.active .bracket-wrapper {
+      position: relative;
+      background: rgba(10, 14, 26, 0.45);
+      border: 1.5px solid var(--card-border);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      padding: 40px 30px;
+      gap: 60px;
+    }
+
+    /* Desktop View styling */
+    .desktop-bracket {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Mobile Bracket Horizontal Slider and Tabs */
+    .mobile-bracket {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .mobile-ko-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 12px 16px;
+      background: var(--dark);
+      border-bottom: 1px solid var(--card-border);
+      scrollbar-width: none; /* Hide scrollbar for Firefox */
+      flex-shrink: 0;
+    }
+    .mobile-ko-tabs::-webkit-scrollbar {
+      display: none; /* Hide scrollbar for Chrome/Safari */
+    }
+
+    .mobile-ko-tab-btn {
+      padding: 8px 16px;
+      background: transparent;
+      border: 1.5px solid var(--card-border);
+      color: var(--text);
+      border-radius: 20px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .mobile-ko-tab-btn.active {
+      background: var(--text);
+      color: var(--darker);
+      border-color: var(--text);
+    }
+
+    .mobile-ko-scroll-wrap {
+      display: flex;
+      gap: 50px;
+      overflow-x: auto;
+      overflow-y: visible;
+      padding: 40px 24px;
+      position: relative;
+      background: rgba(10, 14, 26, 0.45);
+      border: 1.5px solid var(--card-border);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      margin: 16px;
+    }
+
+    .mobile-bracket-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      min-width: 260px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+      gap: 20px;
+    }
+
+    .mobile-bracket-column.hidden {
+      display: none !important;
+    }
+
+    .mobile-bracket-svg-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* External Match ID labels next to cards on desktop and mobile */
+    .fs-ko-match-label-ext {
+      display: block;
+      position: absolute;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--gold);
+      background: var(--darker);
+      border: 1.5px solid var(--card-border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      z-index: 5;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      line-height: 1;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+    
+    /* Hide inline Match ID since we use external labels */
+    .ko-card-header .ko-match-id {
+      display: none;
+    }
+
+    .ko-tname-placeholder {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-style: italic;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* Media query to switch desktop vs mobile */
+    @media (max-width: 991px) {
+      .desktop-bracket {
+        display: none !important;
+      }
+      .mobile-bracket {
+        display: flex !important;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .desktop-bracket {
+        display: block !important;
+      }
+      .mobile-bracket {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 
@@ -1798,8 +1969,10 @@
   <!-- KNOCKOUT PANEL -->
   <div class="panel" id="panel-knockout">
     <h2 class="section-title">Knockout <span>Bracket</span></h2>
-    <div class="notice">⚽ Teams shown as TBD — bracket fills after Group Stage. Times in IST.</div>
-    <div id="knockout-bracket"></div>
+    <div class="notice" style="background: rgba(201, 168, 76, 0.08); border-color: rgba(201, 168, 76, 0.25); color: var(--gold); max-width: 1400px; margin: 0 auto 20px auto; padding: 10px 16px; font-size: 0.8rem; border-radius: 6px; display: block; border: 1px solid rgba(201, 168, 76, 0.2);">
+      ⚽ Teams shown as TBD — bracket fills after Group Stage. Times in IST.
+    </div>
+    <div id="knockout-bracket" style="position: relative;"></div>
   </div>
 
   <!-- PLAYERS PANEL -->
@@ -1820,7 +1993,8 @@
   <!-- FIFA RANKINGS PANEL -->
   <div class="panel" id="panel-rankings">
     <h2 class="section-title">FIFA Men's <span>World Rankings</span></h2>
-    <div class="notice">📈 Official FIFA Men's World Rankings. Ranks and points reflect the official June 6, 2026 update.</div>
+    <div class="notice">📈 Official FIFA Men's World Rankings. Ranks and points reflect the official June 6, 2026
+      update.</div>
     <div class="rankings-list" id="rankings-list"></div>
   </div>
 
@@ -2033,7 +2207,7 @@
     function getPsoSequence(score, opponentScore) {
       const maxScore = Math.max(score, opponentScore);
       const totalShots = maxScore <= 5 ? 5 : maxScore;
-      
+
       let seq = [];
       let makesLeft = score;
       for (let i = 0; i < totalShots; i++) {
@@ -2331,11 +2505,11 @@
             const res = window.MATCH_RESULTS[m.no];
             m.home = res.homeCode || m.home || '';
             m.away = res.awayCode || m.away || '';
-            
+
             const hasPlayed = res.home !== undefined && res.away !== undefined;
             m.homeScore = hasPlayed ? countGoals(res.home) : (res.homeScore !== undefined ? res.homeScore : null);
             m.awayScore = hasPlayed ? countGoals(res.away) : (res.awayScore !== undefined ? res.awayScore : null);
-            
+
             m.isLive = res.isLive || false;
             m.highlight = res.highlight || '';
             m.aet = res.aet || false;
@@ -2377,12 +2551,12 @@
         if (!m) return null;
         const hasScore = m.homeScore !== undefined && m.awayScore !== undefined && m.homeScore !== null && m.awayScore !== null;
         if (!hasScore) return null;
-        
+
         let winnerCode = '';
         let winnerName = '';
         let loserCode = '';
         let loserName = '';
-        
+
         if (m.homeScore > m.awayScore) {
           winnerCode = m.home;
           winnerName = m.homeName || NAMES[m.home] || m.home;
@@ -2406,7 +2580,7 @@
             loserName = m.homeName || NAMES[m.home] || m.home;
           }
         }
-        
+
         if (!winnerCode) return null;
         return { winnerCode, winnerName, loserCode, loserName };
       }
@@ -2457,12 +2631,12 @@
         const prevMatch = matchesMap[prevNo];
         const nextMatch = matchesMap[nextNo];
         if (!prevMatch || !nextMatch) return;
-        
+
         const outcome = getMatchOutcome(prevMatch);
         if (outcome) {
           const teamCode = type === 'winner' ? outcome.winnerCode : outcome.loserCode;
           const teamName = type === 'winner' ? outcome.winnerName : outcome.loserName;
-          
+
           if (slot === 'home') {
             nextMatch.home = teamCode;
             nextMatch.homeName = teamName;
@@ -2752,18 +2926,18 @@
       const todayObj = new Date();
       const tomorrowObj = new Date();
       tomorrowObj.setDate(todayObj.getDate() + 1);
-      
+
       const parsedDate = parseISTDate(istDateStr);
       const isKO = matches.some(m => m.stage && m.stage !== 'Group Stage');
       const prefix = isKO ? "Knockout Stage" : "Group Stage";
-      
+
       if (parsedDate.getDate() === todayObj.getDate() && parsedDate.getMonth() === todayObj.getMonth()) {
         return `${prefix} · Today`;
       }
       if (parsedDate.getDate() === tomorrowObj.getDate() && parsedDate.getMonth() === tomorrowObj.getMonth()) {
         return `${prefix} · Tomorrow`;
       }
-      
+
       const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       const dayName = days[parsedDate.getDay()];
       return `${prefix} · ${dayName}, ${istDateStr}`;
@@ -2809,7 +2983,7 @@
         homePsoHtml = `<span class="list-pso-val" style="font-size:0.8rem; opacity:0.6; margin-left:4px;">(${m.pso.home})</span>`;
         awayPsoHtml = `<span class="list-pso-val" style="font-size:0.8rem; opacity:0.6; margin-left:4px;">(${m.pso.away})</span>`;
         aetLabelHtml = `<span class="aet-label" style="font-size:0.7rem; font-weight:bold; color:var(--accent2); margin-left:8px; border: 1px solid var(--accent2); padding:1px 4px; border-radius:3px; text-transform:uppercase;">P</span>`;
-        
+
         const hSeq = m.pso.homeSeq || getPsoSequence(m.pso.home, m.pso.away);
         const aSeq = m.pso.awaySeq || getPsoSequence(m.pso.away, m.pso.home);
         homeSeqHtml = `<div class="pso-seq" style="font-size:0.6rem; opacity:0.75; letter-spacing:1px; margin-top:2px; line-height:1;">${hSeq}</div>`;
@@ -2893,7 +3067,7 @@
         homePsoHtml = `<span style="font-size:0.75rem; opacity:0.6; margin-left:2px; font-weight:normal;">(${m.pso.home})</span>`;
         awayPsoHtml = `<span style="font-size:0.75rem; opacity:0.6; margin-left:2px; font-weight:normal;">(${m.pso.away})</span>`;
         aetLabelHtml = `<span class="aet-label" style="font-size:0.65rem; font-weight:bold; color:var(--accent2); border: 1px solid var(--accent2); padding:1px 4px; border-radius:3px; text-transform:uppercase;">P</span>`;
-        
+
         const hSeq = m.pso.homeSeq || getPsoSequence(m.pso.home, m.pso.away);
         const aSeq = m.pso.awaySeq || getPsoSequence(m.pso.away, m.pso.home);
         homeSeqHtml = `<div class="pso-seq-badge" style="font-size:0.65rem; margin-top:2px; opacity:0.85; letter-spacing:1px; text-align:center; line-height:1;">${hSeq}</div>`;
@@ -2978,7 +3152,7 @@
         sortedDates.forEach(dateStr => {
           const label = getGroupHeaderLabel(dateStr, groups[dateStr]);
           html += `<div class="fixtures-date-header">${label}</div>`;
-          
+
           const matchesHtml = groups[dateStr].map(m => {
             if (activeView === 'list') {
               return renderMatchRow(m);
@@ -2986,10 +3160,10 @@
               return renderMatchCard(m);
             }
           }).join('');
-          
+
           html += matchesHtml;
         });
-        
+
         grid.innerHTML = html;
       } else if (activeGroupStage) {
         // Group list by stage
@@ -3017,7 +3191,7 @@
 
         sortedKeys.forEach(stageKey => {
           html += `<div class="fixtures-date-header">${stageKey}</div>`;
-          
+
           const matchesHtml = groups[stageKey].map(m => {
             if (activeView === 'list') {
               return renderMatchRow(m);
@@ -3025,10 +3199,10 @@
               return renderMatchCard(m);
             }
           }).join('');
-          
+
           html += matchesHtml;
         });
-        
+
         grid.innerHTML = html;
       } else {
         // Render flat
@@ -3104,11 +3278,11 @@
         }
       }
       if (!m) return;
-      
+
       const ist = etToIST(m.date, m.time || m.et);
-      
+
       document.getElementById('m-no').textContent = isKnockout ? (m.stage === 'Finals' ? (no === 104 ? '🏆 Grand Final' : '🥉 Bronze Final') : `Match #${m.no}`) : `Match #${m.no}`;
-      
+
       const homeCode = m.home || '';
       const awayCode = m.away || '';
       const homeName = m.homeName || (homeCode ? (NAMES[homeCode] || homeCode) : 'TBD');
@@ -3122,12 +3296,12 @@
         homeSeqHtml = `<div class="modal-pso-seq" style="font-size:0.8rem; margin-top:4px; opacity:0.8; letter-spacing:2px; font-weight:normal; text-align:center;">${hSeq}</div>`;
         awaySeqHtml = `<div class="modal-pso-seq" style="font-size:0.8rem; margin-top:4px; opacity:0.8; letter-spacing:2px; font-weight:normal; text-align:center;">${aSeq}</div>`;
       }
-      
+
       document.getElementById('m-flag1').innerHTML = homeCode ? flagImg(homeCode, 72) : `<div class="ko-flag-circle" style="width:72px; height:72px; font-size:1.2rem;"><span class="ko-tbd-text" style="font-size:1rem;">TBD</span></div>`;
       document.getElementById('m-team1').innerHTML = `<div style="display:flex; flex-direction:column; align-items:center;"><span>${homeName}</span>${homeSeqHtml}</div>`;
       document.getElementById('m-flag2').innerHTML = awayCode ? flagImg(awayCode, 72) : `<div class="ko-flag-circle" style="width:72px; height:72px; font-size:1.2rem;"><span class="ko-tbd-text" style="font-size:1rem;">TBD</span></div>`;
       document.getElementById('m-team2').innerHTML = `<div style="display:flex; flex-direction:column; align-items:center;"><span>${awayName}</span>${awaySeqHtml}</div>`;
-      
+
       document.getElementById('m-date').textContent = ist.date + ' 2026';
       document.getElementById('m-time').textContent = ist.time + ' IST';
       document.getElementById('m-venue').textContent = VENUES[m.venue] || m.venue;
@@ -3442,10 +3616,10 @@
           let domain = '';
           try {
             domain = new URL(urlStr).hostname;
-          } catch (e) {}
+          } catch (e) { }
 
-          const faviconUrl = domain 
-            ? `https://www.google.com/s2/favicons?sz=64&domain=${domain}` 
+          const faviconUrl = domain
+            ? `https://www.google.com/s2/favicons?sz=64&domain=${domain}`
             : null;
 
           return {
@@ -3496,10 +3670,10 @@
           let domain = '';
           try {
             domain = new URL(urlStr).hostname;
-          } catch (e) {}
+          } catch (e) { }
 
-          const faviconUrl = domain 
-            ? `https://www.google.com/s2/favicons?sz=64&domain=${domain}` 
+          const faviconUrl = domain
+            ? `https://www.google.com/s2/favicons?sz=64&domain=${domain}`
             : null;
 
           return {
@@ -3556,9 +3730,21 @@
     function showPanel(id) {
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('panel-' + id).classList.add('active');
-      event.target.classList.add('active');
+      
+      const targetPanel = document.getElementById('panel-' + id);
+      if (targetPanel) targetPanel.classList.add('active');
+      
+      // Select the correct navigation button programmatically
+      const btn = Array.from(document.querySelectorAll('.nav-btn')).find(b => b.getAttribute('onclick')?.includes(`'${id}'`));
+      if (btn) btn.classList.add('active');
+
+      if (id === 'knockout') {
+        // Redraw lines after transition
+        setTimeout(drawLines, 60);
+      }
     }
+
+
 
     // ────────────────────────────────────────────────
     // KNOCKOUT BRACKET
@@ -3566,11 +3752,15 @@
     function renderKnockout() {
       const wrap = document.getElementById('knockout-bracket');
 
+      function isPlaceholder(name) {
+        if (!name || name === 'TBD') return true;
+        return /^[0-9W]|RU/.test(name);
+      }
+
       // Helper to render a single match card
-      function renderMatchCard(m, round, mi) {
+      function renderMatchCard(m, round, side) {
         const ist = etToIST(m.date, m.time || m.et);
-        const label = round.labels ? round.labels[mi] : `Match #${m.no}`;
-        const isFinal = round.labels && mi === 1;
+        const isFinal = m.no === 104;
         
         const homeCode = m.home || '';
         const awayCode = m.away || '';
@@ -3604,10 +3794,10 @@
           }
         }
 
-        const homeFlagHtml = homeCode 
+        const homeFlagHtml = (homeCode && !isPlaceholder(homeCode))
           ? flagImg(homeCode, 28) 
           : `<div class="ko-flag-circle"><span class="ko-tbd-text">TBD</span></div>`;
-        const awayFlagHtml = awayCode 
+        const awayFlagHtml = (awayCode && !isPlaceholder(awayCode))
           ? flagImg(awayCode, 28) 
           : `<div class="ko-flag-circle"><span class="ko-tbd-text">TBD</span></div>`;
 
@@ -3639,16 +3829,34 @@
         const clickable = (homeCode || awayCode) ? `onclick="openModal(${m.no})"` : '';
         const cursorStyle = (homeCode || awayCode) ? 'style="cursor: pointer;"' : '';
 
-        return `<div class="ko-match-card ${isFinal ? 'ko-final' : ''} ${m.isLive ? 'is-live' : ''}" ${clickable} ${cursorStyle}>
+        let labelExtHtml = '';
+        if (side === 'left') {
+          labelExtHtml = `<div class="fs-ko-match-label-ext" style="left: -24px; top: 50%;">M${m.no}</div>`;
+        } else if (side === 'right') {
+          labelExtHtml = `<div class="fs-ko-match-label-ext" style="left: calc(100% + 24px); top: 50%;">M${m.no}</div>`;
+        } else if (side === 'center') {
+          labelExtHtml = `<div class="fs-ko-match-label-ext" style="left: 50%; top: calc(100% + 15px);">M${m.no}</div>`;
+        }
+
+        const formattedHomeName = isPlaceholder(homeName) 
+          ? `<span class="ko-tname-placeholder">${homeName}</span>`
+          : `<span class="ko-team-name-ko" title="${homeName}">${homeName}</span>`;
+
+        const formattedAwayName = isPlaceholder(awayName) 
+          ? `<span class="ko-tname-placeholder">${awayName}</span>`
+          : `<span class="ko-team-name-ko" title="${awayName}">${awayName}</span>`;
+
+        return `<div class="ko-match-card ${isFinal ? 'ko-final' : ''} ${m.isLive ? 'is-live' : ''}" data-match-id="${m.no}" ${clickable} ${cursorStyle}>
+      ${labelExtHtml}
       <div class="ko-card-header">
-        <span class="ko-match-id">${label}</span>
+        <span class="ko-match-id">M${m.no}</span>
         <span class="ko-match-date">${ist.date} · ${ist.time}${aetLabel}</span>
       </div>
       <div class="ko-card-teams">
         <div class="ko-card-team ${homeClass}">
           ${homeFlagHtml}
-          <div style="display:flex; flex-direction:column; justify-content:center;">
-            <span class="ko-team-name-ko" title="${homeName}">${homeName}</span>
+          <div style="display:flex; flex-direction:column; justify-content:center; flex:1; min-width:0;">
+            ${formattedHomeName}
             ${homeSeqHtml}
           </div>
           ${homeScoreHtml}
@@ -3656,8 +3864,8 @@
         <div class="ko-card-vs-divider"></div>
         <div class="ko-card-team ${awayClass}">
           ${awayFlagHtml}
-          <div style="display:flex; flex-direction:column; justify-content:center;">
-            <span class="ko-team-name-ko" title="${awayName}">${awayName}</span>
+          <div style="display:flex; flex-direction:column; justify-content:center; flex:1; min-width:0;">
+            ${formattedAwayName}
             ${awaySeqHtml}
           </div>
           ${awayScoreHtml}
@@ -3667,25 +3875,36 @@
     </div>`;
       }
 
-      // Split KO_ROUNDS
-      // Round of 32 (ri = 0): 16 matches
-      const r32_left = KO_ROUNDS[0].matches.slice(0, 8);
-      const r32_right = KO_ROUNDS[0].matches.slice(8, 16);
+      function getMatchObj(no) {
+        for (const round of KO_ROUNDS) {
+          const m = round.matches.find(match => match.no === no);
+          if (m) return m;
+        }
+        return null;
+      }
 
-      // Round of 16 (ri = 1): 8 matches
-      const r16_left = KO_ROUNDS[1].matches.slice(0, 4);
-      const r16_right = KO_ROUNDS[1].matches.slice(4, 8);
+      // Left side match numbers in vertical order
+      const r32_left_nos = [74, 77, 73, 75, 83, 84, 81, 82];
+      const r16_left_nos = [89, 90, 93, 94];
+      const qf_left_nos = [97, 98];
+      const sf_left_nos = [101];
 
-      // Quarter-Finals (ri = 2): 4 matches
-      const qf_left = KO_ROUNDS[2].matches.slice(0, 2);
-      const qf_right = KO_ROUNDS[2].matches.slice(2, 4);
+      // Right side match numbers in vertical order
+      const sf_right_nos = [102];
+      const qf_right_nos = [99, 100];
+      const r16_right_nos = [91, 92, 95, 96];
+      const r32_right_nos = [76, 78, 79, 80, 86, 88, 85, 87];
 
-      // Semi-Finals (ri = 3): 2 matches
-      const sf_left = KO_ROUNDS[3].matches.slice(0, 1);
-      const sf_right = KO_ROUNDS[3].matches.slice(1, 2);
-
-      // Finals (ri = 4): 2 matches (Bronze, Grand Final)
-      const finals = KO_ROUNDS[4].matches;
+      // Resolve match objects
+      const r32_left = r32_left_nos.map(getMatchObj).filter(Boolean);
+      const r32_right = r32_right_nos.map(getMatchObj).filter(Boolean);
+      const r16_left = r16_left_nos.map(getMatchObj).filter(Boolean);
+      const r16_right = r16_right_nos.map(getMatchObj).filter(Boolean);
+      const qf_left = qf_left_nos.map(getMatchObj).filter(Boolean);
+      const qf_right = qf_right_nos.map(getMatchObj).filter(Boolean);
+      const sf_left = sf_left_nos.map(getMatchObj).filter(Boolean);
+      const sf_right = sf_right_nos.map(getMatchObj).filter(Boolean);
+      const finals = KO_ROUNDS[4].matches; // [103, 104]
 
       // Build Left-side Columns
       const leftColumns = [
@@ -3694,49 +3913,298 @@
         { label: 'Quarter-Finals', matches: qf_left },
         { label: 'Semi-Finals', matches: sf_left }
       ].map(col => {
-        const parentRound = KO_ROUNDS.find(r => r.label === col.label);
-        const cardsHTML = col.matches.map(m => renderMatchCard(m, parentRound, parentRound.matches.indexOf(m))).join('');
+        const cardsHTML = col.matches.map(m => renderMatchCard(m, null, 'left')).join('');
         return `<div class="bracket-column">
       <div class="ko-round-title">${col.label}</div>
-      <div style="display:flex; flex-direction:column; justify-content:space-around; flex:1; gap:16px;">
+      <div style="display:flex; flex-direction:column; justify-content:space-around; flex:1; gap:20px;">
         ${cardsHTML}
       </div>
     </div>`;
       }).join('');
 
-      // Build Right-side Columns (Reversed order to flow right-to-left towards the center)
+      // Build Right-side Columns
       const rightColumns = [
         { label: 'Semi-Finals', matches: sf_right },
         { label: 'Quarter-Finals', matches: qf_right },
         { label: 'Round of 16', matches: r16_right },
         { label: 'Round of 32', matches: r32_right }
       ].map(col => {
-        const parentRound = KO_ROUNDS.find(r => r.label === col.label);
-        const cardsHTML = col.matches.map(m => renderMatchCard(m, parentRound, parentRound.matches.indexOf(m))).join('');
+        const cardsHTML = col.matches.map(m => renderMatchCard(m, null, 'right')).join('');
         return `<div class="bracket-column">
       <div class="ko-round-title">${col.label}</div>
-      <div style="display:flex; flex-direction:column; justify-content:space-around; flex:1; gap:16px;">
+      <div style="display:flex; flex-direction:column; justify-content:space-around; flex:1; gap:20px;">
         ${cardsHTML}
       </div>
     </div>`;
       }).join('');
 
-      // Center column for Finals (Grand Final above Bronze Final)
-      const centerCardsHTML = [finals[1], finals[0]].map(m => {
-        const originalIndex = m === finals[1] ? 1 : 0;
-        return renderMatchCard(m, KO_ROUNDS[4], originalIndex);
-      }).join('');
-      const centerColumn = `<div class="bracket-column center-finals" style="min-width:280px; justify-content: center; gap: 40px;">
-    <div class="ko-round-title" style="border-bottom-color: var(--gold);">🏆 Finals</div>
-    <div style="display:flex; flex-direction:column; justify-content:center; flex:1; gap:48px;">
-      ${centerCardsHTML}
+      // Center column for Finals
+      const grandFinalMatch = getMatchObj(104);
+      const bronzeMatch = getMatchObj(103);
+      
+      const grandFinalCard = renderMatchCard(grandFinalMatch, null, 'center');
+      const bronzeCard = renderMatchCard(bronzeMatch, null, 'center');
+
+      const centerColumn = `<div class="bracket-column center-finals" style="min-width:270px; justify-content: center; gap: 40px;">
+    <div class="ko-round-title" style="border-bottom-color: #c9a84c;">🏆 Final</div>
+    <div style="display:flex; flex-direction:column; justify-content:center; flex:1; gap:90px; padding-bottom: 20px;">
+      <div style="display:flex; flex-direction:column; gap:10px; align-items:center;">
+        <span style="font-family:'Bebas Neue', sans-serif; font-size:0.85rem; color:#c9a84c; letter-spacing:1px; text-transform:uppercase;">Grand Final</span>
+        ${grandFinalCard}
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px; align-items:center; margin-top:20px;">
+        <span style="font-family:'Bebas Neue', sans-serif; font-size:0.85rem; color:#7f8c8d; letter-spacing:1px; text-transform:uppercase;">Play-off for third place</span>
+        ${bronzeCard}
+      </div>
     </div>
   </div>`;
 
-      wrap.innerHTML = `<div class="bracket-wrapper">${leftColumns}${centerColumn}${rightColumns}</div>`;
+      const desktopHtml = `
+        <div class="desktop-bracket">
+          <div class="bracket-wrapper">
+            <svg class="fs-ko-svg-container" id="bracket-lines-svg"></svg>
+            ${leftColumns}
+            ${centerColumn}
+            ${rightColumns}
+          </div>
+        </div>
+      `;
+
+      // Mobile stages definition (merged left/right)
+      const mobileStages = [
+        { id: 'r32', name: 'Round of 32', matches: [...r32_left, ...r32_right], side: 'left' },
+        { id: 'r16', name: 'Round of 16', matches: [...r16_left, ...r16_right], side: 'left' },
+        { id: 'qf', name: 'Quarter-Finals', matches: [...qf_left, ...qf_right], side: 'left' },
+        { id: 'sf', name: 'Semi-Finals', matches: [...sf_left, ...sf_right], side: 'left' },
+        { id: 'final', name: 'Finals', matches: [grandFinalMatch, bronzeMatch], side: 'center' }
+      ];
+
+      const mobileTabsHtml = `
+        <div class="mobile-ko-tabs">
+          ${mobileStages.map((stage, idx) => `
+            <button class="mobile-ko-tab-btn ${idx === 0 ? 'active' : ''}" onclick="switchKOTab(${idx})">
+              ${stage.name}
+            </button>
+          `).join('')}
+        </div>
+      `;
+
+      const mobileColumnsHtml = `
+        <div class="mobile-ko-scroll-wrap">
+          <svg class="mobile-bracket-svg-container" id="mobile-bracket-lines-svg"></svg>
+          ${mobileStages.map((stage, idx) => {
+            const cardsHTML = stage.matches.map(m => renderMatchCard(m, null, stage.side)).join('');
+            const isHiddenClass = idx >= 2 ? 'hidden' : '';
+            return `
+              <div class="mobile-bracket-column ${isHiddenClass}">
+                <div class="ko-round-title">${stage.name}</div>
+                ${cardsHTML}
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+
+      const mobileHtml = `
+        <div class="mobile-bracket">
+          ${mobileTabsHtml}
+          ${mobileColumnsHtml}
+        </div>
+      `;
+
+      wrap.innerHTML = desktopHtml + mobileHtml;
     }
 
+    function switchKOTab(index) {
+      const columns = document.querySelectorAll('.mobile-bracket-column');
+      columns.forEach((col, idx) => {
+        if (idx === index || idx === index + 1) {
+          col.classList.remove('hidden');
+        } else {
+          col.classList.add('hidden');
+        }
+      });
 
+      const wrapper = document.querySelector('.mobile-ko-scroll-wrap');
+      if (wrapper) {
+        wrapper.scrollTo({
+          left: 0,
+          behavior: 'smooth'
+        });
+        requestAnimationFrame(() => {
+          wrapper.scrollTo({
+            left: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+
+      const panel = document.getElementById('panel-knockout');
+      if (panel) {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      const btns = document.querySelectorAll('.mobile-ko-tab-btn');
+      btns.forEach((btn, i) => {
+        if (i === index) {
+          btn.classList.add('active');
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Redraw lines after layout updates stabilize
+      drawLines();
+      setTimeout(drawLines, 50);
+      setTimeout(drawLines, 200);
+    }
+
+    function drawLines() {
+      // Choose correct layout context
+      const isMobile = window.innerWidth <= 991;
+      const svgId = isMobile ? 'mobile-bracket-lines-svg' : 'bracket-lines-svg';
+      const wrapperSelector = isMobile ? '.mobile-ko-scroll-wrap' : '#panel-knockout .bracket-wrapper';
+
+      const svg = document.getElementById(svgId);
+      if (!svg) return;
+      svg.innerHTML = ''; // Clear old lines
+
+      // Reset dimensions to avoid bloating scrollWidth/scrollHeight
+      svg.setAttribute('width', '0');
+      svg.setAttribute('height', '0');
+
+      const wrapper = document.querySelector(wrapperSelector);
+      if (!wrapper) return;
+      
+      // Enforce SVG width and height to match wrapper content size
+      svg.setAttribute('width', wrapper.scrollWidth);
+      svg.setAttribute('height', wrapper.scrollHeight);
+
+      const wrapperRect = wrapper.getBoundingClientRect();
+
+      function getCardPorts(matchNo) {
+        const card = wrapper.querySelector(`[data-match-id="${matchNo}"]`);
+        if (!card) return null;
+        const column = card.closest('.mobile-bracket-column');
+        if (column && column.classList.contains('hidden')) return null;
+        
+        const rect = card.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) return null;
+        
+        const localLeft = rect.left - wrapperRect.left + wrapper.scrollLeft;
+        const localTop = rect.top - wrapperRect.top + wrapper.scrollTop;
+        return {
+          left: { x: localLeft, y: localTop + rect.height / 2 },
+          right: { x: localLeft + rect.width, y: localTop + rect.height / 2 }
+        };
+      }
+
+      function drawPath(d) {
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('stroke', 'rgba(201, 168, 76, 0.35)');
+        path.setAttribute('stroke-width', '2');
+        path.setAttribute('fill', 'none');
+        svg.appendChild(path);
+      }
+
+      function connectPairLeft(srcA, srcB, target) {
+        const pA = getCardPorts(srcA);
+        const pB = getCardPorts(srcB);
+        const pT = getCardPorts(target);
+        if (!pA || !pB || !pT) return;
+
+        const xMid = (pA.right.x + pT.left.x) / 2;
+        drawPath(`
+          M ${pA.right.x} ${pA.right.y}
+          H ${xMid}
+          V ${pB.right.y}
+          M ${pB.right.x} ${pB.right.y}
+          H ${xMid}
+          M ${xMid} ${pT.left.y}
+          H ${pT.left.x}
+        `.replace(/\s+/g, ' ').trim());
+      }
+
+      function connectPairRight(srcA, srcB, target) {
+        const pA = getCardPorts(srcA);
+        const pB = getCardPorts(srcB);
+        const pT = getCardPorts(target);
+        if (!pA || !pB || !pT) return;
+
+        const xMid = (pA.left.x + pT.right.x) / 2;
+        drawPath(`
+          M ${pA.left.x} ${pA.left.y}
+          H ${xMid}
+          V ${pB.left.y}
+          M ${pB.left.x} ${pB.left.y}
+          H ${xMid}
+          M ${xMid} ${pT.right.y}
+          H ${pT.right.x}
+        `.replace(/\s+/g, ' ').trim());
+      }
+
+      function connectSingleLeftToDouble(src, targetA, targetB) {
+        const pS = getCardPorts(src);
+        const pTA = getCardPorts(targetA);
+        const pTB = getCardPorts(targetB);
+        if (!pS || !pTA || !pTB) return;
+
+        const xMid = (pS.right.x + pTA.left.x) / 2;
+        drawPath(`
+          M ${pS.right.x} ${pS.right.y}
+          H ${xMid}
+          V ${pTB.left.y}
+          M ${xMid} ${pTA.left.y}
+          H ${pTA.left.x}
+          M ${xMid} ${pTB.left.y}
+          H ${pTB.left.x}
+        `.replace(/\s+/g, ' ').trim());
+      }
+
+      function connectSingleRightToDouble(src, targetA, targetB) {
+        const pS = getCardPorts(src);
+        const pTA = getCardPorts(targetA);
+        const pTB = getCardPorts(targetB);
+        if (!pS || !pTA || !pTB) return;
+
+        const xMid = (pS.left.x + pTA.right.x) / 2;
+        drawPath(`
+          M ${pS.left.x} ${pS.left.y}
+          H ${xMid}
+          V ${pTB.right.y}
+          M ${xMid} ${pTA.right.y}
+          H ${pTA.right.x}
+          M ${xMid} ${pTB.right.y}
+          H ${pTB.right.x}
+        `.replace(/\s+/g, ' ').trim());
+      }
+
+      // Left Side connections
+      connectPairLeft(74, 77, 89);
+      connectPairLeft(73, 75, 90);
+      connectPairLeft(83, 84, 93);
+      connectPairLeft(81, 82, 94);
+      connectPairLeft(89, 90, 97);
+      connectPairLeft(93, 94, 98);
+      connectPairLeft(97, 98, 101);
+
+      // Right Side connections
+      connectPairRight(76, 78, 91);
+      connectPairRight(79, 80, 92);
+      connectPairRight(86, 88, 95);
+      connectPairRight(85, 87, 96);
+      connectPairRight(91, 92, 99);
+      connectPairRight(95, 96, 100);
+      connectPairRight(99, 100, 102);
+
+      // Finals connections
+      connectSingleLeftToDouble(101, 104, 103);
+      connectSingleRightToDouble(102, 104, 103);
+    }
+
+    window.addEventListener('resize', drawLines);
 
     // ────────────────────────────────────────────────
     // INIT
@@ -3747,6 +4215,7 @@
     renderRankings();
     renderLinks();
     renderKnockout();
+    drawLines();
     loadCSVLinks();
   </script>
 </body>
