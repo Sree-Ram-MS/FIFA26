@@ -486,72 +486,62 @@ window.MATCH_RESULTS = {
     home: {},
     away: { "Mateo Chávez": "55'", "Julián Quiñones": "61'", "Álvaro Fidalgo": "90'" },
     highlight: ""
+  },
+
+  55: {
+    no: 55,
+    homeTeam: "Curaçao",
+    awayTeam: "Côte d'Ivoire",
+    home: {},
+    away: { "Nicolas Pépé": "7', 64'" },
+    highlight: ""
+  },
+
+  56: {
+    no: 56,
+    homeTeam: "Ecuador",
+    awayTeam: "Germany",
+    home: { "Nilson Angulo": "9'", "Gonzalo Plata": "77'" },
+    away: { "Leroy Sané": "2'" },
+    highlight: ""
+  },
+
+  57: {
+    no: 57,
+    homeTeam: "Tunisia",
+    awayTeam: "Netherlands",
+    home: { "Hazem Mastouri": "54'" },
+    away: { "Ellyes Skhiri (OG)": "3'", "Brian Brobbey": "7'", "Jan Paul van Hecke": "62'" },
+    highlight: ""
+  },
+
+  58: {
+    no: 58,
+    homeTeam: "Japan",
+    awayTeam: "Sweden",
+    home: { "Daizen Maeda": "56'" },
+    away: { "Anthony Elanga": "62'" },
+    highlight: ""
+  },
+
+  59: {
+    no: 59,
+    homeTeam: "Turkey",
+    awayTeam: "USA",
+    home: { "Arda Güler": "10'", "Barış Alper Yılmaz": "31'", "Kaan Ayhan": "90+8'" },
+    away: { "Auston Trusty": "3'", "Sebastian Berhalter": "49'" },
+    highlight: ""
+  },
+
+  60: {
+    no: 60,
+    homeTeam: "Paraguay",
+    awayTeam: "Australia",
+    home: {},
+    away: {},
+    highlight: ""
   }
 
-  // 53: {
-  //   no: 53,
-  //   homeTeam: "Czechia",
-  //   awayTeam: "Mexico",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 54: {
-  //   no: 54,
-  //   homeTeam: "South Africa",
-  //   awayTeam: "Korea Republic",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 55: {
-  //   no: 55,
-  //   homeTeam: "Curaçao",
-  //   awayTeam: "Côte d'Ivoire",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 56: {
-  //   no: 56,
-  //   homeTeam: "Ecuador",
-  //   awayTeam: "Germany",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 57: {
-  //   no: 57,
-  //   homeTeam: "Japan",
-  //   awayTeam: "Sweden",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 58: {
-  //   no: 58,
-  //   homeTeam: "Tunisia",
-  //   awayTeam: "Netherlands",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 59: {
-  //   no: 59,
-  //   homeTeam: "Türkiye",
-  //   awayTeam: "USA",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 60: {
-  //   no: 60,
-  //   homeTeam: "Paraguay",
-  //   awayTeam: "Australia",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
   // 61: {
   //   no: 61,
   //   homeTeam: "Norway",
