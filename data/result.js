@@ -540,7 +540,7 @@ window.MATCH_RESULTS = {
     home: {},
     away: {},
     highlight: ""
-  }
+  },
 
   // 61: {
   //   no: 61,
@@ -637,5 +637,45 @@ window.MATCH_RESULTS = {
   //   home: {},
   //   away: {},
   //   highlight: ""
-  // }
+  // },
+
+// KNOCKOUT STAGE
+
+  73: {
+    no: 73,
+    homeCode: "RSA",
+    awayCode: "CAN",
+    homeTeam: "South Africa",
+    awayTeam: "Canada",
+    home: {"Test": "12', 105'"},
+    away: {"Another": "45', 118'"},
+    aet: true,
+    pso: { home: 5, away: 4, homeSeq: "⚽⚽⚽⚽⚽", awaySeq: "⚽⚽⚽❌⚽" },
+    highlight: ""
+  },
+
+  74: {
+    no: 74,
+    homeCode: "KOR",
+    awayCode: "CZE",
+    homeTeam: "Korea Republic",
+    awayTeam: "Czechia",
+    home: { "Heung-min Son": "24'" },
+    away: { "Patrik Schick": "88'" },
+    aet: true,
+    pso: { home: 3, away: 5 },
+    highlight: ""
+  },
+
+  89: {
+    no: 89,
+    homeCode: "RSA",
+    awayCode: "CZE",
+    homeTeam: "South Africa",
+    awayTeam: "Czechia",
+    home: { "Percy Tau": "42'" },
+    away: { "Tomáš Souček": "67', 89'" },
+    aet: false,
+    highlight: ""
+  }
 };

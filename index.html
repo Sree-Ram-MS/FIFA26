@@ -1397,6 +1397,21 @@
       text-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
     }
 
+    .ko-card-team.score-lose {
+      background: rgba(232, 56, 42, 0.15) !important;
+      border-radius: 4px;
+      padding: 4px 8px;
+      margin: 0 -8px;
+      opacity: 0.6;
+    }
+
+    .ko-card-team.score-win {
+      background: rgba(46, 204, 113, 0.12) !important;
+      border-radius: 4px;
+      padding: 4px 8px;
+      margin: 0 -8px;
+    }
+
     .list-score {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.5rem;
@@ -1702,15 +1717,22 @@
                  box-shadow:0 8px 24px rgba(0,0,0,0.4);"></div>
         </div>
 
-        <!-- Group by Date Toggle -->
+        <!-- Group by Date & Stage Switchers -->
         <div class="group-switcher"
           style="display:flex; background:var(--card-bg); border:1px solid var(--card-border); border-radius:6px; padding:4px; gap:4px;">
           <button id="btn-group-date" onclick="toggleGroupByDate()" title="Group matches by date" style="
-          padding: 8px 12px; border-radius:4px; border:none; cursor:pointer; transition:all 0.2s;
-          background: transparent; color: var(--muted); display: flex; align-items: center; justify-content: center;
-          font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px; gap: 6px;
-        ">
+            padding: 8px 12px; border-radius:4px; border:none; cursor:pointer; transition:all 0.2s;
+            background: transparent; color: var(--muted); display: flex; align-items: center; justify-content: center;
+            font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px; gap: 6px;
+          ">
             <span>📅 Group by Date</span>
+          </button>
+          <button id="btn-group-stage" onclick="toggleGroupByStage()" title="Group matches by stage/round" style="
+            padding: 8px 12px; border-radius:4px; border:none; cursor:pointer; transition:all 0.2s;
+            background: transparent; color: var(--muted); display: flex; align-items: center; justify-content: center;
+            font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px; gap: 6px;
+          ">
+            <span>🏆 Group by Round</span>
           </button>
         </div>
       </div>
@@ -1749,6 +1771,7 @@
 
     <div class="group-filter" id="group-filter">
       <button class="gf-btn active" onclick="filterGroup('ALL')">All Matches</button>
+      <button class="gf-btn" onclick="filterGroup('KO')">Knockout</button>
       <button class="gf-btn" onclick="filterGroup('A')">Group A</button>
       <button class="gf-btn" onclick="filterGroup('B')">Group B</button>
       <button class="gf-btn" onclick="filterGroup('C')">Group C</button>
@@ -2004,6 +2027,28 @@
     function flagImg(code, size = 44) {
       const iso = ISO[code] || 'un';
       return `<img src="https://flagcdn.com/w320/${iso}.png" width="${size}" height="${size}" alt="${NAMES[code] || code}" style="border-radius:50%;object-fit:cover;display:block;box-shadow:0 2px 8px rgba(0,0,0,0.35);" onerror="this.style.visibility='hidden'">`;
+    }
+
+    // Helper to generate a shootout sequence of makes (⚽) and misses (❌) if not explicitly provided
+    function getPsoSequence(score, opponentScore) {
+      const maxScore = Math.max(score, opponentScore);
+      const totalShots = maxScore <= 5 ? 5 : maxScore;
+      
+      let seq = [];
+      let makesLeft = score;
+      for (let i = 0; i < totalShots; i++) {
+        if (makesLeft > 0) {
+          if (score < totalShots && i === 3) {
+            seq.push('❌'); // Typical miss on the 4th shot
+          } else {
+            seq.push('⚽');
+            makesLeft--;
+          }
+        } else {
+          seq.push('❌');
+        }
+      }
+      return seq.join('');
     }
 
     const FLAGS = {}; // kept for backwards-compat
@@ -2293,6 +2338,8 @@
             
             m.isLive = res.isLive || false;
             m.highlight = res.highlight || '';
+            m.aet = res.aet || false;
+            m.pso = res.pso || null;
 
             m.scorers = { home: {}, away: {} };
             if (res.home) {
@@ -2318,7 +2365,117 @@
         });
       });
     }
+    function computeKnockoutProgression() {
+      const matchesMap = {};
+      KO_ROUNDS.forEach(round => {
+        round.matches.forEach(m => {
+          matchesMap[m.no] = m;
+        });
+      });
+
+      function getMatchOutcome(m) {
+        if (!m) return null;
+        const hasScore = m.homeScore !== undefined && m.awayScore !== undefined && m.homeScore !== null && m.awayScore !== null;
+        if (!hasScore) return null;
+        
+        let winnerCode = '';
+        let winnerName = '';
+        let loserCode = '';
+        let loserName = '';
+        
+        if (m.homeScore > m.awayScore) {
+          winnerCode = m.home;
+          winnerName = m.homeName || NAMES[m.home] || m.home;
+          loserCode = m.away;
+          loserName = m.awayName || NAMES[m.away] || m.away;
+        } else if (m.homeScore < m.awayScore) {
+          winnerCode = m.away;
+          winnerName = m.awayName || NAMES[m.away] || m.away;
+          loserCode = m.home;
+          loserName = m.homeName || NAMES[m.home] || m.home;
+        } else if (m.pso) {
+          if (m.pso.home > m.pso.away) {
+            winnerCode = m.home;
+            winnerName = m.homeName || NAMES[m.home] || m.home;
+            loserCode = m.away;
+            loserName = m.awayName || NAMES[m.away] || m.away;
+          } else {
+            winnerCode = m.away;
+            winnerName = m.awayName || NAMES[m.away] || m.away;
+            loserCode = m.home;
+            loserName = m.homeName || NAMES[m.home] || m.home;
+          }
+        }
+        
+        if (!winnerCode) return null;
+        return { winnerCode, winnerName, loserCode, loserName };
+      }
+
+      const progression = [
+        // Round of 32 -> Round of 16
+        [73, 89, 'home', 'winner'],
+        [74, 89, 'away', 'winner'],
+        [75, 90, 'home', 'winner'],
+        [76, 90, 'away', 'winner'],
+        [77, 91, 'home', 'winner'],
+        [78, 91, 'away', 'winner'],
+        [79, 92, 'home', 'winner'],
+        [80, 92, 'away', 'winner'],
+        [81, 93, 'home', 'winner'],
+        [82, 93, 'away', 'winner'],
+        [83, 94, 'home', 'winner'],
+        [84, 94, 'away', 'winner'],
+        [85, 95, 'home', 'winner'],
+        [86, 95, 'away', 'winner'],
+        [87, 96, 'home', 'winner'],
+        [88, 96, 'away', 'winner'],
+
+        // Round of 16 -> Quarter-Finals
+        [89, 97, 'home', 'winner'],
+        [90, 97, 'away', 'winner'],
+        [91, 98, 'home', 'winner'],
+        [92, 98, 'away', 'winner'],
+        [93, 99, 'home', 'winner'],
+        [94, 99, 'away', 'winner'],
+        [95, 100, 'home', 'winner'],
+        [96, 100, 'away', 'winner'],
+
+        // Quarter-Finals -> Semi-Finals
+        [97, 101, 'home', 'winner'],
+        [98, 101, 'away', 'winner'],
+        [99, 102, 'home', 'winner'],
+        [100, 102, 'away', 'winner'],
+
+        // Semi-Finals -> Finals
+        [101, 104, 'home', 'winner'], // Grand Final Home
+        [102, 104, 'away', 'winner'], // Grand Final Away
+        [101, 103, 'home', 'loser'],  // Bronze Final Home
+        [102, 103, 'away', 'loser']   // Bronze Final Away
+      ];
+
+      progression.forEach(([prevNo, nextNo, slot, type]) => {
+        const prevMatch = matchesMap[prevNo];
+        const nextMatch = matchesMap[nextNo];
+        if (!prevMatch || !nextMatch) return;
+        
+        const outcome = getMatchOutcome(prevMatch);
+        if (outcome) {
+          const teamCode = type === 'winner' ? outcome.winnerCode : outcome.loserCode;
+          const teamName = type === 'winner' ? outcome.winnerName : outcome.loserName;
+          
+          if (slot === 'home') {
+            nextMatch.home = teamCode;
+            nextMatch.homeName = teamName;
+          } else {
+            nextMatch.away = teamCode;
+            nextMatch.awayName = teamName;
+          }
+        }
+      });
+    }
+
     integrateMatchResults();
+    computeKnockoutProgression();
 
     // Precompute IST date and time for all matches
     ALL_MATCHES.forEach(m => {
@@ -2326,6 +2483,28 @@
       m.istDate = ist.date;
       m.istTime = ist.time;
     });
+
+    // Also precompute for KO matches and assign stage
+    KO_ROUNDS.forEach(round => {
+      round.matches.forEach(m => {
+        m.stage = round.label;
+        const ist = etToIST(m.date, m.time || m.et);
+        m.istDate = ist.date;
+        m.istTime = ist.time;
+      });
+    });
+
+    function getFixedKnockoutMatches() {
+      const list = [];
+      KO_ROUNDS.forEach(round => {
+        round.matches.forEach(m => {
+          if (m.home || m.away) {
+            list.push(m);
+          }
+        });
+      });
+      return list;
+    }
 
     // Helper: Convert YYYY-MM-DD to "D MMM" (e.g. "2026-06-12" -> "12 Jun")
     function formatDateToISTString(dateVal) {
@@ -2506,23 +2685,59 @@
     // RENDER FIXTURES
     // ────────────────────────────────────────────────
     let activeGroupDate = false;
+    let activeGroupStage = false;
 
     function toggleGroupByDate() {
       activeGroupDate = !activeGroupDate;
-      const btn = document.getElementById('btn-group-date');
-      if (btn) {
+      if (activeGroupDate) {
+        activeGroupStage = false;
+      }
+      updateGroupingButtons();
+      reRenderFixtures();
+    }
+
+    function toggleGroupByStage() {
+      activeGroupStage = !activeGroupStage;
+      if (activeGroupStage) {
+        activeGroupDate = false;
+        updateGroupingButtons();
+        filterGroup('KO');
+      } else {
+        updateGroupingButtons();
+        filterGroup('ALL');
+      }
+    }
+
+    function updateGroupingButtons() {
+      const btnDate = document.getElementById('btn-group-date');
+      const btnStage = document.getElementById('btn-group-stage');
+
+      if (btnDate) {
         if (activeGroupDate) {
-          btn.style.background = 'var(--gold)';
-          btn.style.color = 'var(--darker)';
-          btn.classList.add('active');
+          btnDate.style.background = 'var(--gold)';
+          btnDate.style.color = 'var(--darker)';
+          btnDate.classList.add('active');
         } else {
-          btn.style.background = 'transparent';
-          btn.style.color = 'var(--muted)';
-          btn.classList.remove('active');
+          btnDate.style.background = 'transparent';
+          btnDate.style.color = 'var(--muted)';
+          btnDate.classList.remove('active');
         }
       }
 
-      // Re-render fixtures to use the new grouping layout
+      if (btnStage) {
+        if (activeGroupStage) {
+          btnStage.style.background = 'var(--gold)';
+          btnStage.style.color = 'var(--darker)';
+          btnStage.classList.add('active');
+        } else {
+          btnStage.style.background = 'transparent';
+          btnStage.style.color = 'var(--muted)';
+          btnStage.classList.remove('active');
+        }
+      }
+    }
+
+    function reRenderFixtures() {
       const activeGroupBtn = document.querySelector('.gf-btn.active');
       let currentGroup = 'ALL';
       if (activeGroupBtn) {
@@ -2530,27 +2745,28 @@
         const match = clickAttr.match(/'([^']+)'/);
         if (match) currentGroup = match[1];
       }
-
       renderFixtures(currentGroup, activeCountry);
     }
 
-    function getGroupHeaderLabel(istDateStr) {
-      // Local time context is June 11, 2026.
-      const todayObj = new Date(2026, 5, 11);
-      const tomorrowObj = new Date(2026, 5, 12);
+    function getGroupHeaderLabel(istDateStr, matches = []) {
+      const todayObj = new Date();
+      const tomorrowObj = new Date();
+      tomorrowObj.setDate(todayObj.getDate() + 1);
       
       const parsedDate = parseISTDate(istDateStr);
+      const isKO = matches.some(m => m.stage && m.stage !== 'Group Stage');
+      const prefix = isKO ? "Knockout Stage" : "Group Stage";
       
       if (parsedDate.getDate() === todayObj.getDate() && parsedDate.getMonth() === todayObj.getMonth()) {
-        return "Group Stage · Today";
+        return `${prefix} · Today`;
       }
       if (parsedDate.getDate() === tomorrowObj.getDate() && parsedDate.getMonth() === tomorrowObj.getMonth()) {
-        return "Group Stage · Tomorrow";
+        return `${prefix} · Tomorrow`;
       }
       
       const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       const dayName = days[parsedDate.getDay()];
-      return `Group Stage · ${dayName}, ${istDateStr}`;
+      return `${prefix} · ${dayName}, ${istDateStr}`;
     }
 
     function renderMatchRow(m) {
@@ -2569,9 +2785,37 @@
           homeClass = 'score-lose';
           awayClass = 'score-win';
         } else {
-          homeClass = 'score-draw';
-          awayClass = 'score-draw';
+          if (m.pso) {
+            if (m.pso.home > m.pso.away) {
+              homeClass = 'score-win';
+              awayClass = 'score-lose';
+            } else {
+              homeClass = 'score-lose';
+              awayClass = 'score-win';
+            }
+          } else {
+            homeClass = 'score-draw';
+            awayClass = 'score-draw';
+          }
         }
+      }
+
+      let homePsoHtml = '';
+      let awayPsoHtml = '';
+      let aetLabelHtml = '';
+      let homeSeqHtml = '';
+      let awaySeqHtml = '';
+      if (m.pso) {
+        homePsoHtml = `<span class="list-pso-val" style="font-size:0.8rem; opacity:0.6; margin-left:4px;">(${m.pso.home})</span>`;
+        awayPsoHtml = `<span class="list-pso-val" style="font-size:0.8rem; opacity:0.6; margin-left:4px;">(${m.pso.away})</span>`;
+        aetLabelHtml = `<span class="aet-label" style="font-size:0.7rem; font-weight:bold; color:var(--accent2); margin-left:8px; border: 1px solid var(--accent2); padding:1px 4px; border-radius:3px; text-transform:uppercase;">P</span>`;
+        
+        const hSeq = m.pso.homeSeq || getPsoSequence(m.pso.home, m.pso.away);
+        const aSeq = m.pso.awaySeq || getPsoSequence(m.pso.away, m.pso.home);
+        homeSeqHtml = `<div class="pso-seq" style="font-size:0.6rem; opacity:0.75; letter-spacing:1px; margin-top:2px; line-height:1;">${hSeq}</div>`;
+        awaySeqHtml = `<div class="pso-seq" style="font-size:0.6rem; opacity:0.75; letter-spacing:1px; margin-top:2px; line-height:1;">${aSeq}</div>`;
+      } else if (m.aet) {
+        aetLabelHtml = `<span class="aet-label" style="font-size:0.7rem; font-weight:bold; color:var(--accent2); margin-left:8px; border: 1px solid var(--accent2); padding:1px 4px; border-radius:3px; text-transform:uppercase;">AET</span>`;
       }
 
       return `<div class="match-row-card ${hasScore ? 'is-completed' : ''} ${isLive ? 'is-live' : ''}" onclick="openModal(${m.no})">
@@ -2579,21 +2823,28 @@
           <div style="display:flex; align-items:center; gap:6px;">
             <span class="mr-no">Match #${m.no} ${hasHighlight ? '<span style="font-size:0.95rem;" title="Match Highlights Available">🎥</span>' : ''}</span>
             ${isLive ? '<span class="live-badge" style="padding:1px 6px;"><span class="live-dot" style="width:5px;height:5px;"></span>LIVE</span>' : ''}
+            ${aetLabelHtml}
           </div>
-          <span class="mr-group">Group ${m.group}</span>
+          <span class="mr-group">${m.stage || ('Group ' + m.group)}</span>
         </div>
         <div class="mr-teams">
-          ${hasScore ? `<span class="list-score ${homeClass}">${m.homeScore}</span>` : '<span class="list-score" style="border-bottom:none;visibility:hidden;"></span>'}
+          ${hasScore ? `<span class="list-score ${homeClass}" style="display:inline-flex; align-items:center; justify-content:center;">${m.homeScore}${homePsoHtml}</span>` : '<span class="list-score" style="border-bottom:none;visibility:hidden;"></span>'}
           <div class="mr-team home">
-            <span class="mr-team-name">${NAMES[m.home] || m.home}</span>
+            <div style="display:flex; flex-direction:column; align-items:flex-end;">
+              <span class="mr-team-name">${NAMES[m.home] || m.home}</span>
+              ${homeSeqHtml}
+            </div>
             <span class="mr-flag">${flagImg(m.home, 32)}</span>
           </div>
           <div class="mr-vs">${hasScore ? ':' : 'VS'}</div>
           <div class="mr-team away">
             <span class="mr-flag">${flagImg(m.away, 32)}</span>
-            <span class="mr-team-name">${NAMES[m.away] || m.away}</span>
+            <div style="display:flex; flex-direction:column; align-items:flex-start;">
+              <span class="mr-team-name">${NAMES[m.away] || m.away}</span>
+              ${awaySeqHtml}
+            </div>
           </div>
-          ${hasScore ? `<span class="list-score ${awayClass}">${m.awayScore}</span>` : '<span class="list-score" style="border-bottom:none;visibility:hidden;"></span>'}
+          ${hasScore ? `<span class="list-score ${awayClass}" style="display:inline-flex; align-items:center; justify-content:center;">${m.awayScore}${awayPsoHtml}</span>` : '<span class="list-score" style="border-bottom:none;visibility:hidden;"></span>'}
         </div>
         <div class="mr-right">
           <div class="mr-time">🕐 ${ist.time} IST · <span class="mr-date">${ist.date} 2026</span></div>
@@ -2618,9 +2869,37 @@
           homeClass = 'score-lose';
           awayClass = 'score-win';
         } else {
-          homeClass = 'score-draw';
-          awayClass = 'score-draw';
+          if (m.pso) {
+            if (m.pso.home > m.pso.away) {
+              homeClass = 'score-win';
+              awayClass = 'score-lose';
+            } else {
+              homeClass = 'score-lose';
+              awayClass = 'score-win';
+            }
+          } else {
+            homeClass = 'score-draw';
+            awayClass = 'score-draw';
+          }
         }
+      }
+
+      let homePsoHtml = '';
+      let awayPsoHtml = '';
+      let aetLabelHtml = '';
+      let homeSeqHtml = '';
+      let awaySeqHtml = '';
+      if (m.pso) {
+        homePsoHtml = `<span style="font-size:0.75rem; opacity:0.6; margin-left:2px; font-weight:normal;">(${m.pso.home})</span>`;
+        awayPsoHtml = `<span style="font-size:0.75rem; opacity:0.6; margin-left:2px; font-weight:normal;">(${m.pso.away})</span>`;
+        aetLabelHtml = `<span class="aet-label" style="font-size:0.65rem; font-weight:bold; color:var(--accent2); border: 1px solid var(--accent2); padding:1px 4px; border-radius:3px; text-transform:uppercase;">P</span>`;
+        
+        const hSeq = m.pso.homeSeq || getPsoSequence(m.pso.home, m.pso.away);
+        const aSeq = m.pso.awaySeq || getPsoSequence(m.pso.away, m.pso.home);
+        homeSeqHtml = `<div class="pso-seq-badge" style="font-size:0.65rem; margin-top:2px; opacity:0.85; letter-spacing:1px; text-align:center; line-height:1;">${hSeq}</div>`;
+        awaySeqHtml = `<div class="pso-seq-badge" style="font-size:0.65rem; margin-top:2px; opacity:0.85; letter-spacing:1px; text-align:center; line-height:1;">${aSeq}</div>`;
+      } else if (m.aet) {
+        aetLabelHtml = `<span class="aet-label" style="font-size:0.65rem; font-weight:bold; color:var(--accent2); border: 1px solid var(--accent2); padding:1px 4px; border-radius:3px; text-transform:uppercase;">AET</span>`;
       }
 
       return `<div class="match-card ${hasScore ? 'is-completed' : ''} ${isLive ? 'is-live' : ''}" onclick="openModal(${m.no})">
@@ -2628,20 +2907,23 @@
           <div class="match-no">Match #${m.no} ${hasHighlight ? '<span style="font-size:0.95rem; margin-left: 4px;" title="Match Highlights Available">🎥</span>' : ''}</div>
           <div style="display:flex; gap:6px; align-items:center;">
             ${isLive ? '<span class="live-badge"><span class="live-dot"></span>LIVE</span>' : ''}
-            <div class="group-badge">Group ${m.group}</div>
+            ${aetLabelHtml}
+            <div class="group-badge">${m.stage || ('Group ' + m.group)}</div>
           </div>
         </div>
         <div class="teams-row">
           <div class="team-side">
             <div class="team-flag">${flagImg(m.home, 44)}</div>
             <div class="team-name">${NAMES[m.home] || m.home}</div>
+            ${homeSeqHtml}
           </div>
-          <div class="vs-badge card-score">
-            ${hasScore ? `<span class="${homeClass}">${m.homeScore}</span> <span style="font-size:1.1rem;opacity:0.3;margin:0 4px;">-</span> <span class="${awayClass}">${m.awayScore}</span>` : 'VS'}
+          <div class="vs-badge card-score" style="display:inline-flex; align-items:center; justify-content:center;">
+            ${hasScore ? `<span class="${homeClass}" style="display:inline-flex; align-items:center;">${m.homeScore}${homePsoHtml}</span> <span style="font-size:1.1rem;opacity:0.3;margin:0 4px;">-</span> <span class="${awayClass}" style="display:inline-flex; align-items:center;">${m.awayScore}${awayPsoHtml}</span>` : 'VS'}
           </div>
           <div class="team-side">
             <div class="team-flag">${flagImg(m.away, 44)}</div>
             <div class="team-name">${NAMES[m.away] || m.away}</div>
+            ${awaySeqHtml}
           </div>
         </div>
         <div class="card-footer">
@@ -2658,10 +2940,16 @@
       const grid = document.getElementById('fixtures-grid');
       let list;
 
+      const fixedKO = getFixedKnockoutMatches();
+
       if (country) {
-        list = ALL_MATCHES.filter(m => m.home === country || m.away === country);
+        const groupMatches = ALL_MATCHES.filter(m => m.home === country || m.away === country);
+        const koMatches = fixedKO.filter(m => m.home === country || m.away === country);
+        list = [...groupMatches, ...koMatches];
       } else if (group === 'ALL') {
-        list = [...ALL_MATCHES].sort((a, b) => a.no - b.no);
+        list = [...ALL_MATCHES, ...fixedKO].sort((a, b) => a.no - b.no);
+      } else if (group === 'KO') {
+        list = [...fixedKO].sort((a, b) => a.no - b.no);
       } else {
         list = ALL_MATCHES.filter(m => m.group === group);
       }
@@ -2688,10 +2976,49 @@
         });
 
         sortedDates.forEach(dateStr => {
-          const label = getGroupHeaderLabel(dateStr);
+          const label = getGroupHeaderLabel(dateStr, groups[dateStr]);
           html += `<div class="fixtures-date-header">${label}</div>`;
           
           const matchesHtml = groups[dateStr].map(m => {
+            if (activeView === 'list') {
+              return renderMatchRow(m);
+            } else {
+              return renderMatchCard(m);
+            }
+          }).join('');
+          
+          html += matchesHtml;
+        });
+        
+        grid.innerHTML = html;
+      } else if (activeGroupStage) {
+        // Group list by stage
+        const groups = {};
+        list.forEach(m => {
+          const key = m.stage === 'Group Stage' ? ('Group ' + m.group) : m.stage;
+          if (!groups[key]) {
+            groups[key] = [];
+          }
+          groups[key].push(m);
+        });
+
+        // Define order for sorting stages
+        const STAGE_ORDER = [
+          'Group A', 'Group B', 'Group C', 'Group D', 'Group E', 'Group F',
+          'Group G', 'Group H', 'Group I', 'Group J', 'Group K', 'Group L',
+          'Round of 32', 'Round of 16', 'Quarter-Finals', 'Semi-Finals', 'Finals'
+        ];
+
+        // Generate HTML with stage headers
+        let html = '';
+        const sortedKeys = Object.keys(groups).sort((a, b) => {
+          return STAGE_ORDER.indexOf(a) - STAGE_ORDER.indexOf(b);
+        });
+
+        sortedKeys.forEach(stageKey => {
+          html += `<div class="fixtures-date-header">${stageKey}</div>`;
+          
+          const matchesHtml = groups[stageKey].map(m => {
             if (activeView === 'list') {
               return renderMatchRow(m);
             } else {
@@ -2722,8 +3049,14 @@
       document.getElementById('search-clear').style.display = 'none';
       document.getElementById('suggestions').style.display = 'none';
       // Activate button
-      document.querySelectorAll('.gf-btn').forEach(b => b.classList.remove('active'));
-      event.target.classList.add('active');
+      document.querySelectorAll('.gf-btn').forEach(btn => {
+        const clickAttr = btn.getAttribute('onclick') || '';
+        if (clickAttr.includes(`'${g}'`)) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
       renderFixtures(g);
     }
 
@@ -2781,10 +3114,19 @@
       const homeName = m.homeName || (homeCode ? (NAMES[homeCode] || homeCode) : 'TBD');
       const awayName = m.awayName || (awayCode ? (NAMES[awayCode] || awayCode) : 'TBD');
 
+      let homeSeqHtml = '';
+      let awaySeqHtml = '';
+      if (m.pso) {
+        const hSeq = m.pso.homeSeq || getPsoSequence(m.pso.home, m.pso.away);
+        const aSeq = m.pso.awaySeq || getPsoSequence(m.pso.away, m.pso.home);
+        homeSeqHtml = `<div class="modal-pso-seq" style="font-size:0.8rem; margin-top:4px; opacity:0.8; letter-spacing:2px; font-weight:normal; text-align:center;">${hSeq}</div>`;
+        awaySeqHtml = `<div class="modal-pso-seq" style="font-size:0.8rem; margin-top:4px; opacity:0.8; letter-spacing:2px; font-weight:normal; text-align:center;">${aSeq}</div>`;
+      }
+      
       document.getElementById('m-flag1').innerHTML = homeCode ? flagImg(homeCode, 72) : `<div class="ko-flag-circle" style="width:72px; height:72px; font-size:1.2rem;"><span class="ko-tbd-text" style="font-size:1rem;">TBD</span></div>`;
-      document.getElementById('m-team1').textContent = homeName;
+      document.getElementById('m-team1').innerHTML = `<div style="display:flex; flex-direction:column; align-items:center;"><span>${homeName}</span>${homeSeqHtml}</div>`;
       document.getElementById('m-flag2').innerHTML = awayCode ? flagImg(awayCode, 72) : `<div class="ko-flag-circle" style="width:72px; height:72px; font-size:1.2rem;"><span class="ko-tbd-text" style="font-size:1rem;">TBD</span></div>`;
-      document.getElementById('m-team2').textContent = awayName;
+      document.getElementById('m-team2').innerHTML = `<div style="display:flex; flex-direction:column; align-items:center;"><span>${awayName}</span>${awaySeqHtml}</div>`;
       
       document.getElementById('m-date').textContent = ist.date + ' 2026';
       document.getElementById('m-time').textContent = ist.time + ' IST';
@@ -2792,19 +3134,20 @@
 
       // Render score in modal if completed or live
       const modalVs = document.getElementById('m-vs');
-      const hasScore = m.homeScore !== undefined && m.awayScore !== undefined && m.homeScore !== null && m.awayScore !== null;
+      const hasScore_ = m.homeScore !== undefined && m.awayScore !== undefined && m.homeScore !== null && m.awayScore !== null;
       const isLive = m.isLive === true;
 
       // Add badge to stage string
       let statusText = isKnockout ? m.stage : `Group Stage · Group ${m.group}`;
       if (isLive) {
         statusText += ` <span class="live-badge" style="display:inline-flex;margin-left:8px;vertical-align:middle;"><span class="live-dot"></span>LIVE</span>`;
-      } else if (hasScore) {
-        statusText += ` <span class="finished-badge" style="display:inline-flex;margin-left:8px;vertical-align:middle;">FULL TIME</span>`;
+      } else if (hasScore_) {
+        const ftText = m.pso ? 'FULL TIME (P)' : 'FULL TIME';
+        statusText += ` <span class="finished-badge" style="display:inline-flex;margin-left:8px;vertical-align:middle;">${ftText}</span>`;
       }
       document.getElementById('m-stage').innerHTML = statusText;
 
-      if (hasScore || isLive) {
+      if (hasScore_ || isLive) {
         let homeClass = '';
         let awayClass = '';
         if (m.homeScore > m.awayScore) {
@@ -2814,10 +3157,41 @@
           homeClass = 'score-lose';
           awayClass = 'score-win';
         } else {
-          homeClass = 'score-draw';
-          awayClass = 'score-draw';
+          if (m.pso) {
+            if (m.pso.home > m.pso.away) {
+              homeClass = 'score-win';
+              awayClass = 'score-lose';
+            } else {
+              homeClass = 'score-lose';
+              awayClass = 'score-win';
+            }
+          } else {
+            homeClass = 'score-draw';
+            awayClass = 'score-draw';
+          }
         }
-        modalVs.innerHTML = `<span class="${homeClass}">${m.homeScore}</span><span style="font-size:1.8rem;opacity:0.4;margin:0 12px;">-</span><span class="${awayClass}">${m.awayScore}</span>`;
+
+        let homePsoHtml = '';
+        let awayPsoHtml = '';
+        let aetBadgeHtml = '';
+        if (m.pso) {
+          homePsoHtml = `<span style="font-size:1.1rem; opacity:0.6; margin-left:4px; font-weight:normal;">(${m.pso.home})</span>`;
+          awayPsoHtml = `<span style="font-size:1.1rem; opacity:0.6; margin-left:4px; font-weight:normal;">(${m.pso.away})</span>`;
+          aetBadgeHtml = `<div style="font-size:0.75rem; font-weight:bold; color:var(--accent2); margin-top:6px; border:1px solid var(--accent2); padding:2px 8px; border-radius:4px; display:inline-block; text-transform:uppercase;">P</div>`;
+        } else if (m.aet) {
+          aetBadgeHtml = `<div style="font-size:0.75rem; font-weight:bold; color:var(--accent2); margin-top:6px; border:1px solid var(--accent2); padding:2px 8px; border-radius:4px; display:inline-block; text-transform:uppercase;">A.E.T.</div>`;
+        }
+
+        modalVs.innerHTML = `
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div style="display:flex; align-items:center;">
+              <span class="${homeClass}">${m.homeScore}${homePsoHtml}</span>
+              <span style="font-size:1.8rem;opacity:0.4;margin:0 12px;">-</span>
+              <span class="${awayClass}">${m.awayScore}${awayPsoHtml}</span>
+            </div>
+            ${aetBadgeHtml}
+          </div>
+        `;
       } else {
         modalVs.textContent = 'VS';
       }
@@ -3215,8 +3589,18 @@
             homeClass = 'score-lose';
             awayClass = 'score-win';
           } else {
-            homeClass = 'score-draw';
-            awayClass = 'score-draw';
+            if (m.pso) {
+              if (m.pso.home > m.pso.away) {
+                homeClass = 'score-win';
+                awayClass = 'score-lose';
+              } else {
+                homeClass = 'score-lose';
+                awayClass = 'score-win';
+              }
+            } else {
+              homeClass = 'score-draw';
+              awayClass = 'score-draw';
+            }
           }
         }
 
@@ -3227,11 +3611,29 @@
           ? flagImg(awayCode, 28) 
           : `<div class="ko-flag-circle"><span class="ko-tbd-text">TBD</span></div>`;
 
+        let homePsoHtml = '';
+        let awayPsoHtml = '';
+        let aetLabel = '';
+        let homeSeqHtml = '';
+        let awaySeqHtml = '';
+        if (m.pso) {
+          homePsoHtml = `<span class="ko-pso-val" style="font-size:0.8rem; opacity:0.6; margin-left: 3px; font-weight:normal;">(${m.pso.home})</span>`;
+          awayPsoHtml = `<span class="ko-pso-val" style="font-size:0.8rem; opacity:0.6; margin-left: 3px; font-weight:normal;">(${m.pso.away})</span>`;
+          aetLabel = ` · <span style="color:var(--accent2); font-weight:bold; font-size:0.75rem;">P</span>`;
+          
+          const hSeq = m.pso.homeSeq || getPsoSequence(m.pso.home, m.pso.away);
+          const aSeq = m.pso.awaySeq || getPsoSequence(m.pso.away, m.pso.home);
+          homeSeqHtml = `<div class="ko-pso-seq" style="font-size:0.6rem; opacity:0.75; letter-spacing:1px; margin-top:2px; line-height:1;">${hSeq}</div>`;
+          awaySeqHtml = `<div class="ko-pso-seq" style="font-size:0.6rem; opacity:0.75; letter-spacing:1px; margin-top:2px; line-height:1;">${aSeq}</div>`;
+        } else if (m.aet) {
+          aetLabel = ` · <span style="color:var(--accent2); font-weight:bold; font-size:0.75rem;">AET</span>`;
+        }
+
         const homeScoreHtml = hasScore 
-          ? `<span class="ko-score-val" style="margin-left:auto; font-weight:bold; font-size:1.1rem; color:var(--gold);">${m.homeScore}</span>` 
+          ? `<span class="ko-score-val" style="margin-left:auto; display:flex; align-items:center; font-weight:bold; font-size:1.1rem; color:var(--gold);">${m.homeScore}${homePsoHtml}</span>` 
           : '';
         const awayScoreHtml = hasScore 
-          ? `<span class="ko-score-val" style="margin-left:auto; font-weight:bold; font-size:1.1rem; color:var(--gold);">${m.awayScore}</span>` 
+          ? `<span class="ko-score-val" style="margin-left:auto; display:flex; align-items:center; font-weight:bold; font-size:1.1rem; color:var(--gold);">${m.awayScore}${awayPsoHtml}</span>` 
           : '';
 
         const clickable = (homeCode || awayCode) ? `onclick="openModal(${m.no})"` : '';
@@ -3240,18 +3642,24 @@
         return `<div class="ko-match-card ${isFinal ? 'ko-final' : ''} ${m.isLive ? 'is-live' : ''}" ${clickable} ${cursorStyle}>
       <div class="ko-card-header">
         <span class="ko-match-id">${label}</span>
-        <span class="ko-match-date">${ist.date} · ${ist.time}</span>
+        <span class="ko-match-date">${ist.date} · ${ist.time}${aetLabel}</span>
       </div>
       <div class="ko-card-teams">
         <div class="ko-card-team ${homeClass}">
           ${homeFlagHtml}
-          <span class="ko-team-name-ko" title="${homeName}">${homeName}</span>
+          <div style="display:flex; flex-direction:column; justify-content:center;">
+            <span class="ko-team-name-ko" title="${homeName}">${homeName}</span>
+            ${homeSeqHtml}
+          </div>
           ${homeScoreHtml}
         </div>
         <div class="ko-card-vs-divider"></div>
         <div class="ko-card-team ${awayClass}">
           ${awayFlagHtml}
-          <span class="ko-team-name-ko" title="${awayName}">${awayName}</span>
+          <div style="display:flex; flex-direction:column; justify-content:center;">
+            <span class="ko-team-name-ko" title="${awayName}">${awayName}</span>
+            ${awaySeqHtml}
+          </div>
           ${awayScoreHtml}
         </div>
       </div>
