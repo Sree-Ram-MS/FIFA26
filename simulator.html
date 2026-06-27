@@ -477,7 +477,7 @@
       <button class="btn btn-gold" id="btn-save-image" onclick="downloadBracketImage()" style="display: none;">📸 Save Image</button>
       <button class="btn" onclick="resetSimulation()">🔄 Reset</button>
       <button class="btn btn-gold" onclick="autoPredict()">🔮 Auto-Predict</button>
-      <button class="btn" onclick="window.close()">❌ Close</button>
+      <button class="btn" onclick="closeOrGoHome()">❌ Close</button>
     </div>
   </header>
 
@@ -1801,6 +1801,14 @@
       // Finals connections
       connectSingleLeftToDouble(101, 104, 103);
       connectSingleRightToDouble(102, 104, 103);
+    }
+
+    // Close tab or redirect to home page (for direct shared links)
+    function closeOrGoHome() {
+      window.close();
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 100);
     }
 
     // Listeners
