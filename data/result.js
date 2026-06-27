@@ -693,7 +693,7 @@ window.MATCH_RESULTS = {
   77: {
     no: 77,
     homeCode: "FRA",
-    awayCode: "SWE ",
+    awayCode: "SWE",
     // home: {},
     // away: {},
     // aet: false,

@@ -3492,7 +3492,10 @@
 
         // 4. Render rows
         const rows = standings.map((s, i) => {
-          return `<tr class="${i < 2 ? 'qual-row' : ''}">
+          const gd = s.goalsFor - s.goalsAgainst;
+          const gdStr = gd > 0 ? `+${gd}` : gd;
+          const isQual = i < 2 || (i === 2 && KO_ROUNDS[0].matches.some(m => m.home === s.code || m.away === s.code));
+          return `<tr class="${isQual ? 'qual-row' : ''}">
         <td><div class="team-cell">${flagImg(s.code, 24)}${NAMES[s.code] || s.code}</div></td>
         <td>${s.played}</td>
         <td>${s.won}</td>
@@ -3500,6 +3503,7 @@
         <td>${s.lost}</td>
         <td>${s.goalsFor}</td>
         <td>${s.goalsAgainst}</td>
+        <td>${gdStr}</td>
         <td class="pts-cell">${s.points}</td>
       </tr>`;
         }).join('');
@@ -3507,11 +3511,11 @@
         return `<div class="group-card">
       <div class="group-card-header">
         <h3>Group ${gid}</h3>
-        <span>P W D L GF GA Pts</span>
+        <span>P W D L GF GA GD Pts</span>
       </div>
       <table class="group-table">
         <thead><tr>
-          <th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>Pts</th>
+          <th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th>
         </tr></thead>
         <tbody>${rows}</tbody>
       </table>
