@@ -542,46 +542,51 @@ window.MATCH_RESULTS = {
     highlight: ""
   },
 
-  // 61: {
-  //   no: 61,
-  //   homeTeam: "Norway",
-  //   awayTeam: "France",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 62: {
-  //   no: 62,
-  //   homeTeam: "Senegal",
-  //   awayTeam: "Iraq",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 63: {
-  //   no: 63,
-  //   homeTeam: "Egypt",
-  //   awayTeam: "IR Iran",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 64: {
-  //   no: 64,
+  61: {
+    no: 61,
+    homeTeam: "Norway",
+    awayTeam: "France",
+    home: { "Thelonious Aasgaard": "58'" },
+    away: { "Ousmane Dembélé": "12', 21', 32'", "Désiré Doué": "90+2'" },
+    highlight: ""
+  },
+
+  62: {
+    no: 62,
+    homeTeam: "Senegal",
+    awayTeam: "Iraq",
+    home: { "Habib Diarra": "4'", "Ismaïla Sarr": "52'", "Pape Gueye": "65', 73'", "Iliman Ndiaye": "88'" },
+    away: {},
+    highlight: ""
+  },
+
+  63: {
+    no: 63,
+    homeTeam: "Cabo Verde",
+    awayTeam: "Saudi Arabia",
+    home: {},
+    away: { "Salem Al-Dawsari": "45'" },
+    highlight: ""
+  },
+
+  64: {
+    no: 64,
+    homeTeam: "Uruguay",
+    awayTeam: "Spain",
+    home: {},
+    away: { "Álex Baena": "42'" },
+    highlight: ""
+  },
+
+  // 65: {
+  //   no: 65,
   //   homeTeam: "New Zealand",
   //   awayTeam: "Belgium",
   //   home: {},
-  //   away: {},
+  //   away: {},  // Assuming Belgium won or it was a draw, no goals for NZ yet.
   //   highlight: ""
-  // },
-  // 65: {
-  //   no: 65,
-  //   homeTeam: "Cabo Verde",
-  //   awayTeam: "Saudi Arabia",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
+  // }
+
   // 66: {
   //   no: 66,
   //   homeTeam: "Uruguay",
@@ -655,7 +660,7 @@ window.MATCH_RESULTS = {
   74: {
     no: 74,
     homeCode: "GER",
-    // awayCode: "",
+    awayCode: "PAR",
     // home: {},
     // away: {},
     // aet: false,
@@ -676,8 +681,8 @@ window.MATCH_RESULTS = {
 
   76: {
     no: 76,
-    // homeCode: "BRA",
-    // awayCode: "JPN",
+    homeCode: "BRA",
+    awayCode: "JPN",
     // home: {},
     // away: {},
     // aet: false,
@@ -687,8 +692,8 @@ window.MATCH_RESULTS = {
 
   77: {
     no: 77,
-    // homeCode: "",
-    // awayCode: "",
+    homeCode: "FRA",
+    awayCode: "SWE ",
     // home: {},
     // away: {},
     // aet: false,
@@ -764,7 +769,7 @@ window.MATCH_RESULTS = {
 
   84: {
     no: 84,
-    homeCode: "FRA",
+    homeCode: "ESP",
     // awayCode: "",
     // home: {},
     // away: {},
@@ -775,7 +780,7 @@ window.MATCH_RESULTS = {
 
   85: {
     no: 85,
-    // homeCode: "SUI",
+    homeCode: "SUI",
     // awayCode: "",
     // home: {},
     // away: {},
@@ -787,7 +792,7 @@ window.MATCH_RESULTS = {
   86: {
     no: 86,
     homeCode: "ARG",
-    // awayCode: "",
+    awayCode: "CPV",
     // home: {},
     // away: {},
     // aet: false,
@@ -818,6 +823,7 @@ window.MATCH_RESULTS = {
   }
 
   // Round 16 //
+
   // , 89: {
   //   no: 89,
   //   // homeCode: "",
