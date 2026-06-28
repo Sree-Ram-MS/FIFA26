@@ -578,73 +578,79 @@ window.MATCH_RESULTS = {
     highlight: ""
   },
 
-  // 65: {
-  //   no: 65,
-  //   homeTeam: "New Zealand",
-  //   awayTeam: "Belgium",
-  //   home: {},
-  //   away: {},  // Assuming Belgium won or it was a draw, no goals for NZ yet.
-  //   highlight: ""
-  // }
+  65: {
+    no: 65,
+    homeTeam: "New Zealand",
+    awayTeam: "Belgium",
+    home: { "Elijah Just": "84'" },
+    away: { "Leandro Trossard": "28', 50'", "Kevin De Bruyne": "66'", "Romelu Lukaku": "86'", "Alexis Saelemaekers": "90'" },
+    highlight: ""
+  },
 
-  // 66: {
-  //   no: 66,
-  //   homeTeam: "Uruguay",
-  //   awayTeam: "Spain",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 67: {
-  //   no: 67,
-  //   homeTeam: "Panama",
-  //   awayTeam: "England",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 68: {
-  //   no: 68,
-  //   homeTeam: "Croatia",
-  //   awayTeam: "Ghana",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 69: {
-  //   no: 69,
-  //   homeTeam: "Congo DR",
-  //   awayTeam: "Uzbekistan",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 70: {
-  //   no: 70,
-  //   homeTeam: "Colombia",
-  //   awayTeam: "Portugal",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 71: {
-  //   no: 71,
-  //   homeTeam: "Algeria",
-  //   awayTeam: "Austria",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
-  // 72: {
-  //   no: 72,
-  //   homeTeam: "Jordan",
-  //   awayTeam: "Argentina",
-  //   home: {},
-  //   away: {},
-  //   highlight: ""
-  // },
+  66: {
+    no: 66,
+    homeTeam: "Egypt",
+    awayTeam: "Iran",
+    home: { "Mahmoud Saber": "5'" },
+    away: { "Ramin Rezaeian": "14'" },
+    highlight: ""
+  },
 
-// KNOCKOUT STAGE //
+  67: {
+    no: 67,
+    homeTeam: "Panama",
+    awayTeam: "England",
+    home: {},
+    away: { "Jude Bellingham": "62'", "Harry Kane": "67'" },
+    highlight: ""
+  },
+
+  68: {
+    no: 68,
+    homeTeam: "Croatia",
+    awayTeam: "Ghana",
+    home: { "Petar Sučić": "31'", "Nikola Vlašić": "83'" },
+    away: { "Derrick Luckassen": "73'" },
+    highlight: ""
+  },
+
+  69: {
+    no: 69,
+    homeTeam: "Colombia",
+    awayTeam: "Portugal",
+    home: {},
+    away: {},
+    highlight: ""
+  },
+
+  70: {
+    no: 70,
+    homeTeam: "DR Congo",
+    awayTeam: "Uzbekistan",
+    home: { "Yoane Wissa": "68', 90+1'", "Fiston Mayele": "78'" },
+    away: { "Eldor Shomurodov": "10'" },
+    highlight: ""
+  },
+
+  71: {
+    no: 71,
+    homeTeam: "Algeria",
+    awayTeam: "Austria",
+    home: { "Rafik Belghali": "45'", "Riyad Mahrez": "60', 90+3'" },
+    away: { "Marko Arnautović": "28'", "Marcel Sabitzer": "55'", "Saša Kalajdžić": "90+5'" },
+    highlight: ""
+  },
+
+  72: {
+    no: 72,
+    homeTeam: "Jordan",
+    awayTeam: "Argentina",
+    home: { "Musa Al-Taamari": "55'" },
+    away: { "Giovani Lo Celso": "19'", "Lautaro Martínez": "31'", "Lionel Messi": "80'" },
+    highlight: ""
+  },
+
+  // KNOCKOUT STAGE //
 
   73: {
     no: 73,
@@ -715,7 +721,7 @@ window.MATCH_RESULTS = {
   79: {
     no: 79,
     homeCode: "MEX",
-    // awayCode: "",
+    awayCode: "ECU",
     // home: {},
     // away: {},
     // aet: false,
@@ -725,8 +731,8 @@ window.MATCH_RESULTS = {
 
   80: {
     no: 80,
-    // homeCode: "",
-    // awayCode: "",
+    homeCode: "ENG",
+    awayCode: "COD",
     // home: {},
     // away: {},
     // aet: false,
@@ -747,8 +753,8 @@ window.MATCH_RESULTS = {
 
   82: {
     no: 82,
-    // homeCode: "",
-    // awayCode: "",
+    homeCode: "BEL",
+    awayCode: "SEN",
     // home: {},
     // away: {},
     // aet: false,
@@ -758,8 +764,8 @@ window.MATCH_RESULTS = {
 
   83: {
     no: 83,
-    // homeCode: "",
-    // awayCode: "",
+    homeCode: "POR",
+    awayCode: "CRO",
     // home: {},
     // away: {},
     // aet: false,
@@ -770,7 +776,7 @@ window.MATCH_RESULTS = {
   84: {
     no: 84,
     homeCode: "ESP",
-    // awayCode: "",
+    awayCode: "AUT",
     // home: {},
     // away: {},
     // aet: false,
@@ -781,7 +787,7 @@ window.MATCH_RESULTS = {
   85: {
     no: 85,
     homeCode: "SUI",
-    // awayCode: "",
+    awayCode: "ALG",
     // home: {},
     // away: {},
     // aet: false,
@@ -802,8 +808,8 @@ window.MATCH_RESULTS = {
 
   87: {
     no: 87,
-    // homeCode: "",
-    // awayCode: "",
+    homeCode: "COL",
+    awayCode: "GHA",
     // home: {},
     // away: {},
     // aet: false,
@@ -814,7 +820,7 @@ window.MATCH_RESULTS = {
   88: {
     no: 88,
     homeCode: "AUS",
-    // awayCode: "",
+    awayCode: "EGY",
     // home: {},
     // away: {},
     // aet: false,
