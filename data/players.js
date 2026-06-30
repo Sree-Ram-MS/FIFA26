@@ -9,11 +9,11 @@ window.PLAYER_STATS = {
     { name: "Ousmane Dembélé", team: "France", iso: "fr", val: 4 }
   ],
   assists: [
+    { name: "Bruno Guimarães", team: "Brazil", iso: "br", val: 4 },
     { name: "Alexander Isak", team: "Sweden", iso: "se", val: 3 },
-    { name: "Bruno Guimarães", team: "Brazil", iso: "br", val: 3 },
     { name: "Michael Olise", team: "France", iso: "fr", val: 3 },
-    { name: "Hannibal Mejbri", team: "Tunisia", iso: "tn", val: 2 },
-    { name: "Chris Wood", team: "New Zealand", iso: "nz", val: 2 }
+    { name: "Florian Wirtz", team: "Germany", iso: "de", val: 3 },
+    { name: "Hannibal Mejbri", team: "Tunisia", iso: "tn", val: 2 }
   ],
   saves: [
     { name: "Eloy Room", team: "Curaçao", iso: "cw", val: 20 },
@@ -23,11 +23,11 @@ window.PLAYER_STATS = {
     { name: "Orlando Gill", team: "Paraguay", iso: "py", val: 11 }
   ],
   rating: [
-    { name: "Lionel Messi", team: "Argentina", iso: "ar", val: 9.18 },
-    { name: "Vinícius Júnior", team: "Brazil", iso: "br", val: 9.15 },
-    { name: "Kylian Mbappé", team: "France", iso: "fr", val: 9.13 },
     { name: "Erling Haaland", team: "Norway", iso: "no", val: 9.11 },
-    { name: "Harry Kane", team: "England", iso: "gb-eng", val: 9.01 }
+    { name: "Kylian Mbappé", team: "France", iso: "fr", val: 8.99 },
+    { name: "Lionel Messi", team: "Argentina", iso: "ar", val: 8.67 },
+    { name: "Ousmane Dembélé", team: "France", iso: "fr", val: 8.40 },
+    { name: "Deniz Undav", team: "Germany", iso: "de", val: 8.30 }
   ],
   speed: [
     { name: "Jordan Bos", team: "Australia", iso: "au", val: 36.7 },

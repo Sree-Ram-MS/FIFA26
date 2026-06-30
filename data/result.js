@@ -656,44 +656,44 @@ window.MATCH_RESULTS = {
     no: 73,
     homeCode: "RSA",
     awayCode: "CAN",
-    // home: {},
-    // away: {},
-    // aet: false,
-    // pso: { home: null, away: null },
-    // highlight: ""
+    home: {},
+    away: { "Stephen Eustáquio": "90+2'" },
+    aet: false,
+    pso: { home: null, away: null },
+    highlight: ""
   },
 
   74: {
     no: 74,
     homeCode: "GER",
     awayCode: "PAR",
-    // home: {},
-    // away: {},
-    // aet: false,
-    // pso: { home: null, away: null },
-    // highlight: ""
+    home: { "Kai Havertz": "54'" },
+    away: { "Julio Enciso": "42'" },
+    aet: true,
+    pso: { home: 3, away: 4 },
+    highlight: ""
   },
 
   75: {
     no: 75,
     homeCode: "NED",
     awayCode: "MAR",
-    // home: {},
-    // away: {},
-    // aet: false,
-    // pso: { home: null, away: null },
-    // highlight: ""
+    home: { "Cody Gakpo": "72'" },
+    away: { "Issa Diop": "90+1'" },
+    aet: true,
+    pso: { home: 2, away: 3 },
+    highlight: ""
   },
 
   76: {
     no: 76,
     homeCode: "BRA",
     awayCode: "JPN",
-    // home: {},
-    // away: {},
-    // aet: false,
-    // pso: { home: null, away: null },
-    // highlight: ""
+    home: { "Casemiro": "56'", "Gabriel Martinelli": "90+6'" },
+    away: { "Kaishū Sano": "29'" },
+    aet: false,
+    pso: { home: null, away: null },
+    highlight: ""
   },
 
   77: {
