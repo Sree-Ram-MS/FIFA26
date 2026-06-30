@@ -658,8 +658,8 @@ window.MATCH_RESULTS = {
     awayCode: "CAN",
     home: {},
     away: { "Stephen Eustáquio": "90+2'" },
-    aet: false,
-    pso: { home: null, away: null },
+    // aet: false,
+    // pso: { home: null, away: null },
     highlight: ""
   },
 
@@ -670,7 +670,7 @@ window.MATCH_RESULTS = {
     home: { "Kai Havertz": "54'" },
     away: { "Julio Enciso": "42'" },
     aet: true,
-    pso: { home: 3, away: 4 },
+    pso: { home: "❌⚽⚽❌⚽❌", away: "⚽⚽⚽❌❌⚽" },
     highlight: ""
   },
 
@@ -691,8 +691,8 @@ window.MATCH_RESULTS = {
     awayCode: "JPN",
     home: { "Casemiro": "56'", "Gabriel Martinelli": "90+6'" },
     away: { "Kaishū Sano": "29'" },
-    aet: false,
-    pso: { home: null, away: null },
+    // aet: false,
+    // pso: { home: null, away: null },
     highlight: ""
   },
 
