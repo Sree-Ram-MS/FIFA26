@@ -2,7 +2,7 @@
 // Modify this file to update goals, assists, saves, ratings, and speeds of top players.
 window.PLAYER_STATS = {
   goals: [
-    { name: "Lionel Messi", team: "Argentina", iso: "ar", val: 5 },
+    { name: "Lionel Messi", team: "Argentina", iso: "ar", val: 6 },
     { name: "Erling Haaland", team: "Norway", iso: "no", val: 4 },
     { name: "Kylian Mbappé", team: "France", iso: "fr", val: 4 },
     { name: "Vinícius Júnior", team: "Brazil", iso: "br", val: 4 },
@@ -16,7 +16,7 @@ window.PLAYER_STATS = {
     { name: "Chris Wood", team: "New Zealand", iso: "nz", val: 2 }
   ],
   saves: [
-    { name: "Eloy Room", team: "Curaçao", iso: "cw", val: 19 },
+    { name: "Eloy Room", team: "Curaçao", iso: "cw", val: 20 },
     { name: "Mohammed Al Owais", team: "Saudi Arabia", iso: "sa", val: 14 },
     { name: "Alireza Beiranvand", team: "Iran", iso: "ir", val: 13 },
     { name: "Mahmoud Abunada", team: "Qatar", iso: "qa", val: 12 },
