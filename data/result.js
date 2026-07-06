@@ -834,10 +834,84 @@ window.MATCH_RESULTS = {
     no: 89,
     homeCode: "PAR",
     awayCode: "FRA",
-    //   // home: {},
-    //   // away: {},
-    //   // aet: false,
-    //   // pso: { home: null, away: null },
-    //   // highlight: ""
+    home: {},
+    away: { "Kylian Mbappé": "Pen" },
+    aet: false,
+    // pso: { home: null, away: null },
+    highlight: ""
+  },
+
+  90: {
+    no: 90,
+    homeCode: "CAN",
+    awayCode: "MAR",
+    home: {},
+    away: { "Azzedine Ounahi": "50', 82'", "Soufiane Rahimi": "90+8'" },
+    aet: false,
+    // pso: { home: null, away: null },
+    highlight: ""
+  },
+
+  91: {
+    no: 91,
+    homeCode: "BRA",
+    awayCode: "NOR",
+    home: { "Neymar": "90+' (P)" },
+    away: { "Erling Haaland": "79', 90'" },
+    aet: false,
+    // pso: { home: null, away: null },
+    highlight: ""
+  },
+
+  92: {
+    no: 92,
+    homeCode: "MEX",
+    awayCode: "ENG",
+    home: { "Julián Quiñones": "42'", "Raúl Jiménez": "69' (P)" },
+    away: { "Jude Bellingham": "36', 38'", "Harry Kane": "60' (P)" },
+    aet: false,
+    // pso: { home: null, away: null },
+    highlight: ""
+  },
+
+  93: {
+    no: 93,
+    homeCode: "POR",
+    awayCode: "ESP",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+  94: {
+    no: 94,
+    homeCode: "USA",
+    awayCode: "BEL",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+  95: {
+    no: 95,
+    homeCode: "ARG",
+    awayCode: "EGY",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+  96: {
+    no: 96,
+    homeCode: "SUI",
+    awayCode: "COL",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
   }
 };
