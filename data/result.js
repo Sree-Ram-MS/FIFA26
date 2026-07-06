@@ -670,7 +670,7 @@ window.MATCH_RESULTS = {
     home: { "Kai Havertz": "54'" },
     away: { "Julio Enciso": "42'" },
     aet: true,
-    pso: { home: "❌⚽⚽❌⚽❌", away: "⚽⚽⚽❌❌⚽" },
+    pso: { home: "2", away: "3" },
     highlight: ""
   },
 
@@ -758,7 +758,7 @@ window.MATCH_RESULTS = {
     home: { "Romelu Lukaku": "86'", "Youri Tielemans": "89', 120+5' (P)" },
     away: { "Habib Diarra": "25'", "Ismaïla Sarr": "51'" },
     aet: true,
-    pso: { home: null, away: null },
+    // pso: { home: null, away: null },
     highlight: ""
   },
 
@@ -802,7 +802,7 @@ window.MATCH_RESULTS = {
     home: { "Lionel Messi": "29'", "Lisandro Martínez": "92'", "Diney Borges": "111' (OG)" },
     away: { "Deroy Duarte": "59'", "Sidny Cabral": "103'" },
     aet: true,
-    pso: { home: null, away: null },
+    // pso: { home: null, away: null },
     highlight: ""
   },
 
