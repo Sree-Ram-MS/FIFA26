@@ -658,7 +658,7 @@ window.MATCH_RESULTS = {
     awayCode: "CAN",
     home: {},
     away: { "Stephen Eustáquio": "90+2'" },
-    // aet: false,
+    aet: false,
     // pso: { home: null, away: null },
     highlight: ""
   },
@@ -691,7 +691,7 @@ window.MATCH_RESULTS = {
     awayCode: "JPN",
     home: { "Casemiro": "56'", "Gabriel Martinelli": "90+6'" },
     away: { "Kaishū Sano": "29'" },
-    // aet: false,
+    aet: false,
     // pso: { home: null, away: null },
     highlight: ""
   },
@@ -700,144 +700,144 @@ window.MATCH_RESULTS = {
     no: 77,
     homeCode: "FRA",
     awayCode: "SWE",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Kylian Mbappé": "45', 74'", "Bradley Barcola": "53'" },
+    away: {},
+    aet: false,
     // pso: { home: null, away: null },
-    // highlight: ""
+    highlight: ""
   },
 
   78: {
     no: 78,
     homeCode: "CIV",
     awayCode: "NOR",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Amad Diallo": "74'" },
+    away: { "Antonio Nusa": "39'", "Erling Haaland": "86'" },
+    aet: false,
     // pso: { home: null, away: null },
-    // highlight: ""
+    highlight: ""
   },
 
   79: {
     no: 79,
     homeCode: "MEX",
     awayCode: "ECU",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Julián Quiñones": "22'", "Raúl Jiménez": "31'" },
+    away: {},
+    aet: false,
     // pso: { home: null, away: null },
-    // highlight: ""
+    highlight: ""
   },
 
   80: {
     no: 80,
     homeCode: "ENG",
     awayCode: "COD",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Harry Kane": "75', 86'" },
+    away: { "Brian Cipenga": "7'" },
+    aet: false,
     // pso: { home: null, away: null },
-    // highlight: ""
+    highlight: ""
   },
 
   81: {
     no: 81,
     homeCode: "USA",
     awayCode: "BIH",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Folarin Balogun": "45'", "Malik Tillman": "82'" },
+    away: {},
+    aet: false,
     // pso: { home: null, away: null },
-    // highlight: ""
+    highlight: ""
   },
 
   82: {
     no: 82,
     homeCode: "BEL",
     awayCode: "SEN",
-    // home: {},
-    // away: {},
-    // aet: false,
-    // pso: { home: null, away: null },
-    // highlight: ""
+    home: { "Romelu Lukaku": "86'", "Youri Tielemans": "89', 120+5' (P)" },
+    away: { "Habib Diarra": "25'", "Ismaïla Sarr": "51'" },
+    aet: true,
+    pso: { home: null, away: null },
+    highlight: ""
   },
 
   83: {
     no: 83,
     homeCode: "POR",
     awayCode: "CRO",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Cristiano Ronaldo": "68' (P)", "Gonçalo Ramos": "90+4'" },
+    away: { "Ivan Perišić": "53'" },
+    aet: false,
     // pso: { home: null, away: null },
-    // highlight: ""
+    highlight: ""
   },
 
   84: {
     no: 84,
     homeCode: "ESP",
     awayCode: "AUT",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Mikel Oyarzabal": "3', 89'", "Pedro Porro": "66'" },
+    away: {},
+    aet: false,
     // pso: { home: null, away: null },
-    // highlight: ""
+    highlight: ""
   },
 
   85: {
     no: 85,
     homeCode: "SUI",
     awayCode: "ALG",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Breel Embolo": "10'", "Dan Ndoye": "46'" },
+    away: {},
+    aet: false,
     // pso: { home: null, away: null },
-    // highlight: ""
+    highlight: ""
   },
 
   86: {
     no: 86,
     homeCode: "ARG",
     awayCode: "CPV",
-    // home: {},
-    // away: {},
-    // aet: false,
-    // pso: { home: null, away: null },
-    // highlight: ""
+    home: { "Lionel Messi": "29'", "Lisandro Martínez": "92'", "Diney Borges": "111' (OG)" },
+    away: { "Deroy Duarte": "59'", "Sidny Cabral": "103'" },
+    aet: true,
+    pso: { home: null, away: null },
+    highlight: ""
   },
 
   87: {
     no: 87,
     homeCode: "COL",
     awayCode: "GHA",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Jhon Arias": "14'" },
+    away: {},
+    aet: false,
     // pso: { home: null, away: null },
-    // highlight: ""
+    highlight: ""
   },
 
   88: {
     no: 88,
     homeCode: "AUS",
     awayCode: "EGY",
-    // home: {},
-    // away: {},
-    // aet: false,
-    // pso: { home: null, away: null },
-    // highlight: ""
-  }
+    home: { "Mohamed Hany": "55' (OG)" },
+    away: { "Emam Ashour": "13'" },
+    aet: true,
+    pso: { home: 2, away: 4 },
+    highlight: ""
+  },
 
   // Round 16 //
 
-  // , 89: {
-  //   no: 89,
-  //   // homeCode: "",
-  //   // awayCode: "",
-  //   // home: {},
-  //   // away: {},
-  //   // aet: false,
-  //   // pso: { home: null, away: null },
-  //   // highlight: ""
-  // }
+  89: {
+    no: 89,
+    homeCode: "PAR",
+    awayCode: "FRA",
+    //   // home: {},
+    //   // away: {},
+    //   // aet: false,
+    //   // pso: { home: null, away: null },
+    //   // highlight: ""
+  }
 };
