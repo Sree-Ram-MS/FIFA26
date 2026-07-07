@@ -878,21 +878,21 @@ window.MATCH_RESULTS = {
     no: 93,
     homeCode: "POR",
     awayCode: "ESP",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: {},
+    away: {"Mikel MERINO":"90'+1"},
+    aet: false,
     // pso: { home: null, away: null },
-    // highlight: ""
+    highlight: ""
   },
   94: {
     no: 94,
     homeCode: "USA",
     awayCode: "BEL",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Malik Tillman": "31'" },
+    away: { "Charles De Ketelaere": "9', 33'", "Hans Vanaken": "57'", "Romelu Lukaku": "90+3'" },
+    aet: false,
     // pso: { home: null, away: null },
-    // highlight: ""
+    highlight: ""
   },
   95: {
     no: 95,
@@ -908,6 +908,38 @@ window.MATCH_RESULTS = {
     no: 96,
     homeCode: "SUI",
     awayCode: "COL",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  }
+
+  // Quarter-final
+  97: {
+    no: 97,
+    homeCode: "FRA",
+    awayCode: "MAR",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+  98: {
+    no: 98,
+    homeCode: "ESP",
+    awayCode: "BEL",
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    // highlight: ""
+  },
+    99: {
+    no: 99,
+    homeCode: "NOR",
+    awayCode: "ENG",
     // home: {},
     // away: {},
     // aet: false,
