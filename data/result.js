@@ -884,6 +884,7 @@ window.MATCH_RESULTS = {
     // pso: { home: null, away: null },
     highlight: ""
   },
+
   94: {
     no: 94,
     homeCode: "USA",
@@ -894,6 +895,7 @@ window.MATCH_RESULTS = {
     // pso: { home: null, away: null },
     highlight: ""
   },
+
   95: {
     no: 95,
     homeCode: "ARG",
@@ -904,6 +906,7 @@ window.MATCH_RESULTS = {
     // pso: { home: null, away: null },
     // highlight: ""
   },
+
   96: {
     no: 96,
     homeCode: "SUI",
@@ -913,7 +916,7 @@ window.MATCH_RESULTS = {
     // aet: false,
     // pso: { home: null, away: null },
     // highlight: ""
-  }
+  },
 
   // Quarter-final
   97: {
@@ -926,6 +929,7 @@ window.MATCH_RESULTS = {
     // pso: { home: null, away: null },
     // highlight: ""
   },
+
   98: {
     no: 98,
     homeCode: "ESP",
@@ -936,7 +940,8 @@ window.MATCH_RESULTS = {
     // pso: { home: null, away: null },
     // highlight: ""
   },
-    99: {
+
+  99: {
     no: 99,
     homeCode: "NOR",
     awayCode: "ENG",
