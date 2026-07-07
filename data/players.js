@@ -5,7 +5,7 @@ window.PLAYER_STATS = {
     { name: "Kylian Mbappé", team: "France", iso: "fr", val: 7 },
     { name: "Lionel Messi", team: "Argentina", iso: "ar", val: 7 },
     { name: "Erling Haaland", team: "Norway", iso: "no", val: 7 },
-    { name: "Harry Kane", team: "England", iso: "gb-eng", val: 5 },
+    { name: "Harry Kane", team: "England", iso: "gb-eng", val: 6 },
     { name: "Vinícius Júnior", team: "Brazil", iso: "br", val: 4 }
   ],
   assists: [
@@ -37,4 +37,3 @@ window.PLAYER_STATS = {
     { name: "Kylian Mbappé", team: "France", iso: "fr", val: 35.7 }
   ]
 };
-
