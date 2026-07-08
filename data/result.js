@@ -879,7 +879,7 @@ window.MATCH_RESULTS = {
     homeCode: "POR",
     awayCode: "ESP",
     home: {},
-    away: {"Mikel MERINO":"90'+1"},
+    away: { "Mikel MERINO": "90'+1" },
     aet: false,
     // pso: { home: null, away: null },
     highlight: ""
@@ -900,22 +900,22 @@ window.MATCH_RESULTS = {
     no: 95,
     homeCode: "ARG",
     awayCode: "EGY",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Cristian Romero": "79'", "Lionel Messi": "83'", "Enzo Fernández": "90+2'" },
+    away: { "Yasser Ibrahim": "15'", "Mostafa Ziko": "67'" },
+    aet: false,
     // pso: { home: null, away: null },
-    // highlight: ""
+    highlight: ""
   },
 
   96: {
     no: 96,
     homeCode: "SUI",
     awayCode: "COL",
-    // home: {},
-    // away: {},
-    // aet: false,
-    // pso: { home: null, away: null },
-    // highlight: ""
+    home: {},
+    away: {},
+    aet: true,
+    pso: { home: "4", away: "3" },
+    highlight: ""
   },
 
   // Quarter-final
