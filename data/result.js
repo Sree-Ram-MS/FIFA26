@@ -923,32 +923,43 @@ window.MATCH_RESULTS = {
     no: 97,
     homeCode: "FRA",
     awayCode: "MAR",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Kylian Mbappé": "60'", "Ousmane Dembélé": "66'" },
+    away: {},
+    aet: false,
     // pso: { home: null, away: null },
-    // highlight: ""
+    highlight: ""
   },
 
   98: {
     no: 98,
     homeCode: "ESP",
     awayCode: "BEL",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Fabián Ruiz": "30'", "Mikel Merino": "88'" },
+    away: { "Charles De Ketelaere": "41'" },
+    aet: false,
     // pso: { home: null, away: null },
-    // highlight: ""
+    highlight: ""
   },
 
   99: {
     no: 99,
     homeCode: "NOR",
     awayCode: "ENG",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Andreas Schjelderup": "36'" },
+    away: { "Jude Bellingham": "45+2', 93'" },
+    aet: true,
     // pso: { home: null, away: null },
-    // highlight: ""
+    highlight: ""
+  },
+
+  100: {
+    no: 100,
+    homeCode: "ARG",
+    awayCode: "SUI",
+    home: { "Alexis Mac Allister": "10'", "Julián Alvarez": "112'", "Lautaro Martínez": "120'" },
+    away: { "Dan Ndoye": "67'" },
+    aet: true,
+    // pso: { home: null, away: null },
+    highlight: ""
   }
 };
