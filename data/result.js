@@ -961,5 +961,52 @@ window.MATCH_RESULTS = {
     aet: true,
     // pso: { home: null, away: null },
     highlight: ""
+  },
+
+  // Semi Final
+  101: {
+    no:101,
+    homdeCode: "FRA",
+    awayCode: "ESP",
+    home: {},
+    away: { "Mikel Oyarzabal": "22' (p)", "Pedro Porro": "58'" },
+    aet: true,
+    // pso: { home: null, away: null },
+    highlight: ""
+  },
+
+    102: {
+    no:102,
+    homdeCode: "ARG",
+    awayCode: "ENG",
+    // home: {},
+    // away: {},
+    // aet: true,
+    // pso: { home: null, away: null },
+    highlight: ""
+  },
+
+  // Finals
+  103: {
+    no: 103,
+    homeCode: "FRA",
+    // awayCode: "TBD", // Loser of Match 102 (ENG vs ARG)
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    highlight: ""
+  },
+
+  104: {
+    no: 104,
+    homeCode: "ESP",
+    // awayCode: "TBD", // Winner of Match 102 (ENG vs ARG)
+    // home: {},
+    // away: {},
+    // aet: false,
+    // pso: { home: null, away: null },
+    highlight: ""
   }
+
 };

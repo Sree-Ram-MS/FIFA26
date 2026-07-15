@@ -17,8 +17,8 @@ window.PLAYER_STATS = {
     { name: "Michael Olise", team: "France", iso: "fr", val: 5 },
     { name: "Bruno Guimarães", team: "Brazil", iso: "br", val: 4 },
     { name: "Brahim Díaz", team: "Morocco", iso: "ma", val: 4 },
-    { name: "Alexander Isak", team: "Sweden", iso: "se", val: 3 },
-    { name: "Roberto Alvarado", team: "Mexico", iso: "mx", val: 3 }
+    { name: "Martin Ødegaard", team: "Norway", iso: "no", val: 4 },
+    { name: "Alexander Isak", team: "Sweden", iso: "se", val: 3 }
   ],
   saves: [
     { name: "Orlando Gill", team: "Paraguay", iso: "py", val: 24 },
