@@ -17,8 +17,8 @@ window.PLAYER_STATS = {
     { name: "Michael Olise", team: "France", iso: "fr", val: 5 },
     { name: "Bruno Guimarães", team: "Brazil", iso: "br", val: 4 },
     { name: "Brahim Díaz", team: "Morocco", iso: "ma", val: 4 },
-    { name: "Martin Ødegaard", team: "Norway", iso: "no", val: 4 },
-    { name: "Alexander Isak", team: "Sweden", iso: "se", val: 3 }
+    { name: "Lionel Messi", team: "Argentina", iso: "ar", val: 4 },
+    { name: "Martin Ødegaard", team: "Norway", iso: "no", val: 4 }
   ],
   saves: [
     { name: "Orlando Gill", team: "Paraguay", iso: "py", val: 24 },
@@ -42,4 +42,3 @@ window.PLAYER_STATS = {
     { name: "Mohamed Touré", team: "Australia", iso: "au", val: 35.8 }
   ]
 };
-
