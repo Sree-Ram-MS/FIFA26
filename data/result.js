@@ -986,14 +986,14 @@ window.MATCH_RESULTS = {
     highlight: ""
   },
 
-  // Loosers Finals
+// Loosers Finals
   103: {
     no: 103,
     homeCode: "FRA",
     awayCode: "ENG",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Kylian Mbappé": "48', 66'", "Bradley Barcola": "54'", "Ousmane Dembélé": "90+6'" },
+    away: { "Declan Rice": "3'", "Ezri Konsa": "18'", "Bukayo Saka": "37', 45+1', 87' (p)", "Jude Bellingham": "90+8'" },
+    aet: false,
     // pso: { home: null, away: null },
     highlight: ""
   },
@@ -1003,9 +1003,9 @@ window.MATCH_RESULTS = {
     no: 104,
     homeCode: "ESP",
     awayCode: "ARG",
-    // home: {},
-    // away: {},
-    // aet: false,
+    home: { "Ferran Torres": "106'" },
+    away: {},
+    aet: true,
     // pso: { home: null, away: null },
     highlight: ""
   }
