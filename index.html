@@ -149,6 +149,582 @@
       }
     }
 
+    /* ── HERO WINNER TEAM ── */
+    .hero-winner-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: linear-gradient(135deg, rgba(201, 168, 76, 0.15) 0%, rgba(15, 22, 40, 0.9) 100%);
+      border: 1.5px solid var(--gold);
+      border-radius: 12px;
+      padding: 14px 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(201, 168, 76, 0.25);
+      position: relative;
+      overflow: hidden;
+      max-width: 440px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .hero-winner-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(201, 168, 76, 0.4);
+    }
+
+    .hero-winner-img-wrap {
+      position: relative;
+      width: 120px;
+      height: 90px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(201, 168, 76, 0.5);
+      flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+
+    .hero-winner-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .hero-winner-card:hover .hero-winner-img-wrap img {
+      transform: scale(1.08);
+    }
+
+    .hero-winner-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hero-winner-badge {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--darker);
+      background: var(--gold);
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-weight: 700;
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .hero-winner-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 1.5px;
+      line-height: 1;
+      color: #FFF;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .hero-winner-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+    }
+
+    .hero-winner-expand-hint {
+      font-size: 0.68rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      opacity: 0.9;
+    }
+
+    /* ── CHAMPION POPUP WIZARD MODAL ── */
+    .champion-wizard-modal {
+      background: linear-gradient(145deg, #0D1322 0%, #060912 100%);
+      border: 2px solid var(--gold);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.9), 0 0 50px rgba(201, 168, 76, 0.3);
+      max-width: 900px !important;
+      width: 92% !important;
+    }
+
+    .champion-wizard-header {
+      margin-bottom: 16px;
+    }
+
+    .champion-wizard-badge {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--darker);
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .champion-wizard-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      letter-spacing: 2px;
+      line-height: 1;
+      background: linear-gradient(135deg, #FFFFFF 40%, var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 4px 0;
+    }
+
+    .champion-wizard-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    .champion-big-img-container {
+      position: relative;
+      width: 100%;
+      max-height: 520px;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      margin: 16px 0;
+      background: #000;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+    }
+
+    .champion-big-img {
+      width: 100%;
+      max-height: 520px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .champion-big-img-container:hover .champion-big-img {
+      transform: scale(1.03);
+    }
+
+    .champion-stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .champ-stat-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .champ-stat-icon {
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+
+    .champ-stat-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    .champ-stat-lbl {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 768px) {
+      .champion-big-img-container {
+        max-height: 320px;
+      }
+      .champion-big-img {
+        max-height: 320px;
+      }
+      .champion-stats-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+
+    /* ── AWARDS TAB & SLIDES ── */
+    .awards-tab-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      justify-content: center;
+    }
+
+    .award-tab-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border-radius: 4px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .award-tab-btn:hover,
+    .award-tab-btn.active {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: var(--darker);
+      border-color: var(--gold);
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(201, 168, 76, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .award-carousel-container {
+      position: relative;
+      background: linear-gradient(145deg, #0F1628 0%, #080D1A 100%);
+      border: 1.5px solid var(--gold);
+      border-radius: 16px;
+      padding: 36px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(201, 168, 76, 0.15);
+      overflow: hidden;
+      min-height: 520px;
+    }
+
+    .award-carousel-container::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(10, 14, 26, 0.75);
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      font-size: 1.3rem;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    .carousel-arrow:hover {
+      background: var(--gold);
+      color: var(--darker);
+      box-shadow: 0 0 20px rgba(201, 168, 76, 0.5);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-arrow.prev { left: 16px; }
+    .carousel-arrow.next { right: 16px; }
+
+    .award-slide {
+      display: none;
+      animation: fadeInSlide 0.4s ease forwards;
+    }
+
+    .award-slide.active {
+      display: block;
+    }
+
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: translateY(12px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .big-award-card {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 20px;
+    }
+
+    .award-card-left {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .award-header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(201, 168, 76, 0.12);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      padding: 6px 14px;
+      border-radius: 20px;
+      align-self: flex-start;
+    }
+
+    .award-header-badge .award-icon {
+      font-size: 1.2rem;
+    }
+
+    .award-header-badge .award-category {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .award-winner-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      line-height: 0.95;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #FFFFFF 40%, var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .award-country-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .award-country-flag {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+
+    .award-country-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text);
+      text-transform: uppercase;
+    }
+
+    .award-position-badge {
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .award-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .award-stat-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(201, 168, 76, 0.2);
+      border-radius: 8px;
+      padding: 12px 10px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+
+    .award-stat-box:hover {
+      border-color: var(--gold);
+      background: rgba(201, 168, 76, 0.06);
+    }
+
+    .award-stat-box .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .award-stat-box .stat-lbl {
+      font-size: 0.68rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .award-desc-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-top: 4px;
+    }
+
+    .award-desc-box .desc-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .award-desc-box p {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: rgba(232, 234, 240, 0.85);
+    }
+
+    .award-card-right {
+      flex: 0.9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .player-img-container {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .player-bg-glow {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201, 168, 76, 0.25) 0%, rgba(26, 58, 143, 0.15) 50%, transparent 75%);
+      filter: blur(25px);
+      animation: auraPulse 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes auraPulse {
+      0% { transform: scale(0.9); opacity: 0.6; }
+      100% { transform: scale(1.15); opacity: 1; }
+    }
+
+    .award-player-png {
+      max-width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 20px rgba(201, 168, 76, 0.25));
+      transition: transform 0.4s ease;
+    }
+
+    .award-player-png:hover {
+      transform: scale(1.04);
+    }
+
+    .award-img-footer-badge {
+      position: absolute;
+      bottom: -10px;
+      z-index: 3;
+      background: rgba(10, 14, 26, 0.9);
+      border: 1px solid var(--gold);
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+
+    .slide-dots-indicator {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .slide-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .slide-dot.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      width: 28px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
+    }
+
+    @media (max-width: 991px) {
+      .big-award-card {
+        flex-direction: column-reverse;
+        gap: 24px;
+        padding: 0;
+      }
+
+      .award-carousel-container {
+        padding: 24px 16px;
+      }
+
+      .carousel-arrow {
+        top: 240px;
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+      }
+
+      .carousel-arrow.prev { left: 6px; }
+      .carousel-arrow.next { right: 6px; }
+
+      .player-img-container {
+        height: 300px;
+      }
+
+      .award-player-png {
+        max-height: 280px;
+      }
+
+      .award-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     /* ── NAV ── */
     .topnav {
       display: flex;
@@ -1821,8 +2397,22 @@
         <p style="color:var(--muted);font-size:0.78rem;margin-top:8px;">All times in Indian Standard Time (IST = ET + 9h
           30m)</p>
       </div>
+
+      <!-- Winner Team Showcase Card at top -->
+      <div class="hero-winner-card" onclick="openChampionModal()" title="Click to view full Champion Popup Wizard">
+        <div class="hero-winner-img-wrap">
+          <img src="img/winner_team.png" alt="Winner Team 2026" onerror="this.onerror=null; this.src='img/FIFA26.png';">
+        </div>
+        <div class="hero-winner-info">
+          <div class="hero-winner-badge">🏆 2026 CHAMPION</div>
+          <div class="hero-winner-title">WINNER TEAM</div>
+          <div class="hero-winner-sub">FIFA World Cup 2026 Champions</div>
+          <div class="hero-winner-expand-hint">🔍 Click to View Popup Wizard</div>
+        </div>
+      </div>
+
       <div class="trophy-wrap"><img src="img/FIFA26.png" alt="FIFA World Cup 2026 Trophy"
-          style="width:320px;height:320px;object-fit:contain;filter:drop-shadow(0 0 30px rgba(201,168,76,0.6));animation:float 3s ease-in-out infinite;">
+          style="width:220px;height:220px;object-fit:contain;filter:drop-shadow(0 0 30px rgba(201,168,76,0.6));animation:float 3s ease-in-out infinite;">
       </div>
     </div>
     <!-- NAV -->
@@ -1831,6 +2421,7 @@
         <button class="nav-btn active" onclick="showPanel('fixtures')">⚽ All Fixtures</button>
         <button class="nav-btn" onclick="showPanel('groups')">📊 Group Tables</button>
         <button class="nav-btn" onclick="showPanel('knockout')">🏆 Knockout Bracket</button>
+        <button class="nav-btn" onclick="showPanel('awards')">🏅 Award Winners</button>
         <button class="nav-btn" onclick="showPanel('players')">🌟 Top Players</button>
         <button class="nav-btn" onclick="showPanel('rankings')">📈 FIFA Rankings</button>
         <button class="nav-btn" onclick="showPanel('watch')">📺 Watch Live</button>
@@ -1976,6 +2567,305 @@
     <div id="knockout-bracket" style="position: relative;"></div>
   </div>
 
+  <!-- AWARDS PANEL -->
+  <div class="panel" id="panel-awards">
+    <h2 class="section-title">All Individual <span>Award Winners</span></h2>
+    <div class="notice">🏅 FIFA World Cup 2026 Official Honours & Individual Award Winners</div>
+
+    <!-- Award Slide Selector Tabs -->
+    <div class="awards-tab-bar">
+      <button class="award-tab-btn active" onclick="setAwardSlide(0)">⚽ Golden Boot</button>
+      <button class="award-tab-btn" onclick="setAwardSlide(1)">🏆 Golden Ball</button>
+      <button class="award-tab-btn" onclick="setAwardSlide(2)">🧤 Golden Glove</button>
+      <button class="award-tab-btn" onclick="setAwardSlide(3)">⭐ Young Player</button>
+      <button class="award-tab-btn" onclick="setAwardSlide(4)">🤝 Fair Play</button>
+    </div>
+
+    <!-- Award Slide Carousel Wrapper -->
+    <div class="award-carousel-container">
+      <!-- Arrow Controls -->
+      <button class="carousel-arrow prev" onclick="prevAwardSlide()" title="Previous Award">❮</button>
+      <button class="carousel-arrow next" onclick="nextAwardSlide()" title="Next Award">❯</button>
+
+      <!-- Slides Container -->
+      <div class="award-slides-wrapper" id="award-slides-wrapper">
+        <!-- Slide 0: Golden Boot -->
+        <div class="award-slide active" data-slide="0">
+          <div class="big-award-card">
+            <!-- Left Side: Details -->
+            <div class="award-card-left">
+              <div class="award-header-badge">
+                <span class="award-icon">⚽</span>
+                <span class="award-category">2026 World Cup Golden Boot Winner</span>
+              </div>
+              <h1 class="award-winner-name">KYLIAN MBAPPÉ</h1>
+              <div class="award-country-row">
+                <img src="https://flagcdn.com/w320/fr.png" class="award-country-flag" alt="France">
+                <span class="award-country-name">FRANCE</span>
+                <span class="award-position-badge">Forward</span>
+              </div>
+
+              <!-- Stats Grid -->
+              <div class="award-stats-grid">
+                <div class="award-stat-box">
+                  <div class="stat-num">10</div>
+                  <div class="stat-lbl">Goals Scored</div>
+                </div>
+                <div class="award-stat-box">
+                  <div class="stat-num">4</div>
+                  <div class="stat-lbl">Assists</div>
+                </div>
+                <div class="award-stat-box">
+                  <div class="stat-num">769'</div>
+                  <div class="stat-lbl">Minutes Played</div>
+                </div>
+                <div class="award-stat-box">
+                  <div class="stat-num">25</div>
+                  <div class="stat-lbl">Shots on Target</div>
+                </div>
+              </div>
+
+              <!-- Description -->
+              <div class="award-desc-box">
+                <div class="desc-title">🏆 Award Criteria & Overview</div>
+                <p>Presented to the top goalscorer of the FIFA World Cup 2026. Awarded for clinical finishing, offensive impact, and highest goal tally in the tournament.</p>
+              </div>
+            </div>
+
+            <!-- Right Side: PNG Cutout Image -->
+            <div class="award-card-right">
+              <div class="player-img-container">
+                <div class="player-bg-glow"></div>
+                <img src="img/golden_boot.png" alt="Golden Boot Winner" class="award-player-png" onerror="this.onerror=null; this.src='img/FIFA26.png';">
+                <div class="award-img-footer-badge">Golden Boot 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 1: Golden Ball -->
+        <div class="award-slide" data-slide="1">
+          <div class="big-award-card">
+            <!-- Left Side: Details -->
+            <div class="award-card-left">
+              <div class="award-header-badge">
+                <span class="award-icon">🏆</span>
+                <span class="award-category">2026 World Cup Golden Ball Winner</span>
+              </div>
+              <h1 class="award-winner-name">RODRI</h1>
+              <div class="award-country-row">
+                <img src="https://flagcdn.com/w320/es.png" class="award-country-flag" alt="Spain">
+                <span class="award-country-name">SPAIN</span>
+                <span class="award-position-badge">Playmaker</span>
+              </div>
+
+            <!-- Stats Grid -->
+              <div class="award-stats-grid">
+                <div class="award-stat-box">
+                  <div class="stat-num">95%</div>
+                  <div class="stat-lbl">Pass Accuracy</div>
+                </div>
+                <div class="award-stat-box">
+                  <div class="stat-num">694</div>
+                  <div class="stat-lbl">Passes Completed</div>
+                </div>
+                <div class="award-stat-box">
+                  <div class="stat-num">34</div>
+                  <div class="stat-lbl">Ball Recoveries</div>
+                </div>
+                <div class="award-stat-box">
+                  <div class="stat-num">8</div>
+                  <div class="stat-lbl">Matches Played</div>
+                </div>
+              </div>
+
+              <!-- Description -->
+              <div class="award-desc-box">
+                <div class="desc-title">🏆 Award Criteria & Overview</div>
+                <p>Awarded to the best overall player of the FIFA World Cup 2026 tournament, voted by the FIFA Technical Study Group for exceptional skill, leadership, and match dominance.</p>
+              </div>
+            </div>
+
+            <!-- Right Side: PNG Cutout Image -->
+            <div class="award-card-right">
+              <div class="player-img-container">
+                <div class="player-bg-glow"></div>
+                <img src="img/golden_ball.png" alt="Golden Ball Winner" class="award-player-png" onerror="this.onerror=null; this.src='img/FIFA26.png';">
+                <div class="award-img-footer-badge">Golden Ball 2026</div>
+              </div>            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2: Golden Glove -->
+        <div class="award-slide" data-slide="2">
+          <div class="big-award-card">
+            <!-- Left Side: Details -->
+            <div class="award-card-left">
+              <div class="award-header-badge">
+                <span class="award-icon">🧤</span>
+                <span class="award-category">2026 World Cup Golden Glove Winner</span>
+              </div>
+              <h1 class="award-winner-name">UNAI SIMON</h1>
+              <div class="award-country-row">
+                <img src="https://flagcdn.com/w320/es.png" class="award-country-flag" alt="Argentina">
+                <span class="award-country-name">SPAIN</span>
+                <span class="award-position-badge">Goalkeeper</span>
+              </div>
+
+              <!-- Stats Grid -->
+              <div class="award-stats-grid">
+                <div class="award-stat-box">
+                  <div class="stat-num">7</div>
+                  <div class="stat-lbl">Clean Sheets</div>
+                </div>
+                <div class="award-stat-box">
+                  <div class="stat-num">10</div>
+                  <div class="stat-lbl">Total Saves</div>
+                </div>
+                <div class="award-stat-box">
+                  <div class="stat-num">90.9%</div>
+                  <div class="stat-lbl">Save Ratio</div>
+                </div>
+                <div class="award-stat-box">
+                  <div class="stat-num">8</div>
+                  <div class="stat-lbl">Matchs Played</div>
+                </div>Koodasha
+                <div class="desc-title">🏆 Award Criteria & Overview</div>
+                <p>Presented to the top goalkeeper of the tournament. Decided by the FIFA Technical Study Group based on shot-stopping performance, clean sheets, and penalty shootout heroics.</p>
+              </div>
+            </div>
+
+            <!-- Right Side: PNG Cutout Image -->
+            <div class="award-card-right">
+              <div class="player-img-container">
+                <div class="player-bg-glow"></div>
+                <img src="img/golden_glove.png" alt="Golden Glove Winner" class="award-player-png" onerror="this.onerror=null; this.src='img/FIFA26.png';">
+                <div class="award-img-footer-badge">Golden Glove 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Young Player Award -->
+        <div class="award-slide" data-slide="3">
+          <div class="big-award-card">
+            <!-- Left Side: Details -->
+            <div class="award-card-left">
+              <div class="award-header-badge">
+                <span class="award-icon">⭐</span>
+                <span class="award-category">2026 World Cup Young Player Award Winner</span>
+              </div>
+              <h1 class="award-winner-name">Pau Cubarsí</h1>
+              <div class="award-country-row">
+                <img src="https://flagcdn.com/w320/es.png" class="award-country-flag" alt="Spain">
+                <span class="award-country-name">SPAIN</span>
+                <span class="award-position-badge">Right Winger</span>
+              </div>
+
+              <!-- Stats Grid -->
+              <div class="award-stats-grid">
+                <div class="award-stat-box">
+                  <div class="stat-num">19</div>
+                  <div class="stat-lbl">Age</div>
+                </div>
+                <div class="award-stat-box">
+                  <div class="stat-num">96%</div>
+                  <div class="stat-lbl">Pass Accuracy</div>
+                </div>
+                <div class="award-stat-box">
+                  <div class="stat-num"></div>
+                  <div class="stat-lbl">Rating</div>
+                </div>
+                <div class="award-stat-box">
+                  <div class="stat-num">29</div>
+                  <div class="stat-lbl">Dribbles</div>
+                </div>
+              </div>
+
+              <!-- Description -->
+              <div class="award-desc-box">
+                <div class="desc-title">🏆 Award Criteria & Overview</div>
+                <p>Awarded to the most outstanding young player in the FIFA World Cup 2026 born on or after Jan 1, 2005. Recognized for world-class flair, chance creation, and extraordinary vision.</p>
+              </div>
+            </div>
+
+            <!-- Right Side: PNG Cutout Image -->
+            <div class="award-card-right">
+              <div class="player-img-container">
+                <div class="player-bg-glow"></div>
+                <img src="img/young_player.png" alt="Young Player Winner" class="award-player-png" onerror="this.onerror=null; this.src='img/FIFA26.png';">
+                <div class="award-img-footer-badge">Young Player 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: Fair Play Trophy -->
+        <div class="award-slide" data-slide="4">
+          <div class="big-award-card">
+            <!-- Left Side: Details -->
+            <div class="award-card-left">
+              <div class="award-header-badge">
+                <span class="award-icon">🤝</span>
+                <span class="award-category">2026 World Cup Fair Play Trophy</span>
+              </div>
+              <h1 class="award-winner-name">NETHERLANDS</h1>
+              <div class="award-country-row">
+                <img src="https://flagcdn.com/w320/jp.png" class="award-country-flag" alt="Japan">
+                <span class="award-country-name">JAPAN (SAMURAI BLUE)</span>
+                <span class="award-position-badge">Team Award</span>
+              </div>
+
+              <!-- Stats Grid -->
+              <div class="award-stats-grid">
+                <div class="award-stat-box">
+                  <div class="stat-num">-3</div>
+                  <div class="stat-lbl">Fair Play Score</div>
+                </div>
+                <div class="award-stat-box">
+                  <div class="stat-num">3</div>
+                  <div class="stat-lbl">Yellow Cards</div>
+                </div>
+                <div class="award-stat-box">
+                  <div class="stat-num">0</div>
+                  <div class="stat-lbl">Red Cards</div>
+                </div>
+                <div class="award-stat-box">
+                  <div class="stat-num">4</div>
+                  <div class="stat-lbl">Matches Played</div>
+                </div>
+              </div>
+
+              <!-- Description -->
+              <div class="award-desc-box">
+                <div class="desc-title">🏆 Award Criteria & Overview</div>
+                <p>Presented by FIFA to the team that advances to the knockout stage with the best fair play record, exemplary sportsmanship, positive play, and respect towards officials and opponents.</p>
+              </div>
+            </div>
+
+            <!-- Right Side: PNG Cutout Image -->
+            <div class="award-card-right">
+              <div class="player-img-container">
+                <div class="player-bg-glow"></div>
+                <img src="img/fair_play.png" alt="Fair Play Trophy Winner" class="award-player-png" onerror="this.onerror=null; this.src='img/FIFA26.png';">
+                <div class="award-img-footer-badge">Fair Play Trophy 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide Dots Indicator -->
+      <div class="slide-dots-indicator">
+        <span class="slide-dot active" onclick="setAwardSlide(0)"></span>
+        <span class="slide-dot" onclick="setAwardSlide(1)"></span>
+        <span class="slide-dot" onclick="setAwardSlide(2)"></span>
+        <span class="slide-dot" onclick="setAwardSlide(3)"></span>
+        <span class="slide-dot" onclick="setAwardSlide(4)"></span>
+      </div>
+    </div>
+  </div>
+
   <!-- PLAYERS PANEL -->
   <div class="panel" id="panel-players">
     <h2 class="section-title">Top <span>Players</span></h2>
@@ -2040,6 +2930,45 @@
 
   <!-- DONATION BUTTON -->
   <button class="donation-btn" onclick="openDonationModal()" title="Support the Project">💖</button>
+
+  <!-- CHAMPION POPUP WIZARD MODAL -->
+  <div class="modal-overlay" id="champion-modal" onclick="closeChampionModal(event)">
+    <div class="modal champion-wizard-modal">
+      <div class="modal-bg"></div>
+      <button class="modal-close" onclick="closeChampionModalBtn()" title="Close Wizard (✕)" style="top: 20px; right: 20px; width: 38px; height: 38px; font-size: 1.3rem; background: rgba(232, 56, 42, 0.7); border: 1px solid rgba(255,255,255,0.3); z-index: 10;">✕</button>
+      <div class="modal-body" style="padding: 28px 24px; text-align: center;">
+        <div class="champion-wizard-header">
+          <div class="champion-wizard-badge">🏆 2026 WORLD CUP CHAMPIONS</div>
+          <h2 class="champion-wizard-title">WINNER TEAM VICTORY</h2>
+          <p class="champion-wizard-sub">FIFA WORLD CUP 2026 · USA / CANADA / MEXICO</p>
+        </div>
+
+        <!-- Big Champion Image -->
+        <div class="champion-big-img-container">
+          <img src="img/winner_team.png" alt="FIFA World Cup 2026 Champions" class="champion-big-img" onerror="this.onerror=null; this.src='img/FIFA26.png';">
+        </div>
+
+        <!-- Champion Highlights Grid -->
+        <div class="champion-stats-row">
+          <div class="champ-stat-card">
+            <div class="champ-stat-icon">🏆</div>
+            <div class="champ-stat-val">WORLD CHAMPION</div>
+            <div class="champ-stat-lbl">FIFA World Cup 2026 Winner</div>
+          </div>
+          <div class="champ-stat-card">
+            <div class="champ-stat-icon">🥇</div>
+            <div class="champ-stat-val">GOLD TROPHY</div>
+            <div class="champ-stat-lbl">Final Match Winners</div>
+          </div>
+          <div class="champ-stat-card">
+            <div class="champ-stat-icon">⭐</div>
+            <div class="champ-stat-val">7 VICTORIES</div>
+            <div class="champ-stat-lbl">Undefeated Campaign</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- DONATION MODAL -->
   <div class="modal-overlay" id="donation-modal" onclick="closeDonationModal(event)">
@@ -4218,6 +5147,77 @@
       connectSingleLeftToDouble(101, 104, 103);
       connectSingleRightToDouble(102, 104, 103);
     }
+
+    // ────────────────────────────────────────────────
+    // AWARDS SLIDER
+    // ────────────────────────────────────────────────
+    let currentAwardSlide = 0;
+    const totalAwardSlides = 5;
+
+    function setAwardSlide(index) {
+      currentAwardSlide = (index + totalAwardSlides) % totalAwardSlides;
+      
+      const slides = document.querySelectorAll('.award-slide');
+      slides.forEach((slide, idx) => {
+        if (idx === currentAwardSlide) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      const tabBtns = document.querySelectorAll('.award-tab-btn');
+      tabBtns.forEach((btn, idx) => {
+        if (idx === currentAwardSlide) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      const dots = document.querySelectorAll('.slide-dot');
+      dots.forEach((dot, idx) => {
+        if (idx === currentAwardSlide) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    function prevAwardSlide() {
+      setAwardSlide(currentAwardSlide - 1);
+    }
+
+    function nextAwardSlide() {
+      setAwardSlide(currentAwardSlide + 1);
+    }
+
+    // ────────────────────────────────────────────────
+    // CHAMPION POPUP WIZARD MODAL CONTROLS
+    // ────────────────────────────────────────────────
+    function openChampionModal() {
+      const modal = document.getElementById('champion-modal');
+      if (modal) modal.classList.add('open');
+    }
+
+    function closeChampionModal(e) {
+      if (e && e.target.id === 'champion-modal') {
+        const modal = document.getElementById('champion-modal');
+        if (modal) modal.classList.remove('open');
+      }
+    }
+
+    function closeChampionModalBtn() {
+      const modal = document.getElementById('champion-modal');
+      if (modal) modal.classList.remove('open');
+    }
+
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeChampionModalBtn();
+      }
+    });
 
     window.addEventListener('resize', drawLines);
 
